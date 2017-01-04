@@ -8,6 +8,8 @@ import {BusamService} from "../../services/busam/busam";
 import {LinhasPage} from "../linhas/linhas";
 import {OneSignal} from 'ionic-native';
 
+declare var AdMob: any;
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -18,10 +20,11 @@ export class HomePage {
 	loggedInUserInfo: any;
 	linhas: any;
 	item: any;
+  private admobId: any;
 
   constructor(
   	GlobalVars: GlobalVars,
-  	platform: Platform,
+  	private platform: Platform,
   	private navCtrl: NavController,
   	private http: Http,
   	private authService: AuthService,
@@ -34,7 +37,7 @@ export class HomePage {
     OneSignal.endInit();
 
     OneSignal.getIds().then(response => {
-      this.authService.setNotificationsId(response.userId).subscribe(response2 => {})
+      this.authService.setNotificationsId(response.userId).subscribe(response2 => {console.log('asdas')});
     });
 
 
@@ -44,6 +47,49 @@ export class HomePage {
     },
     error => {
       console.log("erro", "Ocorreu um erro. Tente novamente.");
+    });
+
+    // admob setup
+    this.platform = platform;
+    if (/(android)/i.test(navigator.userAgent)) {
+      this.admobId = {
+        banner: 'ca-app-pub-9679740505479624~8342485196',
+        interstitial: 'ca-app-pub-9679740505479624~8342485196'
+      };
+    } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+      this.admobId = {
+        banner: 'ca-app-pub-9679740505479624~8342485196',
+        interstitial: 'ca-app-pub-9679740505479624~8342485196'
+      };
+    }
+
+  }
+
+  ionViewWillEnter() {
+    this.createBanner();
+    this.showBanner("bottom");
+  }
+
+  createBanner() {
+    this.platform.ready().then(() => {
+      if (AdMob) {
+        AdMob.createBanner({
+          adId: this.admobId.banner,
+          autoShow: true
+        });
+      }
+    });
+  }
+
+  showBanner(position) {
+    this.platform.ready().then(() => {
+      if (AdMob) {
+        var positionMap = {
+          "bottom": AdMob.AD_POSITION.BOTTOM_CENTER,
+          "top": AdMob.AD_POSITION.TOP_CENTER
+        };
+        AdMob.showBanner(positionMap[position.toLowerCase()]);
+      }
     });
   }
 
