@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Meu Perfil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="profile">
+    <ion-item>
+      <ion-avatar class="profile-pic">
+        <div *ngIf="fotoSrc">
+          <img [src]="fotoSrc">
+        </div>
+        <div *ngIf="!fotoSrc">
+          <ion-icon name="person"></ion-icon>
+        </div>
+      </ion-avatar>
+      <ion-card-content class="profile-options">
+        <span><strong>Nome: </strong>{{userName}}</span>
+        <button block ion-button color="secondary" (click)="presentActionSheet()">Foto de perfil...</button>
+        <button ion-button color="danger" block (click)="logout()">LOGOUT</button>
+      </ion-card-content>
+    </ion-item>
+</ion-content>

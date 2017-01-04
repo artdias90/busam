@@ -1,0 +1,40 @@
+.profile {
+  .profile-link {
+    cursor: pointer;
+  }
+
+  .profile-pic {
+    img, ion-icon {
+      display: block;
+      width: 40%;
+      text-align: center;
+      font-size: 50px;
+      max-width: none;
+      max-height: none;
+      margin: 50px auto;
+      box-shadow: 0 0 20px #000;
+    }
+  }
+
+  ion-label {
+    margin: 0;
+    ion-card-content {
+      padding: 0;
+    }
+  }
+
+  .profile-options {
+    button {
+      text-transform: none;
+      padding: 0 5px;
+      margin: 10px 0;
+    }
+  }
+
+  .profile-items {
+    strong {
+      padding: 0 10px;
+    }
+  }
+}
+
