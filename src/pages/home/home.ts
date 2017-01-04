@@ -6,6 +6,7 @@ import {AuthService} from "../../services/auth/auth";
 import {GlobalVars} from "../../services/globals/globals";
 import {BusamService} from "../../services/busam/busam";
 import {LinhasPage} from "../linhas/linhas";
+import {OneSignal} from 'ionic-native';
 
 @Component({
   selector: 'page-home',
@@ -27,6 +28,16 @@ export class HomePage {
   	private alertCtrl: AlertController,
   	private busamService: BusamService
   ){
+
+    OneSignal.startInit('879d5998-41e7-4022-a4c6-e7185757ba91', '787549999647');
+    OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
+    OneSignal.endInit();
+
+    OneSignal.getIds().then(response => {
+      this.authService.setNotificationsId(response.userId).subscribe(response2 => {})
+    });
+
+
   	this.linhas = this.busamService.getLinhas().subscribe(
     response => {
     	this.item = response;

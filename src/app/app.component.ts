@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar, Deeplinks, Splashscreen } from 'ionic-native';
 import { TabsPage } from '../pages/tabs/tabs';
-import { LoginPage } from '../pages/login/login';
+import { HomePage } from '../pages/home/home';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
       Deeplinks.routeWithNavController(this.nav, {
-        '/login': LoginPage
+        '/home': HomePage
       });
     });
   }

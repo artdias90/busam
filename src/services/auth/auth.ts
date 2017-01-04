@@ -82,8 +82,8 @@ export class AuthService {
   }
 
 
-  setNotificationsId(userId, notificationsId):Observable<any> {
-    return this.http.get(this.hostUser + 'register-notifications-id.php?notificationsId='+ notificationsId + '&userId='+ userId)
+  setNotificationsId(notificationsId):Observable<any> {
+    return this.http.get(this.hostUser + 'register-notifications-id.php?notificationsId='+ notificationsId + '&userId=000')
       .map(response => { return response.json() });
   }
 
