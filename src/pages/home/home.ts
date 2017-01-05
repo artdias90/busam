@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import {Platform, NavController, AlertController} from 'ionic-angular';
-import {Http} from '@angular/http';
+import { Platform, NavController, AlertController } from 'ionic-angular';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {AuthService} from "../../services/auth/auth";
-import {GlobalVars} from "../../services/globals/globals";
-import {BusamService} from "../../services/busam/busam";
-import {LinhasPage} from "../linhas/linhas";
-import {OneSignal} from 'ionic-native';
-
-declare var AdMob: any;
+import { AuthService } from "../../services/auth/auth";
+import { GlobalVars } from "../../services/globals/globals";
+import { BusamService } from "../../services/busam/busam";
+import { LinhasPage } from "../linhas/linhas";
+import { OneSignal, AdMob} from 'ionic-native';
 
 @Component({
   selector: 'page-home',
@@ -17,20 +15,18 @@ declare var AdMob: any;
 })
 
 export class HomePage {
-	loggedInUserInfo: any;
-	linhas: any;
-	item: any;
+  loggedInUserInfo:any;
+  linhas:any;
+  item:any;
   private admobId: any;
 
-  constructor(
-  	GlobalVars: GlobalVars,
-  	private platform: Platform,
-  	private navCtrl: NavController,
-  	private http: Http,
-  	private authService: AuthService,
-  	private alertCtrl: AlertController,
-  	private busamService: BusamService
-  ){
+  constructor(GlobalVars:GlobalVars,
+              private platform:Platform,
+              private navCtrl:NavController,
+              private http:Http,
+              private authService:AuthService,
+              private alertCtrl:AlertController,
+              private busamService:BusamService) {
 
     OneSignal.startInit('879d5998-41e7-4022-a4c6-e7185757ba91', '787549999647');
     OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -41,13 +37,13 @@ export class HomePage {
     });
 
 
-  	this.linhas = this.busamService.getLinhas().subscribe(
-    response => {
-    	this.item = response;
-    },
-    error => {
-      console.log("erro", "Ocorreu um erro. Tente novamente.");
-    });
+    this.linhas = this.busamService.getLinhas().subscribe(
+      response => {
+        this.item = response;
+      },
+      error => {
+        console.log("erro", "Ocorreu um erro. Tente novamente.");
+      });
 
     // admob setup
     this.platform = platform;
@@ -72,28 +68,24 @@ export class HomePage {
 
   createBanner() {
     this.platform.ready().then(() => {
-      if (AdMob) {
-        AdMob.createBanner({
+      AdMob.createBanner({
           adId: this.admobId.banner,
           autoShow: true
         });
-      }
     });
   }
 
   showBanner(position) {
     this.platform.ready().then(() => {
-      if (AdMob) {
-        var positionMap = {
-          "bottom": AdMob.AD_POSITION.BOTTOM_CENTER,
-          "top": AdMob.AD_POSITION.TOP_CENTER
+      var positionMap = {
+          "bottom": 8,
+          "top": 2
         };
         AdMob.showBanner(positionMap[position.toLowerCase()]);
-      }
     });
   }
 
-  viewItem(item){
+  viewItem(item) {
     this.navCtrl.push(LinhasPage, {
       item: item
     });
