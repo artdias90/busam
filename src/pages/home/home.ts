@@ -6,7 +6,7 @@ import { AuthService } from "../../services/auth/auth";
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { LinhasPage } from "../linhas/linhas";
-import { OneSignal, AdMob} from 'ionic-native';
+import { OneSignal} from 'ionic-native';
 
 @Component({
   selector: 'page-home',
@@ -28,20 +28,20 @@ export class HomePage {
               private alertCtrl:AlertController,
               private busamService:BusamService) {
 
-    OneSignal.startInit('879d5998-41e7-4022-a4c6-e7185757ba91', '787549999647');
+    OneSignal.startInit('879d5998-41e7-4022-a4c6-e7185757ba91');
     OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
+    OneSignal.setSubscription(true);
     OneSignal.endInit();
 
-    OneSignal.getIds().then(response => {
-      this.authService.setNotificationsId(response.userId).subscribe(response2 => {console.log('asdas')});
-    });
 
 
     this.linhas = this.busamService.getLinhas().subscribe(
       response => {
+        alert(response);
         this.item = response;
       },
       error => {
+        alert(error);
         console.log("erro", "Ocorreu um erro. Tente novamente.");
       });
 
@@ -62,28 +62,11 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.createBanner();
-    this.showBanner("bottom");
+    // this.createBanner();
+    // this.showBanner("bottom");
   }
 
-  createBanner() {
-    this.platform.ready().then(() => {
-      AdMob.createBanner({
-          adId: this.admobId.banner,
-          autoShow: true
-        });
-    });
-  }
 
-  showBanner(position) {
-    this.platform.ready().then(() => {
-      var positionMap = {
-          "bottom": 8,
-          "top": 2
-        };
-        AdMob.showBanner(positionMap[position.toLowerCase()]);
-    });
-  }
 
   viewItem(item) {
     this.navCtrl.push(LinhasPage, {
