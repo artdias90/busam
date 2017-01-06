@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {GlobalVars} from "../../services/globals/globals";
 import {BusamService} from "../../services/busam/busam";
@@ -73,7 +72,7 @@ export class LinhasPage {
           if(parseInt(this.curHour) == parseInt(this.hora)){
             if(parseInt(this.curMin) < parseInt(this.minuto)){
             this.horarionow = this.hora + 'h' + this.minuto;
-            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
             var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
             var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
             this.resultInMinutes = Math.round(difference / 60000);
@@ -81,11 +80,11 @@ export class LinhasPage {
           } else if(parseInt(this.curHour) < parseInt(this.hora)){
             if(this.stop == 0){
               this.horarionow = this.hora + 'h' + this.minuto;
-              var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+              var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
                 var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
                 var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
                 this.resultInMinutes = Math.round(difference / 60000);
-              this.stop = 1;  
+              this.stop = 1;
             }
           }
         }
@@ -93,7 +92,7 @@ export class LinhasPage {
             this.hora = this.diariamente[0].txtHorario.substring(0,2);
             this.minuto = this.diariamente[0].txtHorario.substring(3,5);
             this.horarionow = this.hora + 'h' + this.minuto;
-            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
             var endTime = new Date('2012/10/10 '+ this.hora +':' + this.minuto + ' ');
             var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
             this.resultInMinutes = Math.round(difference / 60000);
@@ -114,7 +113,7 @@ export class LinhasPage {
             if(parseInt(this.curHour) == parseInt(this.hora)){
               if(parseInt(this.curMin) < parseInt(this.minuto)){
                 this.horarionow = this.hora + 'h' + this.minuto;
-                var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+                var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
                 var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
                 var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
                 this.resultInMinutes = Math.round(difference / 60000);
@@ -122,11 +121,11 @@ export class LinhasPage {
             } else if(parseInt(this.curHour) < parseInt(this.hora)){
               if(this.stop == 0){
                 this.horarionow = this.hora + 'h' + this.minuto;
-                var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+                var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
                 var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
                 var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
                 this.resultInMinutes = Math.round(difference / 60000);
-                this.stop = 1;  
+                this.stop = 1;
               }
             }
           }
@@ -134,7 +133,7 @@ export class LinhasPage {
             this.hora = this.segsex[0].txtHorario.substring(0,2);
             this.minuto = this.segsex[0].txtHorario.substring(3,5);
             this.horarionow = this.hora + 'h' + this.minuto;
-            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
             var endTime = new Date('2012/10/10 '+ this.hora +':' + this.minuto + ' ');
             var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
             this.resultInMinutes = Math.round(difference / 60000);
@@ -154,7 +153,7 @@ export class LinhasPage {
           if(parseInt(this.curHour) == parseInt(this.hora)){
             if(parseInt(this.curMin) < parseInt(this.minuto)){
             this.horarionow = this.hora + 'h' + this.minuto;
-            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
                 var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
                 var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
                 this.resultInMinutes = Math.round(difference / 60000);
@@ -162,11 +161,11 @@ export class LinhasPage {
           } else if(parseInt(this.curHour) < parseInt(this.hora)){
             if(this.stop == 0){
               this.horarionow = this.hora + 'h' + this.minuto;
-              var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+              var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
                 var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
                 var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
                 this.resultInMinutes = Math.round(difference / 60000);
-              this.stop = 1;  
+              this.stop = 1;
             }
           }
         }
@@ -174,7 +173,7 @@ export class LinhasPage {
             this.hora = this.sabado[0].txtHorario.substring(0,2);
             this.minuto = this.sabado[0].txtHorario.substring(3,5);
             this.horarionow = this.hora + 'h' + this.minuto;
-            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
             var endTime = new Date('2012/10/10 '+ this.hora +':' + this.minuto + ' ');
             var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
             this.resultInMinutes = Math.round(difference / 60000);
@@ -193,7 +192,7 @@ export class LinhasPage {
           if(parseInt(this.curHour) == parseInt(this.hora)){
             if(parseInt(this.curMin) < parseInt(this.minuto)){
             this.horarionow = this.hora + 'h' + this.minuto;
-            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
                 var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
                 var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
                 this.resultInMinutes = Math.round(difference / 60000);
@@ -201,11 +200,11 @@ export class LinhasPage {
           } else if(parseInt(this.curHour) < parseInt(this.hora)){
             if(this.stop == 0){
               this.horarionow = this.hora + 'h' + this.minuto;
-              var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+              var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
                 var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
                 var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
                 this.resultInMinutes = Math.round(difference / 60000);
-              this.stop = 1;  
+              this.stop = 1;
             }
           }
         }
@@ -213,7 +212,7 @@ export class LinhasPage {
             this.hora = this.domingo[0].txtHorario.substring(0,2);
             this.minuto = this.domingo[0].txtHorario.substring(3,5);
             this.horarionow = this.hora + 'h' + this.minuto;
-            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
             var endTime = new Date('2012/10/10 '+ this.hora +':' + this.minuto + ' ');
             var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
             this.resultInMinutes = Math.round(difference / 60000);
@@ -233,7 +232,7 @@ export class LinhasPage {
             if(parseInt(this.curHour) == parseInt(this.hora)){
               if(parseInt(this.curMin) < parseInt(this.minuto)){
               this.horarionow = this.hora + 'h' + this.minuto;
-              var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+              var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
                 var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
                 var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
                 this.resultInMinutes = Math.round(difference / 60000);
@@ -241,11 +240,11 @@ export class LinhasPage {
             } else if(parseInt(this.curHour) < parseInt(this.hora)){
               if(this.stop == 0){
                 this.horarionow = this.hora + 'h' + this.minuto;
-                var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+                var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
                 var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
                 var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
                 this.resultInMinutes = Math.round(difference / 60000);
-                this.stop = 1;  
+                this.stop = 1;
               }
             }
           }
@@ -253,7 +252,7 @@ export class LinhasPage {
             this.hora = this.segsab[0].txtHorario.substring(0,2);
             this.minuto = this.segsab[0].txtHorario.substring(3,5);
             this.horarionow = this.hora + 'h' + this.minuto;
-            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' '); 
+            var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
             var endTime = new Date('2012/10/10 '+ this.hora +':' + this.minuto + ' ');
             var difference = endTime.getTime() - startTime.getTime(); // This will give difference in milliseconds
             this.resultInMinutes = Math.round(difference / 60000);
@@ -262,7 +261,7 @@ export class LinhasPage {
       }
     },
     error => {console.log("erro", "Ocorreu um erro. Tente novamente.");});
-    
+
     this.itinerario = this.busamService.getItinerarios(this.navParams.get('item').idLinha).subscribe(
     response => {
       this.ruas = response;

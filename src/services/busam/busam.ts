@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {Observable} from "rxjs";
 import {GlobalVars} from "../globals/globals";
 
 @Injectable()
@@ -30,7 +29,7 @@ export class BusamService {
    * @param password: password
    */
   getLinhas():any{
-    console.log("getLinhas");
+    console.log("getLinhas22222");
     return this.http.get(this.host + 'linhas.php?id='+ this.appId)
       .map(response => { return response.json() });
   }

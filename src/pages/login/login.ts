@@ -4,7 +4,6 @@ import { Http } from '@angular/http';
 import {AuthService} from "../../services/auth/auth";
 import {GlobalVars} from "../../services/globals/globals";
 import {AlertController} from 'ionic-angular';
-import {OneSignal} from 'ionic-native';
 import { TabsPage } from '../tabs/tabs';
 import {PasswordResetPage} from '../password-reset/password-reset';
 import {RegisterPage} from '../register/register';

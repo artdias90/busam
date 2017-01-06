@@ -6,7 +6,9 @@ import { AuthService } from "../../services/auth/auth";
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { LinhasPage } from "../linhas/linhas";
-import { OneSignal} from 'ionic-native';
+
+declare var AdMob: any;
+
 
 @Component({
   selector: 'page-home',
@@ -28,20 +30,15 @@ export class HomePage {
               private alertCtrl:AlertController,
               private busamService:BusamService) {
 
-    OneSignal.startInit('879d5998-41e7-4022-a4c6-e7185757ba91');
-    OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
-    OneSignal.setSubscription(true);
-    OneSignal.endInit();
+
 
 
 
     this.linhas = this.busamService.getLinhas().subscribe(
       response => {
-        alert(response);
         this.item = response;
       },
       error => {
-        alert(error);
         console.log("erro", "Ocorreu um erro. Tente novamente.");
       });
 
@@ -49,21 +46,44 @@ export class HomePage {
     this.platform = platform;
     if (/(android)/i.test(navigator.userAgent)) {
       this.admobId = {
-        banner: 'ca-app-pub-9679740505479624~8342485196',
-        interstitial: 'ca-app-pub-9679740505479624~8342485196'
+        banner: 'ca-app-pub-9679740505479624/9819218390',
+        interstitial: 'ca-app-pub-9679740505479624/9819218390'
       };
     } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
       this.admobId = {
-        banner: 'ca-app-pub-9679740505479624~8342485196',
-        interstitial: 'ca-app-pub-9679740505479624~8342485196'
+        banner: 'ca-app-pub-9679740505479624/9819218390',
+        interstitial: 'ca-app-pub-9679740505479624/9819218390'
       };
     }
 
   }
 
   ionViewWillEnter() {
-    // this.createBanner();
-    // this.showBanner("bottom");
+    this.createBanner();
+    this.showBanner("top");
+  }
+
+  createBanner() {
+    this.platform.ready().then(() => {
+      if (AdMob) {
+        AdMob.createBanner({
+          adId: this.admobId.banner,
+          autoShow: true
+        });
+      }
+    });
+  }
+
+  showBanner(position) {
+    this.platform.ready().then(() => {
+      if (AdMob) {
+        var positionMap = {
+          "bottom": AdMob.AD_POSITION.BOTTOM_CENTER,
+          "top": AdMob.AD_POSITION.TOP_CENTER
+        };
+        AdMob.showBanner(positionMap[position.toLowerCase()]);
+      }
+    });
   }
 
 
