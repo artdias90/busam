@@ -38,6 +38,11 @@ export class LinhasPage {
   teste;
   i;
   retornou;
+  sabdom;
+  verificado;
+  d1;
+  d2;
+  diff;
 
 
   constructor(
@@ -47,37 +52,57 @@ export class LinhasPage {
   ){}
 
   ionViewDidLoad() {
-    const d = new Date();
-    this.curHour = d.getHours();
-    this.curMin = d.getMinutes();
-    this.curDay = d.getDay();
     this.obsLinha = this.navParams.get('item').obsLinha;
     this.title = this.navParams.get('item').title;
     this.description = this.navParams.get('item').nomeLinha;
     this.number = this.navParams.get('item').numeroLinha;
+  	const d = new Date();
+    this.curDay = d.getDay();
 
-for(this.i=2;this.i<8;this.i++){
+	for(this.i=2;this.i<8;this.i++){
     this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i).subscribe(
     response => {
       this.retornou = this.getHorario(response);
       if(response){
         if(response[0].idFrequencia == 2){
           this.diariamente = response;
+          this.horarionow = this.verificaHorario(response);
+          this.resultInMinutes = this.getHorario(this.horarionow);
         }
         if(response[0].idFrequencia == 3){
           this.segsex = response;
+          if(this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5){
+						this.horarionow = this.verificaHorario(response);
+          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          }
         }
         if(response[0].idFrequencia == 4){
           this.sabado = response;
+          if(this.curDay == 6){
+						this.horarionow = this.verificaHorario(response);
+          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          }
         }
         if(response[0].idFrequencia == 5){
           this.domingo = response;
+          if(this.curDay == 0){
+						this.horarionow = this.verificaHorario(response);
+          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          }
         }
         if(response[0].idFrequencia == 6){
           this.segsab = response;
+          if(this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5 || this.curDay == 6){
+						this.horarionow = this.verificaHorario(response);
+          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          }
         }
         if(response[0].idFrequencia == 7){
           this.sabdom = response;
+          if(this.curDay == 0 || this.curDay == 6){
+						this.horarionow = this.verificaHorario(response);
+          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          }
         }
 
       }
@@ -102,21 +127,33 @@ for(this.i=2;this.i<8;this.i++){
     this.horario = true;
   }
 
-  verificaHorario(hora, minuto, anterior){
-    var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
-    if(anterior == 0){
-      var endTime = new Date('2012/10/09 '+ hora +':' + minuto + ' ');
-    } else {
-      var endTime = new Date('2012/10/10 '+ hora +':' + minuto + ' ');
-    }
-    var difference = endTime.getTime() - startTime.getTime();
-    this.resultInMinutes = Math.round(difference / 60000);
+  verificaHorario(response){
+  	const d = new Date();
+    this.curHour = d.getHours();
+    this.curMin = d.getMinutes();
+    this.curDay = d.getDay();
+    this.d2 = new​ Date(0, 0, 0, this.curHour, this.curMin);
+    for (var i=0; i < response.length; i++){
+      this.hora = response[i].txtHorario.substring(0,2);
+      this.minuto = response[i].txtHorario.substring(3,5);
+      this.d1 = new​ Date(0, 0, 0, this.hora, this.minuto);
+			if(this.d1 > this.d2){
+				this.horarionow = this.hora + 'h' + this.minuto;
+				console.log(this.horarionow);
+    		return this.horarionow;
+			}
+ 	 	}
 
-    return this.resultInMinutes;
+
+
+
   }
 
   getHorario(response){
-    console.log(response);
-    return "teste";
+    var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
+    var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
+    var difference = endTime.getTime() - startTime.getTime();
+    this.resultInMinutes = Math.round(difference / 60000);
+    return this.resultInMinutes;
   }
 }
