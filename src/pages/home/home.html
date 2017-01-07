@@ -5,13 +5,28 @@
 </ion-header>
 
 <ion-content style="background: #E8EAF6">
-<ion-card padding>
-O aplicativo não tem nenhuma relação com a Sou Valinhos ou a Prefeitura de Valinhos. Os dados foram coletados do site da Sou Valinhos. 
-Mantenha o aplicativo sempre atualizado.
-</ion-card>
+	<ion-card padding *ngIf="aviso">
+		{{aviso}}
+	</ion-card>
 
-<ion-card *ngFor="let items of item" (click)="viewItem(items)" padding>
-	{{items.numeroLinha}} - {{items.nomeLinha}}
-</ion-card>
+  <div style="text-align: center;" *ngIf="imagem">
+  	<a href="{{link}}" target="_target"><img src="{{imagem}}" ></a>
+  </div>
+
+  <ion-card *ngFor="let items of item" (click)="viewItem(items)" padding>
+  	{{items.numeroLinha}} - {{items.nomeLinha}}
+  </ion-card>
+
+  <div style="text-align: center;" *ngIf="imagem_footer">
+    <a href="{{link_footer}}" target="_target"><img src="{{imagem_footer}}" ></a>
+  </div>
+
+  <ion-card padding>
+  	<div style="text-align: center;">
+  		<a href="http://www.codeam.com.br" target="_blank" style="color: #000000;text-decoration: none;font-family: roboto;font-size: 110%;">
+        Desenvolvido por CodeAM
+      </a>
+  	</div>
+  </ion-card>
 
 </ion-content>

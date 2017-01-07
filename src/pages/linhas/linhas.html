@@ -68,19 +68,6 @@
           </ion-row>
         </ion-grid>
 
-        <ion-grid *ngIf="domingo">
-          <div style="text-align: center">
-          Domingos e Feriados
-          </div>
-          <ion-row wrap>
-            <ion-col width-25 *ngFor="let items of domingo"  [ngStyle]="{'background': items.corFrequencia}">
-              <div [ngStyle]="{'background': items.corObservacao}">
-                {{items.txtHorario}}
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
         <ion-grid *ngIf="segsab">
           <div style="text-align: center">
           Segunda - Sábado
@@ -94,7 +81,33 @@
           </ion-row>
         </ion-grid>
 
-        <button class="aparecer" (click)="showItinerario()">Itinerario</button>
+        <ion-grid *ngIf="domingo">
+          <div style="text-align: center">
+          Domingos e Feriados
+          </div>
+          <ion-row wrap>
+            <ion-col width-25 *ngFor="let items of domingo"  [ngStyle]="{'background': items.corFrequencia}">
+              <div [ngStyle]="{'background': items.corObservacao}">
+                {{items.txtHorario}}
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid *ngIf="sabdom">
+          <div style="text-align: center">
+          Sábados, Domingos e Feriados
+          </div>
+          <ion-row wrap>
+            <ion-col width-25 *ngFor="let items of sabdom"  [ngStyle]="{'background': items.corFrequencia}">
+              <div [ngStyle]="{'background': items.corObservacao}">
+                {{items.txtHorario}}
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <!--<button class="aparecer" (click)="showItinerario()">Itinerario</button>-->
       </div>
 
       <div *ngIf="!horario">

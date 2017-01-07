@@ -46,7 +46,7 @@ export class BusamService {
       .map(response => { return response.json() });
   }
 
-   getObs(linha):any{
+  getObs(linha):any{
     console.log("getObs");
     return this.http.get(this.host + 'observacoes.php?id='+ linha)
       .map(response => { return response.json() });

@@ -20,6 +20,11 @@ export class HomePage {
   loggedInUserInfo:any;
   linhas:any;
   item:any;
+  aviso;
+  imagem;
+  link;
+  imagem_footer;
+  link_footer;
   private admobId: any;
 
   constructor(GlobalVars:GlobalVars,
@@ -32,7 +37,31 @@ export class HomePage {
 
 
 
+    this.aviso = this.busamService.getObs(0).subscribe(
+      response => {
+        this.aviso = response[0].txtObservacao;
+      },
+      error => {
+        console.log("erro", "Ocorreu um erro. Tente novamente.");
+      });
 
+    this.imagem = this.busamService.getObs(9999).subscribe(
+      response => {
+        this.imagem = response[0].txtObservacao;
+        this.link =  response[0].corObservacao;
+      },
+      error => {
+        console.log("erro", "Ocorreu um erro. Tente novamente.");
+      });
+
+    this.imagem_footer = this.busamService.getObs(9999).subscribe(
+      response => {
+        this.imagem_footer = response[0].txtObservacao;
+        this.link_footer = response[0].corObservacao;
+      },
+      error => {
+        console.log("erro", "Ocorreu um erro. Tente novamente.");
+      });
 
     this.linhas = this.busamService.getLinhas().subscribe(
       response => {
