@@ -89,7 +89,7 @@ export class HomePage {
 
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this.createBanner();
     this.showBanner("top");
   }
