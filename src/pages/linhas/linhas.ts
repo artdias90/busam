@@ -43,6 +43,7 @@ export class LinhasPage {
   d1;
   d2;
   diff;
+  showLoading = true;
 
 
   constructor(
@@ -59,7 +60,7 @@ export class LinhasPage {
   	const d = new Date();
     this.curDay = d.getDay();
 
-	for(this.i=2;this.i<8;this.i++){
+	  for(this.i=2; this.i<8; this.i++){
     this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i).subscribe(
     response => {
       this.retornou = this.getHorario(response);
@@ -73,45 +74,48 @@ export class LinhasPage {
           this.segsex = response;
           if(this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5){
 						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          	this.resultInMinutes = this.getHorario(this.horarionow);
           }
         }
         if(response[0].idFrequencia == 4){
           this.sabado = response;
           if(this.curDay == 6){
 						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          	this.resultInMinutes = this.getHorario(this.horarionow);
           }
         }
         if(response[0].idFrequencia == 5){
           this.domingo = response;
           if(this.curDay == 0){
 						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          	this.resultInMinutes = this.getHorario(this.horarionow);
           }
         }
         if(response[0].idFrequencia == 6){
           this.segsab = response;
           if(this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5 || this.curDay == 6){
 						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          	this.resultInMinutes = this.getHorario(this.horarionow);
           }
         }
         if(response[0].idFrequencia == 7){
           this.sabdom = response;
           if(this.curDay == 0 || this.curDay == 6){
 						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);          	
+          	this.resultInMinutes = this.getHorario(this.horarionow);
           }
+        }
+        if(this.i == 7){
+          this.showLoading = false;
         }
 
       }
     });
-}
-    
+    }
+
 
     this.itinerario = this.busamService.getItinerarios(this.navParams.get('item').idLinha).subscribe(
-    response => {this.ruas = response;},
+    response => {this.ruas = response;this.showLoading = false;},
     error => {console.log("erro", "Ocorreu um erro. Tente novamente.");});
 
     this.observacoes = this.busamService.getObs(this.navParams.get('item').idLinha).subscribe(
@@ -143,10 +147,10 @@ export class LinhasPage {
     		return this.horarionow;
 			}
  	 	}
-
-
-
-
+    this.hora = response[0].txtHorario.substring(0,2);
+    this.minuto = response[0].txtHorario.substring(3,5);
+    this.horarionow = this.hora + 'h' + this.minuto;
+    return this.horarionow;
   }
 
   getHorario(response){

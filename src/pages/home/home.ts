@@ -26,6 +26,7 @@ export class HomePage {
   imagem_footer;
   link_footer;
   private admobId: any;
+  showLoading = true;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -66,6 +67,7 @@ export class HomePage {
     this.linhas = this.busamService.getLinhas().subscribe(
       response => {
         this.item = response;
+        this.showLoading = false;
       },
       error => {
         console.log("erro", "Ocorreu um erro. Tente novamente.");
