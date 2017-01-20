@@ -1,31 +1,69 @@
 <ion-header>
-  <ion-navbar style="background: red">
+  <ion-navbar>
     <ion-title>
       Linha {{number}}
     </ion-title>
   </ion-navbar>
 </ion-header>
- 
-<ion-content style="background: #E8EAF6">
+
+
+<ion-content style="background: #E8EAF6" overflow-scroll="false">
   <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
   <div *ngIf="!showLoading">
-    <ion-card padding style="background: #5C6BC0">
-      <div style="text-align: center; color: white">{{description}}</div>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col width-75>Próximo Horário: </ion-col>
-            <ion-col width-25 style="text-align: right">{{horarionow}} </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col width-100 style="text-align: right">Em {{resultInMinutes}} Minutos</ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card padding *ngIf="obs">
-        {{obsLinha}}
-      </ion-card>
+
+  <div style="background: #3f51b5;padding-left: 15px;padding-bottom: 10px;">
+    <div style="color: white;font-weight: bold;font-size: 150%;">{{description}}</div>
+
+    <ion-grid>
+      <ion-row style="margin-bottom: -10px;">
+        <ion-col width-50></ion-col>
+        <ion-col width-50 style="text-align: right;color: white;font-weight: bold;font-size: 80%;">Próximo: {{horarionow}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-50></ion-col>
+        <ion-col width-50 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 100%;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-card padding *ngIf="obs" style="padding: 5px;margin-left: 2px;">
+      {{obsLinha}}
     </ion-card>
+  </div>
+
+<div style="text-align: center;margin-top: 20px;background: white;font-weight: 500;padding-top: 10px;">DIARIAMENTE</div>
+<ion-scroll scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 70px" scrollbar-x="false">
+  <div *ngFor="let items of diariamente"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block">
+    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+    </div>
+  </div>
+</ion-scroll>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <ion-card>
       <ion-card-content>

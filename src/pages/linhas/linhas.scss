@@ -24,4 +24,19 @@ page-linhas {
     height: 35px;
     border-bottom: solid 1px;
   }
+
+  .toolbar-background toolbar-background-md {
+    border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+	}
+
+	.header-md::after{
+		height: 0px;
+	}
+
+	.scroll-bar-indicator{
+		display: none;
+	}
 }
