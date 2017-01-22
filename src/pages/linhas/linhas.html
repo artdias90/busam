@@ -4,34 +4,44 @@
       Linha {{number}}
     </ion-title>
   </ion-navbar>
-</ion-header>
-
-
-<ion-content style="background: #E8EAF6" overflow-scroll="false">
-  <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
-  <div *ngIf="!showLoading">
-
-  <div style="background: #3f51b5;padding-left: 15px;padding-bottom: 10px;">
-    <div style="color: white;font-weight: bold;font-size: 150%;">{{description}}</div>
+  <div style="background: #3f51b5;padding-left: 15px;padding-bottom: 10px;position: fixed;margin-top: -15px;padding-top: 10px;width: 100%">
+    <div style="color: white;font-weight: bold;font-size: 1.5em;">{{description}}</div>
 
     <ion-grid>
       <ion-row style="margin-bottom: -10px;">
         <ion-col width-50></ion-col>
-        <ion-col width-50 style="text-align: right;color: white;font-weight: bold;font-size: 80%;">Próximo: {{horarionow}}</ion-col>
+        <ion-col width-50 style="text-align: right;color: white;font-weight: bold;font-size: 1em;">Próximo: {{horarionow}}</ion-col>
       </ion-row>
       <ion-row>
         <ion-col width-50></ion-col>
-        <ion-col width-50 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 100%;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col>
+        <ion-col width-50 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 1.5em;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col>
       </ion-row>
     </ion-grid>
-
-    <ion-card padding *ngIf="obs" style="padding: 5px;margin-left: 2px;">
-      {{obsLinha}}
-    </ion-card>
   </div>
 
-<div style="text-align: center;margin-top: 20px;background: white;font-weight: 500;padding-top: 10px;">DIARIAMENTE</div>
-<ion-scroll scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 70px" scrollbar-x="false">
+
+  <!-- LINHA DA VERGONHA -->
+  <div style="background: #3f51b5;padding-left: 15px;padding-bottom: 10px;margin-top: -15px;padding-top: 10px;width: 100%"><div style="color: white;font-weight: bold;font-size: 150%;">{{description}}</div><ion-grid><ion-row style="margin-bottom: -10px;"><ion-col width-50></ion-col><ion-col width-50 style="text-align: right;color: white;font-weight: bold;font-size: 80%;">Próximo: {{horarionow}}</ion-col></ion-row><ion-row><ion-col width-50></ion-col><ion-col width-50 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 100%;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col></ion-row></ion-grid></div>
+
+
+
+</ion-header>
+
+
+
+<ion-content style="background: #E8EAF6" overflow-scroll="false">
+  <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
+  <div *ngIf="!showLoading" style="margin-top: 15px;">
+
+  
+
+    <div *ngIf="obs" style="background: #feff9e;margin-bottom: 15px;padding: 10px;font-size: 1.2em;">
+      {{obsLinha}}
+    </div>
+
+
+<div *ngIf="diariamente" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;">DIARIAMENTE</div>
+<ion-scroll *ngIf="diariamente" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 70px" scrollbar-x="false">
   <div *ngFor="let items of diariamente"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block">
     <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
       <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
@@ -40,132 +50,70 @@
 </ion-scroll>
 
 
+<div *ngIf="segsex" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;">Seg - Sex</div>
+<ion-scroll *ngIf="segsex" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 70px" scrollbar-x="false">
+  <div *ngFor="let items of segsex"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block">
+    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+    </div>
+  </div>
+</ion-scroll>
 
 
+<div *ngIf="sabado" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;">Sábados</div>
+<ion-scroll *ngIf="sabado" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 70px" scrollbar-x="false">
+  <div *ngFor="let items of sabado"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block">
+    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+    </div>
+  </div>
+</ion-scroll>
+
+<div *ngIf="segsab" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;">Seg - Sab</div>
+<ion-scroll *ngIf="segsab" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 70px" scrollbar-x="false">
+  <div *ngFor="let items of segsab"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block">
+    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+    </div>
+  </div>
+</ion-scroll>
 
 
+<div *ngIf="domingo" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;">Domingos</div>
+<ion-scroll *ngIf="domingo" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 70px" scrollbar-x="false">
+  <div *ngFor="let items of domingo"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block">
+    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+    </div>
+  </div>
+</ion-scroll>
 
 
+<div *ngIf="sabdom" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;">Sábados, Domingos e Feriados</div>
+<ion-scroll *ngIf="sabdom" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 70px" scrollbar-x="false">
+  <div *ngFor="let items of sabdom"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block">
+    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+    </div>
+  </div>
+</ion-scroll>
+
+<div *ngIf="!horario">
+  <ion-list>
+    <div style="text-align: center;font-size: 20px;">Itinerário</div>
+    <ion-item class="ruas" *ngFor="let items of ruas">{{items.ruaItinerario}}</ion-item>
+  </ion-list>
+  <button class="aparecer" (click)="showHorarios()">Horários</button>
+</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <ion-card>
-      <ion-card-content>
-        <div *ngIf="horario">
-          <ion-grid *ngIf="diariamente">
-            <div style="text-align: center">
-            Diariamente
-            </div>
-            <ion-row wrap>
-              <ion-col width-25 *ngFor="let items of diariamente"  [ngStyle]="{'background': items.corFrequencia}">
-                <div [ngStyle]="{'background': items.corObservacao}">
-                  {{items.txtHorario}}
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <ion-grid *ngIf="segsex">
-            <div style="text-align: center">
-            Segunda - Sexta
-            </div>
-            <ion-row wrap>
-              <ion-col width-25 *ngFor="let items of segsex"  [ngStyle]="{'background': items.corFrequencia}">
-                <div [ngStyle]="{'background': items.corObservacao}">
-                  {{items.txtHorario}}
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <ion-grid *ngIf="sabado">
-            <div style="text-align: center">
-            Sábado
-            </div>
-            <ion-row wrap>
-              <ion-col width-25 *ngFor="let items of sabado"  [ngStyle]="{'background': items.corFrequencia}">
-                <div [ngStyle]="{'background': items.corObservacao}">
-                  {{items.txtHorario}}
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <ion-grid *ngIf="segsab">
-            <div style="text-align: center">
-            Segunda - Sábado
-            </div>
-            <ion-row wrap>
-              <ion-col width-25 *ngFor="let items of segsab"  [ngStyle]="{'background': items.corFrequencia}">
-                <div [ngStyle]="{'background': items.corObservacao}">
-                  {{items.txtHorario}}
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <ion-grid *ngIf="domingo">
-            <div style="text-align: center">
-            Domingos e Feriados
-            </div>
-            <ion-row wrap>
-              <ion-col width-25 *ngFor="let items of domingo"  [ngStyle]="{'background': items.corFrequencia}">
-                <div [ngStyle]="{'background': items.corObservacao}">
-                  {{items.txtHorario}}
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <ion-grid *ngIf="sabdom">
-            <div style="text-align: center">
-            Sábados, Domingos e Feriados
-            </div>
-            <ion-row wrap>
-              <ion-col width-25 *ngFor="let items of sabdom"  [ngStyle]="{'background': items.corFrequencia}">
-                <div [ngStyle]="{'background': items.corObservacao}">
-                  {{items.txtHorario}}
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <!--<button class="aparecer" (click)="showItinerario()">Itinerario</button>-->
+    <ion-card padding *ngIf="obs">
+    <div style="text-align: center;">LEGENDA</div>
+      <div *ngFor="let items of obs" style="float: left;margin-right: 10px;">
+        <div style="    padding: 5px;" [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" >
+          <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtObservacao}}</div>
         </div>
-
-        <div *ngIf="!horario">
-          <ion-list>
-            <div style="text-align: center;font-size: 20px;">Itinerário</div>
-            <ion-item class="ruas" *ngFor="let items of ruas">{{items.ruaItinerario}}</ion-item>
-          </ion-list>
-          <button class="aparecer" (click)="showHorarios()">Horários</button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card padding>
-    LEGENDA
-      <ion-item *ngFor="let items of obs">
-        <div style="    padding: 5px;" [ngStyle]="{'background': items.corObservacao}">
-          {{items.txtObservacao}}
-        </div>
-      </ion-item>
+      </div>
     </ion-card>
   </div>
 </ion-content>

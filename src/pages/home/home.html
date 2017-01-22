@@ -18,7 +18,8 @@
     </div>
 
     <ion-card *ngFor="let items of item" (click)="viewItem(items)" padding>
-    	{{items.numeroLinha}} - {{items.nomeLinha}}
+    	<div style="background: #e8eaf6;color: #3f51b5;position: absolute;padding: 10px;border-radius: 30px;margin-left: -25px;margin-top: -25px;border: #3f51b5 solid 2px;">{{items.numeroLinha}}</div>
+      <div style="margin-left: 30px;">{{items.nomeLinha}}</div>
     </ion-card>
 
     <div style="text-align: center;" *ngIf="imagem_footer">
