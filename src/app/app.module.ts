@@ -10,6 +10,7 @@ import { LoginPage } from '../pages/login/login';
 import { PasswordResetPage } from '../pages/password-reset/password-reset';
 import { RegisterPage } from '../pages/register/register';
 import { LinhasPage } from '../pages/linhas/linhas';
+import { StartPage } from '../pages/start/start';
 @NgModule({
   declarations: [
     MyApp,
@@ -21,7 +22,8 @@ import { LinhasPage } from '../pages/linhas/linhas';
     LoginPage,
     PasswordResetPage,
     RegisterPage,
-    LinhasPage
+    LinhasPage,
+    StartPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -37,7 +39,8 @@ import { LinhasPage } from '../pages/linhas/linhas';
     LoginPage,
     PasswordResetPage,
     RegisterPage,
-    LinhasPage
+    LinhasPage,
+    StartPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

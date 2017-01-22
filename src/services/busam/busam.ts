@@ -34,6 +34,12 @@ export class BusamService {
       .map(response => { return response.json() });
   }
 
+  getCidades():any{
+    console.log("getLinhas22222");
+    return this.http.get(this.host + 'cidades.php')
+      .map(response => { return response.json() });
+  }
+
   getHorarios(linha, frequencia):any{
     console.log("getHorarios");
     return this.http.get(this.host + 'horarios.php?id='+ linha + '&frequencia='+ frequencia)

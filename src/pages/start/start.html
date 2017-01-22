@@ -1,0 +1,21 @@
+<ion-content>
+	<div style="background-color:#269;
+background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+height: 100%;width: 100%;vertical-align: middle;display: flex;align-items: center;justify-content: center;">
+    <ion-list>
+      <ion-item>
+        <ion-label>Escolha sua cidade</ion-label>
+        <ion-select>
+
+    <ion-option *ngFor="let items of item" (click)="viewItem(items.idCidade)">
+     {{items.nomeCidade}}
+    </ion-option>
+
+
+
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

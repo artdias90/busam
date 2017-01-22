@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar, Deeplinks, Splashscreen } from 'ionic-native';
 import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
+import { StartPage } from '../pages/start/start';
 import { OneSignal} from 'ionic-native';
 
 
@@ -11,7 +11,7 @@ import { OneSignal} from 'ionic-native';
 })
 export class MyApp {
   @ViewChild(Nav) nav:Nav;
-  rootPage = TabsPage;
+  rootPage = StartPage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
@@ -31,7 +31,7 @@ export class MyApp {
       OneSignal.endInit();
 
       Deeplinks.routeWithNavController(this.nav, {
-        '/home': HomePage
+        '/start': StartPage
       });
     });
   }
