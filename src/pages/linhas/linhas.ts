@@ -44,6 +44,8 @@ export class LinhasPage {
   d2;
   diff;
   showLoading = true;
+  linha;
+  linhaFavorita;
 
 
   constructor(
@@ -159,5 +161,10 @@ export class LinhasPage {
     var difference = endTime.getTime() - startTime.getTime();
     this.resultInMinutes = Math.round(difference / 60000);
     return this.resultInMinutes;
+  }
+
+  idlinhaFavorita(){
+    this.linhaFavorita = this.navParams.get('item').idLinha;
+    this.linha = localStorage.setItem("idLinhaBusam", this.linhaFavorita);
   }
 }

@@ -12,6 +12,8 @@ export class BusamService {
   key_senha: any;
   appId: any;
   names: Array<string>;
+  cidade;
+  linha;
 
   constructor (private http: Http, GlobalVars: GlobalVars) {
     this.http = http;
@@ -28,34 +30,39 @@ export class BusamService {
    * @param user: username
    * @param password: password
    */
-  getLinhas():any{
-    console.log("getLinhas22222");
-    return this.http.get(this.host + 'linhas.php?id='+ this.appId)
+  getLinhas(cidade):any{
+    return this.http.get(this.host + 'linhas.php?id='+ cidade)
       .map(response => { return response.json() });
   }
 
   getCidades():any{
-    console.log("getLinhas22222");
     return this.http.get(this.host + 'cidades.php')
       .map(response => { return response.json() });
   }
 
   getHorarios(linha, frequencia):any{
-    console.log("getHorarios");
     return this.http.get(this.host + 'horarios.php?id='+ linha + '&frequencia='+ frequencia)
       .map(response => { return response.json() });
   }
 
   getItinerarios(linha):any{
-    console.log("getItinerarios");
     return this.http.get(this.host + 'itinerario.php?id='+ linha)
       .map(response => { return response.json() });
   }
 
   getObs(linha):any{
-    console.log("getObs");
     return this.http.get(this.host + 'observacoes.php?id='+ linha)
       .map(response => { return response.json() });
+  }
+
+  verificaCidade():any{
+    this.cidade = localStorage.getItem("idCidadeBusam");
+    return this.cidade;
+  }
+
+  verificaLinha():any{
+    this.linha = localStorage.getItem("idLinhaBusam");
+    return this.linha;
   }
 
 }

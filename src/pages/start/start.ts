@@ -7,6 +7,7 @@ import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { LinhasPage } from "../linhas/linhas";
 import { HomePage } from "../home/home";
+
 /*
   Generated class for the Start page.
 
@@ -22,6 +23,8 @@ export class StartPage {
   linhas:any;
   item:any;
   showLoading = true;
+  cidade;
+  linha;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -35,7 +38,6 @@ export class StartPage {
     this.linhas = this.busamService.getCidades().subscribe(
     response => {
       this.item = response;
-      console.log(this.item);
       this.showLoading = false;
     },
     error => {
@@ -44,9 +46,23 @@ export class StartPage {
   }
 
   ionViewDidLoad() {
-    console.log('Hello StartPage Page');
-    this.navCtrl.push(HomePage, {});
+    //this.linha = this.busamService.verificaLinha();
+    //if(this.linha){
+    //  console.log(this.linha)
+    //  this.navCtrl.push(LinhasPage, {});
+    //}else{
+      this.cidade = this.busamService.verificaCidade();
+      if(this.cidade){
+        this.navCtrl.push(HomePage, {});
+      }      
+    //}
+
   }
 
+  selecionacidade(event, select){
+    localStorage.setItem("idCidadeBusam", select);
+    this.cidade = localStorage.getItem("idCidadeBusam");
+    this.navCtrl.push(HomePage, {});
+  }
 
 }

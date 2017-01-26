@@ -27,6 +27,7 @@ export class HomePage {
   link_footer;
   private admobId: any;
   showLoading = true;
+  cidade;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -36,7 +37,7 @@ export class HomePage {
               private alertCtrl:AlertController,
               private busamService:BusamService) {
 
-
+    this.cidade = this.busamService.verificaCidade();
 
     this.aviso = this.busamService.getObs(0).subscribe(
       response => {
@@ -64,7 +65,7 @@ export class HomePage {
         console.log("erro", "Ocorreu um erro. Tente novamente.");
       });
 
-    this.linhas = this.busamService.getLinhas().subscribe(
+    this.linhas = this.busamService.getLinhas(this.cidade).subscribe(
       response => {
         this.item = response;
         this.showLoading = false;

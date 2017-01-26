@@ -6,14 +6,8 @@ height: 100%;width: 100%;vertical-align: middle;display: flex;align-items: cente
     <ion-list>
       <ion-item>
         <ion-label>Escolha sua cidade</ion-label>
-        <ion-select>
-
-    <ion-option *ngFor="let items of item" (click)="viewItem(items.idCidade)">
-     {{items.nomeCidade}}
-    </ion-option>
-
-
-
+        <ion-select [(ngModel)]="selectedItem" (ionChange)="selecionacidade($event, selectedItem)">
+          <ion-option *ngFor="let items of item" (click)="viewItem(items.idCidade)" value="{{items.idCidade}}">{{items.nomeCidade}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
