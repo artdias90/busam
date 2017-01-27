@@ -65,4 +65,8 @@ export class StartPage {
     this.navCtrl.push(HomePage, {});
   }
 
+  selectedItem(){
+    
+  }
+
 }

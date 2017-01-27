@@ -6,6 +6,7 @@ import { AuthService } from "../../services/auth/auth";
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { LinhasPage } from "../linhas/linhas";
+import { StartPage } from "../start/start";
 
 declare var AdMob: any;
 
@@ -124,6 +125,10 @@ export class HomePage {
     this.navCtrl.push(LinhasPage, {
       item: item
     });
+  }
+
+  backStart(){
+    this.navCtrl.push(StartPage, {});
   }
 
 }

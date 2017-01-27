@@ -1,10 +1,13 @@
 <ion-header >
-  <ion-navbar>
+  <ion-navbar hideBackButton >
+    <div style="position: absolute;color: white;font-size: 150%;margin-left: 2%;" (click)="backStart()">
+      <ion-icon name="swap"></ion-icon>
+    </div>
     <ion-title style="text-align: center;">BusAM - Valinhos</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content style="background-image: url('http://valinhos.sp.gov.br/portal/images/stories/imprensa/parcialvalinhos.jpg');padding: 0px;background-repeat: no-repeat;background-size: auto 100%;background-position: center top;">
+<ion-content style="background-image: url('../www/assets/img/valinhos.png');padding: 0px;background-repeat: no-repeat;background-size: auto 100%;background-position: center top;">
 
   <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
 
