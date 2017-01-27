@@ -79,13 +79,13 @@ export class HomePage {
     this.platform = platform;
     if (/(android)/i.test(navigator.userAgent)) {
       this.admobId = {
-        banner: 'ca-app-pub-9679740505479624/9819218390',
-        interstitial: 'ca-app-pub-9679740505479624/9819218390'
+        banner: 'ca-app-pub-5898281503537290~1866548811',
+        interstitial: 'ca-app-pub-5898281503537290~1866548811'
       };
     } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
       this.admobId = {
-        banner: 'ca-app-pub-9679740505479624/9819218390',
-        interstitial: 'ca-app-pub-9679740505479624/9819218390'
+        banner: 'ca-app-pub-5898281503537290~1866548811',
+        interstitial: 'ca-app-pub-5898281503537290~1866548811'
       };
     }
 
