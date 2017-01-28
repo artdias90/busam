@@ -20,18 +20,25 @@
     	<a href="{{link}}" target="_target"><img src="{{imagem}}" ></a>
     </div>
 
+    <ion-list>
+      <ion-searchbar  [(ngModel)]='searchBarItem' (ionInput)="getLinhas($event)" placeholder="pesquise linha..."></ion-searchbar>
+      <button ion-item *ngFor="let item of currResults" (click)="addToReceita($event, item)">
+        <ion-icon [name]="'add'" item-right></ion-icon>
+        {{ item.nome }}
+      </button>
+    </ion-list>
 
 <ion-list>
   <button ion-item *ngFor="let items of item" (click)="viewItem(items)" style="background: rgba(255, 255, 255, 0.8);    margin-bottom: 5px;">
     {{items.numeroLinha}} - {{items.nomeLinha}}
-  </button>  
+  </button>
 </ion-list>
 
 
    <!-- <ion-card *ngFor="let items of item" (click)="viewItem(items)" padding>
     	<div style="background: #e8eaf6;color: #3f51b5;position: absolute;padding: 10px;border-radius: 30px;margin-left: -25px;margin-top: -25px;border: #3f51b5 solid 2px;">{{items.numeroLinha}}</div>
       <div style="margin-left: 30px;">{{items.nomeLinha}}</div>
-    </ion-card> 
+    </ion-card>
     -->
 
     <div style="text-align: center;" *ngIf="imagem_footer">

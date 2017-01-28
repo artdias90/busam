@@ -21,6 +21,7 @@ export class HomePage {
   loggedInUserInfo:any;
   linhas:any;
   item:any;
+  currResults:any;
   aviso;
   imagem;
   link;
@@ -75,6 +76,9 @@ export class HomePage {
         console.log("erro", "Ocorreu um erro. Tente novamente.");
       });
 
+
+
+
     // admob setup
     this.platform = platform;
     if (/(android)/i.test(navigator.userAgent)) {
@@ -89,6 +93,29 @@ export class HomePage {
       };
     }
 
+  }
+
+
+  //BUSCA
+  getLinhas(ev: any) {
+    this.currResults = [];
+    let val = ev.target.value;
+    if(val && val.trim() != '' && val.length <= 2) {
+      this.linhas = this.busamService.getLinhas(this.cidade).subscribe(
+        response => {
+          this.item = response;
+          this.showLoading = false;
+        },
+        error => {
+          console.log("erro", "Ocorreu um erro. Tente novamente.");
+        });
+    } else if (val && val.trim() != '' && val.length > 2) {
+      this.busamService.getLinhas(this.cidade).subscribe(response => {
+        this.item = response.filter((item) => {
+          return (item.nome.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+      }, error => {})
+    }
   }
 
   ionViewDidLoad() {
