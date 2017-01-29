@@ -39,8 +39,9 @@ export class HomePage {
               private alertCtrl:AlertController,
               private busamService:BusamService) {
 
-    this.cidade = this.busamService.verificaCidade();
-
+    //this.cidade = this.busamService.verificaCidade();
+    this.cidade = 1;
+    
     this.aviso = this.busamService.getObs(0).subscribe(
       response => {
         this.aviso = response[0].txtObservacao;

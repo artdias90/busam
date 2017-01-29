@@ -34,7 +34,8 @@ export class StartPage {
               private alertCtrl:AlertController,
               private busamService:BusamService) {
 
-
+    this.navCtrl.push(HomePage, {});
+    
     this.linhas = this.busamService.getCidades().subscribe(
     response => {
       this.item = response;
@@ -51,10 +52,10 @@ export class StartPage {
     //  console.log(this.linha)
     //  this.navCtrl.push(LinhasPage, {});
     //}else{
-      this.cidade = this.busamService.verificaCidade();
-      if(this.cidade){
-        this.navCtrl.push(HomePage, {});
-      }      
+      //this.cidade = this.busamService.verificaCidade();
+      //if(this.cidade){
+         //this.navCtrl.push(HomePage, {});    
+      //}      
     //}
 
   }
