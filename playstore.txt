@@ -1,0 +1,5 @@
+cordova build --release android
+
+jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore D:\Desktop\busam\onibus.key platforms\android\build\outputs\apk\android-release-unsigned.apk br.com.busam
+
+zipalign -f -v 4 platforms\android\build\outputs\apk\android-release-unsigned.apk novo.apk
