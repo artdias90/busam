@@ -84,8 +84,8 @@ export class HomePage {
     this.platform = platform;
     if (/(android)/i.test(navigator.userAgent)) {
       this.admobId = {
-        banner: 'ca-app-pub-5898281503537290~1866548811',
-        interstitial: 'ca-app-pub-5898281503537290~1866548811'
+        banner: 'ca-app-pub-5898281503537290/4820015210',
+        interstitial: 'ca-app-pub-5898281503537290/4820015210'
       };
     } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
       this.admobId = {
@@ -120,6 +120,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+    console.log("admob");
     this.createBanner();
     this.showBanner("top");
   }
@@ -127,6 +128,8 @@ export class HomePage {
   createBanner() {
     this.platform.ready().then(() => {
       if (AdMob) {
+        console.log("criando banner");
+        console.log(this.admobId.banner);
         AdMob.createBanner({
           adId: this.admobId.banner,
           autoShow: true
@@ -143,6 +146,7 @@ export class HomePage {
           "top": AdMob.AD_POSITION.TOP_CENTER
         };
         AdMob.showBanner(positionMap[position.toLowerCase()]);
+        console.log("banner criado com sucesso");
       }
     });
   }
