@@ -30,6 +30,7 @@ export class HomePage {
   private admobId: any;
   showLoading = true;
   cidade;
+  backcity;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -39,9 +40,13 @@ export class HomePage {
               private alertCtrl:AlertController,
               private busamService:BusamService) {
 
-    //this.cidade = this.busamService.verificaCidade();
-    this.cidade = 1;
-    
+    this.cidade = this.busamService.verificaCidade();
+    if(this.cidade == 1){
+      this.backcity = "../www/assets/img/valinhos_2.jpg";
+    }else if(this.cidade == 3){
+      this.backcity = "../www/assets/img/vinhedo.jpg";
+    }
+    console.log(this.backcity);
     this.aviso = this.busamService.getObs(0).subscribe(
       response => {
         this.aviso = response[0].txtObservacao;
@@ -160,6 +165,7 @@ export class HomePage {
   }
 
   backStart(){
+    this.busamService.resetaCidade();
     this.navCtrl.push(StartPage, {});
   }
 

@@ -40,8 +40,8 @@ export class BusamService {
       .map(response => { return response.json() });
   }
 
-  getHorarios(linha, frequencia):any{
-    return this.http.get(this.host + 'horarios.php?id='+ linha + '&frequencia='+ frequencia)
+  getHorarios(linha, frequencia, sentido):any{
+    return this.http.get(this.host + 'horarios.php?id='+ linha + '&frequencia='+ frequencia + '&sentido='+ sentido)
       .map(response => { return response.json() });
   }
 
@@ -63,6 +63,10 @@ export class BusamService {
   verificaLinha():any{
     this.linha = localStorage.getItem("idLinhaBusam");
     return this.linha;
+  }
+
+  resetaCidade():any{
+    this.linha = localStorage.removeItem("idCidadeBusam");
   }
 
 }

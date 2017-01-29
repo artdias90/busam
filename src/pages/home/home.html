@@ -1,13 +1,13 @@
 <ion-header >
   <ion-navbar hideBackButton >
-    <!--<div style="position: absolute;color: white;font-size: 150%;margin-left: 2%;" (click)="backStart()">
+    <div style="position: absolute;color: white;font-size: 150%;margin-left: 2%;" (click)="backStart()">
       <ion-icon name="swap"></ion-icon>
-    </div>-->
-    <ion-title style="text-align: center;">BusAM - Valinhos</ion-title>
+    </div>
+    <ion-title style="text-align: center;width: 60%;margin-left: 20%;">BusAM</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content style="background-image: url('../www/assets/img/valinhos_2.jpg');padding: 0px;background-repeat: no-repeat;background-size: auto 100%;background-position: center top;">
+<ion-content [ngStyle]="{'background-image': 'url(' + backcity + ')'}" style="padding: 0px;background-repeat: no-repeat;background-size: auto 100%;background-position: center top;">
 
   <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
 

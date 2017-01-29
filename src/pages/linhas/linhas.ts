@@ -46,6 +46,12 @@ export class LinhasPage {
   showLoading = true;
   linha;
   linhaFavorita;
+  diariamenteVolta;
+  sabadoVolta;
+  domingoVolta;
+  segsexVolta;
+  segsabVolta;
+  sabdomVolta;
 
 
   constructor(
@@ -63,7 +69,7 @@ export class LinhasPage {
     this.curDay = d.getDay();
 
 	  for(this.i=2; this.i<8; this.i++){
-    this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i).subscribe(
+    this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 0).subscribe(
     response => {
       this.retornou = this.getHorario(response);
       if(response){
@@ -112,7 +118,64 @@ export class LinhasPage {
         }
 
       }
-    });
+      });
+    }
+
+
+
+
+
+    for(this.i=2; this.i<8; this.i++){
+    this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 1).subscribe(
+    response => {
+      this.retornou = this.getHorario(response);
+      if(response){
+        if(response[0].idFrequencia == 2){
+          this.diariamenteVolta = response;
+          this.horarionow = this.verificaHorario(response);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+        if(response[0].idFrequencia == 3){
+          this.segsexVolta = response;
+          if(this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5){
+            this.horarionow = this.verificaHorario(response);
+            this.resultInMinutes = this.getHorario(this.horarionow);
+          }
+        }
+        if(response[0].idFrequencia == 4){
+          this.sabadoVolta = response;
+          if(this.curDay == 6){
+            this.horarionow = this.verificaHorario(response);
+            this.resultInMinutes = this.getHorario(this.horarionow);
+          }
+        }
+        if(response[0].idFrequencia == 5){
+          this.domingoVolta = response;
+          if(this.curDay == 0){
+            this.horarionow = this.verificaHorario(response);
+            this.resultInMinutes = this.getHorario(this.horarionow);
+          }
+        }
+        if(response[0].idFrequencia == 6){
+          this.segsabVolta = response;
+          if(this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5 || this.curDay == 6){
+            this.horarionow = this.verificaHorario(response);
+            this.resultInMinutes = this.getHorario(this.horarionow);
+          }
+        }
+        if(response[0].idFrequencia == 7){
+          this.sabdomVolta = response;
+          if(this.curDay == 0 || this.curDay == 6){
+            this.horarionow = this.verificaHorario(response);
+            this.resultInMinutes = this.getHorario(this.horarionow);
+          }
+        }
+        if(this.i == 7){
+          this.showLoading = false;
+        }
+
+      }
+      });
     }
 
 

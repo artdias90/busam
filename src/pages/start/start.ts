@@ -33,8 +33,18 @@ export class StartPage {
               private authService:AuthService,
               private alertCtrl:AlertController,
               private busamService:BusamService) {
+    
+    //this.linha = this.busamService.verificaLinha();
+    //if(this.linha){
+    //  console.log(this.linha)
+    //  this.navCtrl.push(LinhasPage, {});
+    //}else{
+      this.cidade = this.busamService.verificaCidade();
+      if(this.cidade){
+         this.navCtrl.push(HomePage, {});    
+      }      
+    //}
 
-    this.navCtrl.push(HomePage, {});
     
     this.linhas = this.busamService.getCidades().subscribe(
     response => {
@@ -47,16 +57,7 @@ export class StartPage {
   }
 
   ionViewDidLoad() {
-    //this.linha = this.busamService.verificaLinha();
-    //if(this.linha){
-    //  console.log(this.linha)
-    //  this.navCtrl.push(LinhasPage, {});
-    //}else{
-      //this.cidade = this.busamService.verificaCidade();
-      //if(this.cidade){
-         //this.navCtrl.push(HomePage, {});    
-      //}      
-    //}
+
 
   }
 
