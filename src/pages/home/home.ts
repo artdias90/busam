@@ -50,6 +50,9 @@ export class HomePage {
     this.aviso = this.busamService.getObs(0).subscribe(
       response => {
         this.aviso = response[0].txtObservacao;
+        if(this.aviso == ""){
+           this.aviso = false;
+        }
       },
       error => {
         console.log("erro", "Ocorreu um erro. Tente novamente.");

@@ -1,8 +1,9 @@
 <ion-content>
+  <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
 	<div style="background-color:#269;
 background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
 background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
-height: 100%;width: 100%;vertical-align: middle;display: flex;align-items: center;justify-content: center;">
+height: 100%;width: 100%;vertical-align: middle;display: flex;align-items: center;justify-content: center;" *ngIf="!showLoading">
     <ion-list>
       <ion-item>
         <ion-label>Escolha sua cidade</ion-label>

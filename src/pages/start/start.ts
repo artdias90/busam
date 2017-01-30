@@ -42,7 +42,9 @@ export class StartPage {
       this.cidade = this.busamService.verificaCidade();
       if(this.cidade){
          this.navCtrl.push(HomePage, {});    
-      }      
+      }else{
+        this.showLoading = false;
+      }     
     //}
 
     
