@@ -31,6 +31,7 @@ export class HomePage {
   showLoading = true;
   cidade;
   backcity;
+  searchBarItem;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -41,6 +42,7 @@ export class HomePage {
               private busamService:BusamService) {
 
     this.cidade = this.busamService.verificaCidade();
+    this.searchBarItem = '';
     if(this.cidade == 1){
       this.backcity = "../www/assets/img/valinhos_2.jpg";
     }else if(this.cidade == 3){
