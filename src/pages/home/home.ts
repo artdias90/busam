@@ -102,11 +102,12 @@ export class HomePage {
   }
 
 
+
   //BUSCA
   getLinhas(ev: any) {
     this.currResults = [];
     let val = ev.target.value;
-    if(val && val.trim() != '' && val.length <= 2) {
+    if(!val || val.length <= 2) {
       this.linhas = this.busamService.getLinhas(this.cidade).subscribe(
         response => {
           this.item = response;
@@ -118,7 +119,7 @@ export class HomePage {
     } else if (val && val.trim() != '' && val.length > 2) {
       this.busamService.getLinhas(this.cidade).subscribe(response => {
         this.item = response.filter((item) => {
-          return (item.nome.toLowerCase().indexOf(val.toLowerCase()) > -1);
+          return (item.nomeLinha.toLowerCase().indexOf(val.toLowerCase()) > -1);
         })
       }, error => {})
     }
