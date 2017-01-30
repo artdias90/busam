@@ -21,7 +21,9 @@
     </div>
 
 
+    <!--
     <ion-searchbar [(ngModel)]='searchBarItem' (ionInput)="getLinhas($event)" placeholder="pesquise linha..."></ion-searchbar>
+    -->
     <ion-list>
       <button ion-item *ngFor="let items of item" (click)="viewItem(items)" style="background: rgba(255, 255, 255, 0.8);    margin-bottom: 5px;">
         {{items.numeroLinha}} - {{items.nomeLinha}}
