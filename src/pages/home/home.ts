@@ -30,7 +30,6 @@ export class HomePage {
   private admobId: any;
   showLoading = true;
   cidade;
-  backcity;
   searchBarItem;
 
   constructor(GlobalVars:GlobalVars,
@@ -43,12 +42,6 @@ export class HomePage {
 
     this.cidade = this.busamService.verificaCidade();
     this.searchBarItem = '';
-    if(this.cidade == 1){
-      this.backcity = "../www/assets/img/valinhos_2.jpg";
-    }else if(this.cidade == 3){
-      this.backcity = "../www/assets/img/vinhedo.jpg";
-    }
-    console.log(this.backcity);
     this.aviso = this.busamService.getObs(0).subscribe(
       response => {
         this.aviso = response[0].txtObservacao;
