@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content style="padding: 0px;">
+<ion-content style="padding: 0px;" [ngStyle]="{'background-image': 'url(' + background + ')'}">
 
   <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
 

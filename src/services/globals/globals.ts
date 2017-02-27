@@ -10,6 +10,9 @@ export class GlobalVars {
   key_id: any;
   key_usuario: any;
   key_senha: any;
+  background: any;
+  platform: any;
+  icon: any;
 
   constructor() {
     this.host = "http://api.codeam.com.br/busam/";
@@ -19,6 +22,10 @@ export class GlobalVars {
     this.key_id = "busam_id";
     this.key_usuario = "busam_user";
     this.key_senha = "busam_password";
+    this.platform = "../www";
+    this.platform = "";
+    this.background = "/assets/img/background.jpg";
+    this.icon = "/assets/img/icon.png";
   }
 
 }

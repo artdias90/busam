@@ -31,6 +31,7 @@ export class HomePage {
   showLoading = true;
   cidade;
   searchBarItem;
+  background;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -39,7 +40,7 @@ export class HomePage {
               private authService:AuthService,
               private alertCtrl:AlertController,
               private busamService:BusamService) {
-
+    this.background = "../www/assets/img/background.jpg";
     this.cidade = this.busamService.verificaCidade();
     this.searchBarItem = '';
     this.aviso = this.busamService.getObs(0).subscribe(
