@@ -25,6 +25,7 @@ export class StartPage {
   showLoading = true;
   cidade;
   linha;
+  background;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -34,6 +35,8 @@ export class StartPage {
               private alertCtrl:AlertController,
               private busamService:BusamService) {
     
+    //this.background = "../www/assets/img/background.jpg";
+    this.background = GlobalVars.platform + GlobalVars.background;
     //this.linha = this.busamService.verificaLinha();
     //if(this.linha){
     //  console.log(this.linha)
