@@ -74,6 +74,19 @@ export class HomePage {
     this.linhas = this.busamService.getLinhas(this.cidade).subscribe(
       response => {
         this.item = response;
+        let favoritas:any = JSON.parse(window.localStorage.getItem('linha_favoritas'));
+        if(favoritas) {
+          this.item.map((linha, index) => {
+            linha.favorita = false;
+            if(favoritas.indexOf(linha.idLinha) !== -1) {
+              linha.favorita = true;
+            }
+          })
+          this.item.sort((linhaa, linhab) => {
+            return (linhaa.favorita === linhab.favorita)? 0 : linhaa.favorita? -1 : 1;
+          })
+          console.log(this.item);
+        }
         this.showLoading = false;
       },
       error => {
@@ -99,6 +112,15 @@ export class HomePage {
 
   }
 
+  // favorita uma linha para que ela fique sempre no topo
+  favoritar(event:any, item:any) {
+    item.favorita = !item.favorita;
+    console.log(item);
+    event.stopPropagation();
+    event.preventDefault();
+
+    this.authService.addFavorite(item.idLinha);
+  }
 
 
   //BUSCA
@@ -109,6 +131,15 @@ export class HomePage {
       this.linhas = this.busamService.getLinhas(this.cidade).subscribe(
         response => {
           this.item = response;
+          let favoritas:any = JSON.parse(window.localStorage.getItem('linha_favoritas'));
+          if(favoritas) {
+            this.item.map((linha, index) => {
+              linha.favorita = false;
+              if(favoritas.indexOf(linha.idLinha) !== -1) {
+                linha.favorita = true;
+              }
+            })
+          }
           this.showLoading = false;
         },
         error => {
@@ -124,9 +155,10 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log("admob");
-    this.createBanner();
-    this.showBanner("top");
+    if (/(android)/i.test(navigator.userAgent)) {
+      this.createBanner();
+      this.showBanner("top");
+    }
   }
 
   createBanner() {

@@ -67,8 +67,23 @@ export class AuthService {
   }
 
 
-
-
+  /**
+   * registers a favorite line
+   * @param userId: user name
+   * * @param linhaId: id da linha
+   */
+  addFavorite(lineId):any {
+    let favoritas:any = JSON.parse(window.localStorage.getItem('linha_favoritas'));
+    if(!favoritas) {
+      favoritas = [];
+    }
+    if(favoritas.indexOf(lineId) === -1) {
+      favoritas.push(lineId);
+    } else {
+      favoritas.splice(favoritas.indexOf(lineId), 1);
+    }
+    window.localStorage.setItem('linha_favoritas', JSON.stringify(favoritas));
+  }
 
   /**
    *register an user

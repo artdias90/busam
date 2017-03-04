@@ -25,9 +25,19 @@
 
     <ion-searchbar [(ngModel)]='searchBarItem' (ionInput)="getLinhas($event)" placeholder="pesquise linha..."></ion-searchbar>
     <ion-list>
-      <button ion-item *ngFor="let items of item" (click)="viewItem(items)" style="background: rgba(255, 255, 255, 0.8);    margin-bottom: 5px;">
-        {{items.numeroLinha}} - {{items.nomeLinha}}
-      </button>
+      <ion-item *ngFor="let items of item">
+        <ion-row>
+          <ion-col width-90>
+            <button ion-item (click)="viewItem(items)" style="background: rgba(255, 255, 255, 0.8);    margin-bottom: 5px;" width-90>
+              {{items.numeroLinha}} - {{items.nomeLinha}}
+            </button>
+          </ion-col>
+          <ion-col width-10>
+            <ion-icon [color]="items.favorita? 'yellow' :'#000'" [name]="items.favorita? 'star' :'star-outline'" yellow class="favorite-star" ion-stop-event (click)="favoritar($event, items)" width-10></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
     </ion-list>
 
 
