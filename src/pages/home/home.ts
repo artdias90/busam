@@ -121,6 +121,8 @@ export class HomePage {
     event.preventDefault();
 
     this.authService.addFavorite(item.idLinha);
+
+    this.navCtrl.push(HomePage);
   }
 
 
