@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar, Deeplinks, Splashscreen } from 'ionic-native';
-import { TabsPage } from '../pages/tabs/tabs';
 import { StartPage } from '../pages/start/start';
 //import { HomePage } from '../pages/home/home';
 import { OneSignal} from 'ionic-native';
