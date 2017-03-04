@@ -3,12 +3,12 @@
   <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
   
 <div style="display: flex;align-items: center;justify-content: center;height: 100%;position: absolute;width: 100%;">
-  <div style="height: 250px;background: white;z-index: 10000;width: 300px;opacity: 0.6;"></div>
+  <div style="height: 50%;background: white;z-index: 10000;width: 90%;opacity: 0.6;"></div>
 </div>
 
 	<div style="height: 100%;width: 100%;vertical-align: middle;display: flex;align-items: center;justify-content: center;" *ngIf="!showLoading">
-      <ion-list style="z-index: 10000000;">
-        <img src="">
+      <ion-list style="z-index: 10000000;width: 70%;text-align: -webkit-center;">
+        <img src="assets/img/icon.png" style="width: 70%;margin-bottom: 10%;">
         <ion-item>
           <ion-label>Escolha sua cidade</ion-label>
           <ion-select [(ngModel)]="selectedItem" (ionChange)="selecionacidade($event, selectedItem)">
