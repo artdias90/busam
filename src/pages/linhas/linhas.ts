@@ -121,7 +121,6 @@ export class LinhasPage {
 
 
 
-
     for(this.i=2; this.i<8; this.i++){
     this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 1).subscribe(
     response => {
@@ -168,7 +167,42 @@ export class LinhasPage {
   }
 
   showHorarios(){
+
     this.horario = true;
+  }
+
+  saveHorario(horario) {
+    console.log(horario);
+    var dat = new Date, time = horario.txtHorario.split(/h/g);
+    dat.setHours(time[0]);
+    dat.setMinutes(time[1]);
+
+    let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
+    if(favoritos) {
+      console.log(favoritos);
+      let found = false;
+      favoritos.map((linha, index) => {
+        if(linha.numero === this.number) {
+          found = true;
+          linha.horarios.push[dat.getTime()];
+        }
+      })
+      if(!found) {
+        favoritos.push({
+          numero: this.number,
+          horarios: [dat.getTime()]
+        });
+      }
+    } else {
+      let favoritos = [];
+      favoritos.push({
+        numero: this.number,
+        horarios: [dat.getTime()]
+      });
+    }
+    window.localStorage.setItem('horarios_favoritos', JSON.stringify(favoritos));
+
+    // dat.getTime();
   }
 
   verificaHorario(response){

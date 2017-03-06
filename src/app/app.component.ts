@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
-import { StatusBar, Deeplinks, Splashscreen } from 'ionic-native';
+import { StatusBar, Deeplinks, Splashscreen, LocalNotifications } from 'ionic-native';
 import { StartPage } from '../pages/start/start';
 //import { HomePage } from '../pages/home/home';
 import { OneSignal} from 'ionic-native';
-
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -25,13 +24,35 @@ export class MyApp {
         OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
         OneSignal.setSubscription(true);
         OneSignal.handleNotificationReceived().subscribe(() => {
-// do something when the notification is received.
+        // do something when the notification is received.
         });
         OneSignal.handleNotificationOpened().subscribe(() => {
-// do something when the notification is opened.
+        // do something when the notification is opened.
         });
         OneSignal.endInit();
+
+
+
       }
+
+      // schedule notifications
+      let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
+      if(favoritos) {
+        favoritos.map((linha, index) => {
+          console.log(linha);
+        })
+
+
+      }
+
+
+      LocalNotifications.schedule({
+        text: 'Delayed ILocalNotification',
+        at: new Date(new Date().getTime() + 3600),
+        led: 'FF0000',
+        sound: null
+      });
+
       Deeplinks.routeWithNavController(this.nav, {
         '/start': StartPage
       });
