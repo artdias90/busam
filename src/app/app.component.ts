@@ -41,13 +41,10 @@ export class MyApp {
         favoritos.map((linha, index) => {
           console.log(linha);
         })
-
-
       }
 
-
       LocalNotifications.schedule({
-        text: 'Delayed ILocalNotification',
+        text: 'Sua linha está chegando!',
         at: new Date(new Date().getTime() + 3600),
         led: 'FF0000',
         sound: null

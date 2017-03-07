@@ -184,7 +184,7 @@ export class LinhasPage {
       favoritos.map((linha, index) => {
         if(linha.numero === this.number) {
           found = true;
-          linha.horarios.push[dat.getTime()];
+          linha.horarios.push(dat.getTime());
         }
       })
       if(!found) {
