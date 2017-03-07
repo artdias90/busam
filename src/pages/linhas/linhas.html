@@ -1,29 +1,19 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Linha {{number}}
+      <div style="font-size: 1em;font-weight: bolder;line-height: 1em;width: 100%;height: 60px;cursor: pointer;word-break: normal;white-space: normal;margin-top: 10px;">Linha {{number}} - {{description}}</div>
     </ion-title>
   </ion-navbar>
   <div style="background: #3f51b5;padding-left: 15px;padding-bottom: 10px;position: fixed;margin-top: -15px;padding-top: 10px;width: 100%">
-    <div style="color: white;font-weight: bold;font-size: 1.5em;">{{description}}</div>
+    <div style="color: white;font-weight: bold;font-size: 1.5em;"></div>
 
     <ion-grid>
-      <ion-row style="margin-bottom: -10px;">
-        <ion-col width-50></ion-col>
-        <ion-col width-50 style="text-align: right;color: white;font-weight: bold;font-size: 1em;">Próximo: {{horarionow}}</ion-col>
-      </ion-row>
       <ion-row>
-        <ion-col width-25></ion-col>
-        <ion-col width-75 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 1.5em;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col>
+        <ion-col width-50 style="display: flex;justify-content: center;align-items: center;color: white;font-weight: 900;font-size: 1.3em;">Próximo: {{horarionow}}</ion-col>
+        <ion-col width-50 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 1.5em;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col>
       </ion-row>
     </ion-grid>
   </div>
-
-
-  <!-- LINHA DA VERGONHA -->
-  <div style="background: #3f51b5;padding-left: 15px;padding-bottom: 10px;position: relative;margin-top: -15px;padding-top: 10px;width: 100%"><div style="color: white;font-weight: bold;font-size: 1.5em;">{{description}}</div><ion-grid><ion-row style="margin-bottom: -10px;"><ion-col width-50></ion-col><ion-col width-50 style="text-align: right;color: white;font-weight: bold;font-size: 1em;">Próximo: {{horarionow}}</ion-col></ion-row><ion-row><ion-col width-25></ion-col><ion-col width-75 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 1.5em;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col></ion-row></ion-grid></div>
-
-
 
 </ion-header>
 
@@ -38,6 +28,15 @@
     <div *ngIf="obs" style="background: #feff9e;margin-bottom: 15px;padding: 10px;font-size: 1.2em;">
       {{obsLinha}}
     </div>
+
+<ion-row wrap>
+  <ion-col width-25 *ngFor="let items of diariamente" style="padding: 0px;">
+    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+    </div>
+    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+  </ion-col>
+</ion-row>
 
 
 <div *ngIf="diariamente" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;    margin-top: 20px;">DIARIAMENTE</div>
@@ -235,5 +234,11 @@
         </div>
       </div>
     </ion-card>
+  </div>
+
+
+  <div style="position: absolute;bottom: 0;background: #3f51b5;width: 100%;color: white;padding: 5px;">
+    <div (click)="sentidoida()" style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;">Sentido Ida</div>
+    <div (click)="sentidovolta()" style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;">Sentido Volta</div>
   </div>
 </ion-content>

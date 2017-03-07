@@ -10,6 +10,7 @@ import { LembreteService } from '../../services/lembrete/lembrete.service';
   templateUrl: 'linhas.html',
   providers: [GlobalVars, BusamService, LembreteService]
 })
+
 export class LinhasPage {
   title;
   description;
@@ -298,5 +299,14 @@ export class LinhasPage {
   idlinhaFavorita() {
     this.linhaFavorita = this.navParams.get('item').idLinha;
     this.linha = localStorage.setItem("idLinhaBusam", this.linhaFavorita);
+  }
+
+
+  sentidoida(){
+    console.log("ida");
+  }
+
+  sentidovolta(){
+    console.log("volta");
   }
 }
