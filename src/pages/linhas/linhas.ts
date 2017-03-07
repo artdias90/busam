@@ -185,9 +185,8 @@ export class LinhasPage {
   saveHorario(horario) {
     horario.favorito = !horario.favorito;
     let time = horario.txtHorario.split(/h/g);
-    let dat = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), time[0], time[1]);
+    let dat = new Date(new Date().getFullYear(), new Date().getMonth(), (new Date().getHours() > time[0]? new Date().getDate() + 1 : new Date().getDate()), time[0], time[1], 0, 0);
     // console.log(dat, dat.getUTCMilliseconds());
-
 
     let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
     let added = false;
@@ -200,7 +199,6 @@ export class LinhasPage {
             added = true;
             linha.horarios.push(dat.getTime());
           } else {
-            added = false;
             linha.horarios.splice(linha.horarios.indexOf(dat.getTime()), 1);
           }
         }
@@ -213,6 +211,7 @@ export class LinhasPage {
       }
     } else {
       favoritos = [];
+      added = true;
       favoritos.push({
         numero: this.number,
         horarios: [dat.getTime()]

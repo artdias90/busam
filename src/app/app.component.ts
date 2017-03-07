@@ -3,16 +3,18 @@ import { Platform, Nav } from 'ionic-angular';
 import { StatusBar, Deeplinks, Splashscreen, LocalNotifications } from 'ionic-native';
 import { StartPage } from '../pages/start/start';
 //import { HomePage } from '../pages/home/home';
+import { LembreteService } from '../services/lembrete/lembrete.service';
 import { OneSignal } from 'ionic-native';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`,
+  providers: [LembreteService]
 })
 export class MyApp {
   @ViewChild(Nav) nav:Nav;
   rootPage = StartPage;
 
-  constructor(platform:Platform) {
+  constructor(platform:Platform, lembreteService:LembreteService) {
     platform.ready().then(() => {
 
 
@@ -35,21 +37,7 @@ export class MyApp {
 
       }
 
-      // schedule notifications
-      let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
-      if (favoritos) {
-        favoritos.map((linha, index) => {
-          linha.horarios.map((horario, index) => {
-            console.log(new Date(new Date(horario).getTime()));
-            LocalNotifications.schedule({
-              text: `alerta: linha ${linha.numero} - ônibus a caminho`,
-              at: new Date(new Date(horario).getTime()),
-              led: 'FF0000',
-              sound: null
-            });
-          })
-        })
-      }
+      lembreteService.updateLembretes();
 
       Deeplinks.routeWithNavController(this.nav, {
         '/start': StartPage
