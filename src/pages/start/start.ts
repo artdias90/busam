@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 import { AuthService } from "../../services/auth/auth";
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
-import { LinhasPage } from "../linhas/linhas";
 import { HomePage } from "../home/home";
 
 /*
