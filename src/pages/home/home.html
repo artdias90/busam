@@ -24,7 +24,7 @@
 
 
     <ion-searchbar [(ngModel)]='searchBarItem' (ionInput)="getLinhas($event)" placeholder="pesquise linha..."></ion-searchbar>
-    <ion-list>
+<!--     <ion-list>
       <ion-item *ngFor="let items of item">
         <ion-row>
           <ion-col width-90>
@@ -38,14 +38,22 @@
         </ion-row>
       </ion-item>
 
-    </ion-list>
+    </ion-list> -->
 
 
-   <!-- <ion-card *ngFor="let items of item" (click)="viewItem(items)" padding>
-    	<div style="background: #e8eaf6;color: #3f51b5;position: absolute;padding: 10px;border-radius: 30px;margin-left: -25px;margin-top: -25px;border: #3f51b5 solid 2px;">{{items.numeroLinha}}</div>
-      <div style="margin-left: 30px;">{{items.nomeLinha}}</div>
+   <ion-card *ngFor="let items of item" (click)="viewItem(items)">
+      <ion-row>
+        <ion-col width-90>
+          <button ion-item (click)="viewItem(items)" style="background: rgba(255, 255, 255, 0.8);    margin-bottom: 5px;" width-90>
+            <div style="font-size: 1em;width: 100%;cursor: pointer;word-break: normal;white-space: normal;">{{items.numeroLinha}} - {{items.nomeLinha}}</div>
+          </button>
+        </ion-col>
+        <ion-col width-10 style="display: flex;justify-content: center;align-items: center;font-size: 1.5em;">
+          <ion-icon [color]="items.favorita? 'yellow' :'#000'" [name]="items.favorita? 'star' :'star-outline'" yellow class="favorite-star" ion-stop-event (click)="favoritar($event, items)" width-10></ion-icon>
+        </ion-col>
+      </ion-row>
     </ion-card>
-    -->
+   
 
     <div style="text-align: center;" *ngIf="imagem_footer">
       <a href="{{link_footer}}" target="_target"><img src="{{imagem_footer}}" ></a>
