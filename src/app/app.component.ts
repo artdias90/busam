@@ -3,7 +3,7 @@ import { Platform, Nav } from 'ionic-angular';
 import { StatusBar, Deeplinks, Splashscreen, LocalNotifications } from 'ionic-native';
 import { StartPage } from '../pages/start/start';
 //import { HomePage } from '../pages/home/home';
-import { OneSignal} from 'ionic-native';
+import { OneSignal } from 'ionic-native';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -12,7 +12,7 @@ export class MyApp {
   @ViewChild(Nav) nav:Nav;
   rootPage = StartPage;
 
-  constructor(platform: Platform) {
+  constructor(platform:Platform) {
     platform.ready().then(() => {
 
 
@@ -24,10 +24,10 @@ export class MyApp {
         OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
         OneSignal.setSubscription(true);
         OneSignal.handleNotificationReceived().subscribe(() => {
-        // do something when the notification is received.
+          // do something when the notification is received.
         });
         OneSignal.handleNotificationOpened().subscribe(() => {
-        // do something when the notification is opened.
+          // do something when the notification is opened.
         });
         OneSignal.endInit();
 
@@ -37,9 +37,16 @@ export class MyApp {
 
       // schedule notifications
       let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
-      if(favoritos) {
+      if (favoritos) {
         favoritos.map((linha, index) => {
-          console.log(linha);
+          linha.horarios.map((horario, index) => {
+            LocalNotifications.schedule({
+              text: `alerta: linha ${linha.numero} - ônibus a caminho`,
+              at: new Date(new Date(horario).getTime()),
+              led: 'FF0000',
+              sound: null
+            });
+          })
         })
       }
 

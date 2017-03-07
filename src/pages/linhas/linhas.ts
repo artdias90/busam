@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
-import {GlobalVars} from "../../services/globals/globals";
-import {BusamService} from "../../services/busam/busam";
+import { GlobalVars } from "../../services/globals/globals";
+import { BusamService } from "../../services/busam/busam";
 
 @Component({
   selector: 'page-linhas',
@@ -54,188 +54,246 @@ export class LinhasPage {
   sabdomVolta;
 
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private busamService: BusamService
-  ){}
+  constructor(public navCtrl:NavController,
+              public navParams:NavParams,
+              private alertCtrl:AlertController,
+              private busamService:BusamService) {}
 
   ionViewDidLoad() {
     this.obsLinha = this.navParams.get('item').obsLinha;
     this.title = this.navParams.get('item').title;
     this.description = this.navParams.get('item').nomeLinha;
     this.number = this.navParams.get('item').numeroLinha;
-  	const d = new Date();
+    const d = new Date();
     this.curDay = d.getDay();
 
-	  for(this.i=2; this.i<8; this.i++){
-    this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 0).subscribe(
-    response => {
-      this.retornou = this.getHorario(response);
-      if(response){
-        if(response[0].idFrequencia == 2){
-          this.diariamente = response;
-          this.horarionow = this.verificaHorario(response);
-          this.resultInMinutes = this.getHorario(this.horarionow);
-        }
-        if(response[0].idFrequencia == 3){
-          this.segsex = response;
-          if(this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5){
-						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);
-          }
-        }
-        if(response[0].idFrequencia == 4){
-          this.sabado = response;
-          if(this.curDay == 6){
-						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);
-          }
-        }
-        if(response[0].idFrequencia == 5){
-          this.domingo = response;
-          if(this.curDay == 0){
-						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);
-          }
-        }
-        if(response[0].idFrequencia == 6){
-          this.segsab = response;
-          if(this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5 || this.curDay == 6){
-						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);
-          }
-        }
-        if(response[0].idFrequencia == 7){
-          this.sabdom = response;
-          if(this.curDay == 0 || this.curDay == 6){
-						this.horarionow = this.verificaHorario(response);
-          	this.resultInMinutes = this.getHorario(this.horarionow);
-          }
-        }
+    for (this.i = 2; this.i < 8; this.i++) {
+      this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 0).subscribe(
+        response => {
+          this.retornou = this.getHorario(response);
+          if (response) {
+            if (response[0].idFrequencia == 2) {
+              this.diariamente = response;
+              this.checkNotifications(this.diariamente);
+              this.horarionow = this.verificaHorario(response);
+              this.resultInMinutes = this.getHorario(this.horarionow);
+            }
+            if (response[0].idFrequencia == 3) {
+              this.segsex = response;
+              this.checkNotifications(this.segsex);
+              if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5) {
+                this.horarionow = this.verificaHorario(response);
+                this.resultInMinutes = this.getHorario(this.horarionow);
+              }
+            }
+            if (response[0].idFrequencia == 4) {
+              this.sabado = response;
+              this.checkNotifications(this.sabado);
+              if (this.curDay == 6) {
+                this.horarionow = this.verificaHorario(response);
+                this.resultInMinutes = this.getHorario(this.horarionow);
+              }
+            }
+            if (response[0].idFrequencia == 5) {
+              this.domingo = response;
+              this.checkNotifications(this.domingo);
+              if (this.curDay == 0) {
+                this.horarionow = this.verificaHorario(response);
+                this.resultInMinutes = this.getHorario(this.horarionow);
+              }
+            }
+            if (response[0].idFrequencia == 6) {
+              this.segsab = response;
+              this.checkNotifications(this.segsab);
+              if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5 || this.curDay == 6) {
+                this.horarionow = this.verificaHorario(response);
+                this.resultInMinutes = this.getHorario(this.horarionow);
+              }
+            }
+            if (response[0].idFrequencia == 7) {
+              this.sabdom = response;
+              this.checkNotifications(this.sabdom);
+              if (this.curDay == 0 || this.curDay == 6) {
+                this.horarionow = this.verificaHorario(response);
+                this.resultInMinutes = this.getHorario(this.horarionow);
+              }
+            }
 
-      }
-      });
+          }
+        });
     }
 
 
 
 
-    for(this.i=2; this.i<8; this.i++){
-    this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 1).subscribe(
-    response => {
-      this.retornou = this.getHorario(response);
-      if(response){
-        if(response[0].idFrequencia == 2){
-          this.diariamenteVolta = response;
-        }
-        if(response[0].idFrequencia == 3){
-          this.segsexVolta = response;
-        }
-        if(response[0].idFrequencia == 4){
-          this.sabadoVolta = response;
-        }
-        if(response[0].idFrequencia == 5){
-          this.domingoVolta = response;
-        }
-        if(response[0].idFrequencia == 6){
-          this.segsabVolta = response;
-        }
-        if(response[0].idFrequencia == 7){
-          this.sabdomVolta = response;
-        }
-        if(this.i == 7){
-          this.showLoading = false;
-        }
+    for (this.i = 2; this.i < 8; this.i++) {
+      this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 1).subscribe(
+        response => {
+          this.retornou = this.getHorario(response);
+          if (response) {
+            if (response[0].idFrequencia == 2) {
+              this.diariamenteVolta = response;
+            }
+            if (response[0].idFrequencia == 3) {
+              this.segsexVolta = response;
+            }
+            if (response[0].idFrequencia == 4) {
+              this.sabadoVolta = response;
+            }
+            if (response[0].idFrequencia == 5) {
+              this.domingoVolta = response;
+            }
+            if (response[0].idFrequencia == 6) {
+              this.segsabVolta = response;
+            }
+            if (response[0].idFrequencia == 7) {
+              this.sabdomVolta = response;
+            }
+            if (this.i == 7) {
+              this.showLoading = false;
+            }
 
-      }
-      });
+          }
+        });
     }
 
 
     this.itinerario = this.busamService.getItinerarios(this.navParams.get('item').idLinha).subscribe(
-    response => {this.ruas = response;this.showLoading = false;},
-    error => {console.log("erro", "Ocorreu um erro. Tente novamente.");});
+      response => {
+        this.ruas = response;
+        this.showLoading = false;
+      },
+      error => {console.log("erro", "Ocorreu um erro. Tente novamente.");});
 
     this.observacoes = this.busamService.getObs(this.navParams.get('item').idLinha).subscribe(
-    response => {this.obs = response;},
-    error => {console.log("erro", "Ocorreu um erro. Tente novamente.");});
+      response => {this.obs = response;},
+      error => {console.log("erro", "Ocorreu um erro. Tente novamente.");});
   }
 
-  showItinerario(){
+  showItinerario() {
     this.horario = false;
   }
 
-  showHorarios(){
+  showHorarios() {
 
     this.horario = true;
   }
 
   saveHorario(horario) {
-    console.log(horario);
-    var dat = new Date, time = horario.txtHorario.split(/h/g);
-    dat.setHours(time[0]);
-    dat.setMinutes(time[1]);
+    horario.favorito = !horario.favorito;
+    let time = horario.txtHorario.split(/h/g);
+    let dat = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), time[0], time[1]);
+    // console.log(dat, dat.getUTCMilliseconds());
+
 
     let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
-    if(favoritos) {
-      console.log(favoritos);
+    let added = false;
+    if (favoritos) {
       let found = false;
       favoritos.map((linha, index) => {
-        if(linha.numero === this.number) {
+        if (linha.numero === this.number) {
           found = true;
-          linha.horarios.push(dat.getTime());
+          if (linha.horarios.indexOf(dat.getTime()) === -1) {
+            added = true;
+            linha.horarios.push(dat.getTime());
+          } else {
+            added = false;
+            linha.horarios.splice(linha.horarios.indexOf(dat.getTime()), 1);
+          }
         }
       })
-      if(!found) {
+      if (!found) {
         favoritos.push({
           numero: this.number,
           horarios: [dat.getTime()]
         });
       }
     } else {
-      let favoritos = [];
+      favoritos = [];
       favoritos.push({
         numero: this.number,
         horarios: [dat.getTime()]
       });
     }
+
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso',
+      subTitle: `Lembrete de horário ${added? 'salvo': 'apagado'} com sucesso!`,
+      buttons: ['OK']
+    });
+    alert.present();
     window.localStorage.setItem('horarios_favoritos', JSON.stringify(favoritos));
 
     // dat.getTime();
   }
 
-  verificaHorario(response){
-  	const d = new Date();
+  private checkNotifications(horarios:any) {
+    horarios.map((horario, index) => {
+      let time = horario.txtHorario.split(/h/g);
+      let dat = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), time[0], time[1]);
+      let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
+      if (favoritos) {
+        let found = false;
+        favoritos.map((linha, index) => {
+          if (linha.numero === this.number) {
+            found = true;
+            if (linha.horarios.indexOf(dat.getTime()) === -1) {
+              horario.favorito = false;
+            } else {
+              horario.favorito = true;
+            }
+          }
+        })
+        if (!found) {
+          favoritos.push({
+            numero: this.number,
+            horarios: [dat.getTime()]
+          });
+        }
+      } else {
+        favoritos = [];
+        favoritos.push({
+          numero: this.number,
+          horarios: [dat.getTime()]
+        });
+      }
+    })
+
+  }
+
+  verificaHorario(response) {
+    const d = new Date();
     this.curHour = d.getHours();
     this.curMin = d.getMinutes();
     this.curDay = d.getDay();
-    this.d2 = new​ Date(0, 0, 0, this.curHour, this.curMin);
-    for (var i=0; i < response.length; i++){
-      this.hora = response[i].txtHorario.substring(0,2);
-      this.minuto = response[i].txtHorario.substring(3,5);
-      this.d1 = new​ Date(0, 0, 0, this.hora, this.minuto);
-			if(this.d1 > this.d2){
-				this.horarionow = this.hora + 'h' + this.minuto;
-				console.log(this.horarionow);
-    		return this.horarionow;
-			}
- 	 	}
-    this.hora = response[0].txtHorario.substring(0,2);
-    this.minuto = response[0].txtHorario.substring(3,5);
+    this.d2 = new​
+    Date(0, 0, 0, this.curHour, this.curMin);
+    for (var i = 0; i < response.length; i++) {
+      this.hora = response[i].txtHorario.substring(0, 2);
+      this.minuto = response[i].txtHorario.substring(3, 5);
+      this.d1 = new​
+      Date(0, 0, 0, this.hora, this.minuto);
+      if (this.d1 > this.d2) {
+        this.horarionow = this.hora + 'h' + this.minuto;
+        console.log(this.horarionow);
+        return this.horarionow;
+      }
+    }
+    this.hora = response[0].txtHorario.substring(0, 2);
+    this.minuto = response[0].txtHorario.substring(3, 5);
     this.horarionow = this.hora + 'h' + this.minuto;
     return this.horarionow;
   }
 
-  getHorario(response){
-    var startTime = new Date('2012/10/09 '+ this.curHour +':' + this.curMin + ' ');
-    var endTime = new Date('2012/10/09 '+ this.hora +':' + this.minuto + ' ');
+  getHorario(response) {
+    var startTime = new Date('2012/10/09 ' + this.curHour + ':' + this.curMin + ' ');
+    var endTime = new Date('2012/10/09 ' + this.hora + ':' + this.minuto + ' ');
     var difference = endTime.getTime() - startTime.getTime();
     this.resultInMinutes = Math.round(difference / 60000);
     return this.resultInMinutes;
   }
 
-  idlinhaFavorita(){
+  idlinhaFavorita() {
     this.linhaFavorita = this.navParams.get('item').idLinha;
     this.linha = localStorage.setItem("idLinhaBusam", this.linhaFavorita);
   }
