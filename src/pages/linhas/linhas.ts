@@ -3,11 +3,12 @@ import { NavController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
+import { LembreteService } from '../../services/lembrete/lembrete.service';
 
 @Component({
   selector: 'page-linhas',
   templateUrl: 'linhas.html',
-  providers: [GlobalVars, BusamService]
+  providers: [GlobalVars, BusamService, LembreteService]
 })
 export class LinhasPage {
   title;
@@ -57,7 +58,8 @@ export class LinhasPage {
   constructor(public navCtrl:NavController,
               public navParams:NavParams,
               private alertCtrl:AlertController,
-              private busamService:BusamService) {}
+              private busamService:BusamService,
+              private lembreteService:LembreteService) {}
 
   ionViewDidLoad() {
     this.obsLinha = this.navParams.get('item').obsLinha;
@@ -223,7 +225,7 @@ export class LinhasPage {
     });
     alert.present();
     window.localStorage.setItem('horarios_favoritos', JSON.stringify(favoritos));
-
+    this.lembreteService.updateLembretes();
     // dat.getTime();
   }
 

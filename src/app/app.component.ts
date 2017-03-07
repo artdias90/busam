@@ -6,7 +6,7 @@ import { StartPage } from '../pages/start/start';
 import { OneSignal } from 'ionic-native';
 
 @Component({
-  template: `<ion-nav [root]="rootPage"></ion-nav>`
+  template: `<ion-nav [root]="rootPage"></ion-nav>`,
 })
 export class MyApp {
   @ViewChild(Nav) nav:Nav;
@@ -40,6 +40,7 @@ export class MyApp {
       if (favoritos) {
         favoritos.map((linha, index) => {
           linha.horarios.map((horario, index) => {
+            console.log(new Date(new Date(horario).getTime()));
             LocalNotifications.schedule({
               text: `alerta: linha ${linha.numero} - ônibus a caminho`,
               at: new Date(new Date(horario).getTime()),
@@ -49,13 +50,6 @@ export class MyApp {
           })
         })
       }
-
-      LocalNotifications.schedule({
-        text: 'Sua linha está chegando!',
-        at: new Date(new Date().getTime() + 3600),
-        led: 'FF0000',
-        sound: null
-      });
 
       Deeplinks.routeWithNavController(this.nav, {
         '/start': StartPage
