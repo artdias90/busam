@@ -7,6 +7,7 @@ import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { LinhasPage } from "../linhas/linhas";
 import { StartPage } from "../start/start";
+import { HorariosFavoritosPage } from '../horarios-favoritos/horarios-favoritos';
 
 declare var AdMob: any;
 
@@ -190,6 +191,9 @@ export class HomePage {
     });
   }
 
+  viewFavoritos(item) {
+    this.navCtrl.push(HorariosFavoritosPage, {});
+  }
 
 
   viewItem(item) {

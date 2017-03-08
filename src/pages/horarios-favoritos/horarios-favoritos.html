@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Horários Favoritos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let linha of horarios">
+      <ion-card *ngFor="let linha_horario of linha.horarios" (click)="deleteHorario(linha.numero, linha_horario)">
+        Linha {{linha.numero}} - {{printHorario(linha_horario)}}
+      </ion-card>
+    </ion-card>
+  </ion-list>
+
+</ion-content>
