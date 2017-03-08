@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, NavParams } from 'ionic-angular';
+import { Platform, NavController, AlertController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
@@ -54,9 +54,17 @@ export class LinhasPage {
   segsexVolta;
   segsabVolta;
   sabdomVolta;
+  backgroundvolta;
+  colorvolta;
+  backgroundida;
+  colorida;
+  ida;
+  volta;
+  background;
 
-
-  constructor(public navCtrl:NavController,
+  constructor(GlobalVars:GlobalVars,
+              private platform:Platform,
+              public navCtrl:NavController,
               public navParams:NavParams,
               private alertCtrl:AlertController,
               private busamService:BusamService,
@@ -69,7 +77,11 @@ export class LinhasPage {
     this.number = this.navParams.get('item').numeroLinha;
     const d = new Date();
     this.curDay = d.getDay();
-
+    this.backgroundida = "white";
+    this.colorida = "#3f51b5";
+    this.ida = true;
+    this.volta = false;
+    this.background = "/assets/img/background.jpg";
     for (this.i = 2; this.i < 8; this.i++) {
       this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 0).subscribe(
         response => {
@@ -303,9 +315,21 @@ export class LinhasPage {
 
   sentidoida(){
     console.log("ida");
+    this.backgroundida = "white";
+    this.colorida = "#3f51b5";
+    this.backgroundvolta = "#3f51b5";
+    this.colorvolta = "white";
+    this.ida = true;
+    this.volta = false;
   }
 
   sentidovolta(){
     console.log("volta");
+    this.backgroundvolta = "white";
+    this.colorvolta = "#3f51b5";
+    this.backgroundida = "#3f51b5";
+    this.colorida = "white";
+    this.ida = false;
+    this.volta = true;
   }
 }

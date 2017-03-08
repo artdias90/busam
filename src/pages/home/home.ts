@@ -40,7 +40,7 @@ export class HomePage {
               private authService:AuthService,
               private alertCtrl:AlertController,
               private busamService:BusamService) {
-    this.background = "../www/assets/img/background.jpg";
+    this.background = GlobalVars.platform + GlobalVars.background;
     this.cidade = this.busamService.verificaCidade();
     this.searchBarItem = '';
     this.aviso = this.busamService.getObs(0).subscribe(

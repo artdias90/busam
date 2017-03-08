@@ -1,12 +1,19 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <div style="font-size: 1em;font-weight: bolder;line-height: 1em;width: 100%;height: 60px;cursor: pointer;word-break: normal;white-space: normal;margin-top: 10px;">Linha {{number}} - {{description}}</div>
+      <div style="font-size: 1em;font-weight: bolder;line-height: 1em;width: 100%;height: 60px;cursor: pointer;word-break: normal;white-space: normal;margin-top: 10px;display: flex;justify-content: center;align-items: center;">Linha {{number}} - {{description}}</div>
     </ion-title>
   </ion-navbar>
-  <div style="background: #3f51b5;padding-left: 15px;padding-bottom: 10px;position: fixed;margin-top: -15px;padding-top: 10px;width: 100%">
-    <div style="color: white;font-weight: bold;font-size: 1.5em;"></div>
+</ion-header>
 
+
+
+<ion-content style="background: #E8EAF6" overflow-scroll="false">
+
+  <div [ngStyle]="{'background-image': 'url(' + background + ')'}" style="height: 100%;width: 100%;position: fixed;opacity: 0.6;z-index: -10;"></div>
+
+  <div style="background: #3f51b5;padding-left: 15px;padding-bottom: 10px;margin-top: -15px;padding-top: 10px;width: 100%">
+    <div style="color: white;font-weight: bold;font-size: 1.5em;"></div>
     <ion-grid>
       <ion-row>
         <ion-col width-50 style="display: flex;justify-content: center;align-items: center;color: white;font-weight: 900;font-size: 1.3em;">Próximo: {{horarionow}}</ion-col>
@@ -15,207 +22,141 @@
     </ion-grid>
   </div>
 
-</ion-header>
-
-
-
-<ion-content style="background: #E8EAF6" overflow-scroll="false">
   <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
-  <div *ngIf="!showLoading" style="margin-top: 15px;">
+  <div *ngIf="!showLoading" style="margin-top: 15px;margin-bottom: 10%;">
 
 
-
-    <div *ngIf="obs" style="background: #feff9e;margin-bottom: 15px;padding: 10px;font-size: 1.2em;">
-      {{obsLinha}}
-    </div>
-
-<ion-row wrap>
-  <ion-col width-25 *ngFor="let items of diariamente" style="padding: 0px;">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
-  </ion-col>
-</ion-row>
+  <!-- OBSERVACAO DA LINHA-->
+  <div *ngIf="obs" style="background: #feff9e;margin-bottom: 15px;padding: 10px;font-size: 1.2em;">
+    {{obsLinha}}
+  </div>
 
 
-<div *ngIf="diariamente" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;    margin-top: 20px;">DIARIAMENTE</div>
-<ion-scroll *ngIf="diariamente" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Ida</div>
-    </div>
-  </div>
-  <div *ngFor="let items of diariamente"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
+<div *ngIf="ida">
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="diariamente">Diariamente</div>
+  <ion-row wrap *ngIf="diariamente">
+    <ion-col width-25 *ngFor="let items of diariamente" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
 
-<ion-scroll *ngIf="diariamenteVolta" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Volta</div>
-    </div>
-  </div>
-  <div *ngFor="let items of diariamenteVolta"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block " (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="segsex">Segunda - Sexta</div>
+  <ion-row wrap *ngIf="segsex">
+    <ion-col width-25 *ngFor="let items of segsex" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
 
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="sabado">Sábado</div>
+  <ion-row wrap *ngIf="sabado">
+    <ion-col width-25 *ngFor="let items of sabado" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
 
-<div *ngIf="segsex" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;    margin-top: 20px;">Seg - Sex</div>
-<ion-scroll *ngIf="segsex" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Ida</div>
-    </div>
-  </div>
-  <div *ngFor="let items of segsex"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="segsab">Segunda - Sábado</div>
+  <ion-row wrap *ngIf="segsab">
+    <ion-col width-25 *ngFor="let items of segsab" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
 
-<ion-scroll *ngIf="segsexVolta" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Volta</div>
-    </div>
-  </div>
-  <div *ngFor="let items of segsexVolta"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="domingo">Domingo</div>
+  <ion-row wrap *ngIf="domingo">
+    <ion-col width-25 *ngFor="let items of domingo" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
 
-
-<div *ngIf="sabado" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;    margin-top: 20px;">Sábados</div>
-<ion-scroll *ngIf="sabado" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Ida</div>
-    </div>
-  </div>
-  <div *ngFor="let items of sabado"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
-
-<ion-scroll *ngIf="sabadoVolta" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Volta</div>
-    </div>
-  </div>
-  <div *ngFor="let items of sabadoVolta"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
-
-<div *ngIf="segsab" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;    margin-top: 20px;">Seg - Sab</div>
-<ion-scroll *ngIf="segsab" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 74px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Ida</div>
-    </div>
-  </div>
-  <div *ngFor="let items of segsab"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
-
-<ion-scroll *ngIf="segsabVolta" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Volta</div>
-    </div>
-  </div>
-  <div *ngFor="let items of segsabVolta"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="sabdom">Sábado - Domingo</div>
+  <ion-row wrap *ngIf="sabdom">
+    <ion-col width-25 *ngFor="let items of sabdom" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
+</div>
 
 
-<div *ngIf="domingo" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;    margin-top: 20px;">Domingos</div>
-<ion-scroll *ngIf="domingo" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Ida</div>
-    </div>
-  </div>
-  <div *ngFor="let items of domingo"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
+<div *ngIf="volta">
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="diariamenteVolta">Diariamente</div>
+  <ion-row wrap *ngIf="diariamenteVolta">
+    <ion-col width-25 *ngFor="let items of diariamenteVolta" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
 
-<ion-scroll *ngIf="domingoVolta" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Volta</div>
-    </div>
-  </div>
-  <div *ngFor="let items of domingoVolta"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="segsexVolta">Segunda - Sexta</div>
+  <ion-row wrap *ngIf="segsexVolta">
+    <ion-col width-25 *ngFor="let items of segsexVolta" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
 
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="sabadoVolta">Sábado</div>
+  <ion-row wrap *ngIf="sabadoVolta">
+    <ion-col width-25 *ngFor="let items of sabadoVolta" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
 
-<div *ngIf="sabdom" style="text-align: center;background: white;font-weight: 500;padding-top: 10px;    margin-top: 20px;">Sábados, Domingos e Feriados</div>
-<ion-scroll *ngIf="sabdom" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Ida</div>
-    </div>
-  </div>
-  <div *ngFor="let items of sabdom"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="segsabVolta">Segunda - Sábado</div>
+  <ion-row wrap *ngIf="segsabVolta">
+    <ion-col width-25 *ngFor="let items of segsabVolta" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
 
-<ion-scroll *ngIf="sabdomVolta" scrollX="true" style="overflow-x:hidden;white-space: nowrap; height: 49px" scrollbar-x="false">
-  <div style="display: inline-block;margin-right: -5px;">
-    <div style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">Horários de Volta</div>
-    </div>
-  </div>
-  <div *ngFor="let items of sabdomVolta"  [ngStyle]="{'background': items.corFrequencia}" style="display: inline-block" (click)="saveHorario(items)">
-    <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
-      <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
-    </div>
-    <ion-icon name="alarm"></ion-icon>
-  </div>
-</ion-scroll>
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="domingoVolta">Domingo</div>
+  <ion-row wrap *ngIf="domingoVolta">
+    <ion-col width-25 *ngFor="let items of domingoVolta" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
+
+  <div style="    width: 100%;display: flex;justify-content: center;background: white;font-size: 1.5em;font-weight: bold;padding: 5px;" *ngIf="sabdomVolta">Sábado e Domingo</div>
+  <ion-row wrap *ngIf="sabdomVolta">
+    <ion-col width-25 *ngFor="let items of sabdomVolta" style="padding: 0px;">
+      <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" style="padding: 10px;background: white;">
+        <div style="background: #3f51b5;color: white;padding: 5px;border-radius: 10px;">{{items.txtHorario}}</div>
+      </div>
+      <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm" style="position: absolute;margin-top: -50px;"></ion-icon>
+    </ion-col>
+  </ion-row>
+</div>
+
 
 <div *ngIf="!horario">
   <ion-list>
@@ -237,8 +178,8 @@
   </div>
 
 
-  <div style="position: absolute;bottom: 0;background: #3f51b5;width: 100%;color: white;padding: 5px;">
-    <div (click)="sentidoida()" style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;">Sentido Ida</div>
-    <div (click)="sentidovolta()" style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;">Sentido Volta</div>
+  <div style="position: fixed;bottom: 0;width: 100%;color: white;padding: 5px;background: #3f51b5;">
+    <div id="sentidoida" (click)="sentidoida()" style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;background: #3f51b5;" [ngStyle]="{'background-color': backgroundida, 'color': colorida}">Sentido Ida</div>
+    <div id="sentidovolta" (click)="sentidovolta()" style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;color: #3f51b5;background:white" [ngStyle]="{'background-color': backgroundvolta, 'color': colorvolta}">Sentido Volta</div>
   </div>
 </ion-content>
