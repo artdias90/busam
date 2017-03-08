@@ -61,6 +61,15 @@ export class LinhasPage {
   ida;
   volta;
   background;
+  aparecesegsex;
+  aparecesab;
+  aparecedom;
+  backgroundsemana;
+  backgroundsabado;
+  backgrounddomingo;
+  colorsemana;
+  colorsabado;
+  colordomingo;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -82,6 +91,18 @@ export class LinhasPage {
     this.ida = true;
     this.volta = false;
     this.background = "/assets/img/background.jpg";
+    this.aparecesegsex = true;
+    this.aparecesab = false;
+    this.aparecedom = false;
+    this.backgroundsemana = "white";
+    this.backgroundsabado = "#3f51b5";
+    this.backgrounddomingo = "#3f51b5";
+    this.colorsemana = "#3f51b5";
+    this.colorsabado = "white";
+    this.colordomingo = "white";
+
+
+
     for (this.i = 2; this.i < 8; this.i++) {
       this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 0).subscribe(
         response => {
@@ -331,5 +352,41 @@ export class LinhasPage {
     this.colorida = "white";
     this.ida = false;
     this.volta = true;
+  }
+
+  mostrasemana() {
+    this.backgroundsemana = "white";
+    this.backgroundsabado = "#3f51b5";
+    this.backgrounddomingo = "#3f51b5";
+    this.colorsemana = "#3f51b5";
+    this.colorsabado = "white";
+    this.colordomingo = "white";
+    this.aparecesegsex = true;
+    this.aparecesab = false;
+    this.aparecedom = false;
+  }
+
+  mostrasabado() {
+    this.backgroundsemana = "#3f51b5";
+    this.backgroundsabado = "white";
+    this.backgrounddomingo = "#3f51b5";
+    this.colorsemana = "white";
+    this.colorsabado = "#3f51b5";
+    this.colordomingo = "white";
+    this.aparecesegsex = false;
+    this.aparecesab = true;
+    this.aparecedom = false;
+  }
+
+  mostradomingo() {
+    this.backgroundsemana = "#3f51b5";
+    this.backgroundsabado = "#3f51b5";
+    this.backgrounddomingo = "white";
+    this.colorsemana = "white";
+    this.colorsabado = "white";
+    this.colordomingo = "#3f51b5";
+    this.aparecesegsex = false;
+    this.aparecesab = false;
+    this.aparecedom = true;
   }
 }
