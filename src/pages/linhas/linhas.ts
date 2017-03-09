@@ -233,6 +233,9 @@ export class LinhasPage {
             linha.horarios.push(dat.getTime());
           } else {
             linha.horarios.splice(linha.horarios.indexOf(dat.getTime()), 1);
+            if(linha.horarios.length === 0) {
+              favoritos.splice(index, 1);
+            }
           }
         }
       })
