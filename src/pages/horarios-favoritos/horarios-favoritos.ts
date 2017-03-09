@@ -23,9 +23,12 @@ export class HorariosFavoritosPage {
 
 
   deleteHorario(paramNumero, horario) {
-    this.horarios.map((linha) => {
+    this.horarios.map((linha, index) => {
         if (linha.numero === paramNumero) {
           linha.horarios.splice(linha.horarios.indexOf(horario), 1);
+          if(linha.horarios.length === 0) {
+            this.horarios.splice(index, 1);
+          }
         }
       })
 
@@ -41,7 +44,7 @@ export class HorariosFavoritosPage {
   }
 
   printHorario(timestamp){
-    return `${new Date(timestamp).getHours()} - ${new Date(timestamp).getMinutes()}`;
+    return `${("0" + new Date(timestamp).getHours()).slice(-2)}:${("0" + new Date(timestamp).getMinutes()).slice(-2)}`;
   }
 
 }
