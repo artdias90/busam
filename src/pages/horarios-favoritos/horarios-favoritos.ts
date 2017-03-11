@@ -11,7 +11,7 @@ import { LembreteService } from '../../services/lembrete/lembrete.service';
 })
 
 export class HorariosFavoritosPage {
-  private horarios;
+  public horarios;
   constructor(GlobalVars:GlobalVars,
               public navCtrl:NavController,
               private alertCtrl:AlertController,

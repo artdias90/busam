@@ -7,95 +7,261 @@
 </ion-header>
 
 
-
 <ion-content overflow-scroll="false">
   <img src="assets/img/fundo.png" class="predios">
 
   <div *ngIf="showLoading" class="show-loading"><img src="assets/img/loading.gif"></div>
   <div *ngIf="!showLoading" class="show-content">
 
-  <div class="box-divisao">
-    <div id="sabado" (click)="mostrasabado()" class="dia-semana" [ngStyle]="{'background-color': backgroundsabado, 'color': colorsabado}">Sábado</div>
-    <div id="semana" (click)="mostrasemana()" class="dia-semana" [ngStyle]="{'background-color': backgroundsemana, 'color': colorsemana}">Seg-Sex</div>
-    <div id="domingo" (click)="mostradomingo()" class="dia-semana" [ngStyle]="{'background-color': backgrounddomingo, 'color': colordomingo}">Domingo</div>
-  </div>
-
-<!--   <div style="background: #4565a6;padding-left: 15px;padding-bottom: 10px;margin-top: -15px;padding-top: 10px;width: 100%">
-    <div style="color: white;font-weight: bold;font-size: 1.5em;"></div>
-    <ion-grid>
+    <div class="box-divisao">
       <ion-row>
-        <ion-col class="horarios" width-50 style="display: flex;justify-content: center;align-items: center;color: white;font-weight: 900;font-size: 1.3em;">Próximo: {{horarionow}}</ion-col>
-        <ion-col class="horarios" width-50 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 1.5em;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col>
+        <ion-col width-33>
+          <button ion-button id="sabado" (click)="mostrasabado()" class="dia-semana"
+               [ngStyle]="{'background-color': backgroundsabado, 'color': colorsabado}">Sábado
+          </button>
+        </ion-col>
+        <ion-col width-33>
+          <button ion-button id="semana" (click)="mostrasemana()" class="dia-semana"
+               [ngStyle]="{'background-color': backgroundsemana, 'color': colorsemana}">Seg-Sex
+          </button>
+        </ion-col>
+        <ion-col width-33>
+          <button ion-button id="domingo" (click)="mostradomingo()" class="dia-semana"
+               [ngStyle]="{'background-color': backgrounddomingo, 'color': colordomingo}">Domingo
+          </button>
+        </ion-col>
       </ion-row>
-    </ion-grid>
-  </div> -->
-
-  <!-- OBSERVACAO DA LINHA-->
-  <div *ngIf="obs" class="observacao">
-    {{obsLinha}}
-  </div>
-
-
-<div *ngIf="ida" class="box-horarios">
-    <div *ngIf="aparecesegsex">
-      <ion-row wrap *ngIf="diariamente"><ion-col class="horarios" width-25 *ngFor="let items of diariamente"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-      <ion-row wrap *ngIf="segsex"><ion-col class="horarios" width-25 *ngFor="let items of segsex"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-      <ion-row wrap *ngIf="segsab"><ion-col class="horarios" width-25 *ngFor="let items of segsab"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
     </div>
 
-    <div *ngIf="aparecesab">
-      <ion-row wrap *ngIf="diariamente"><ion-col class="horarios" width-25 *ngFor="let items of diariamente"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-      <ion-row wrap *ngIf="sabado"><ion-col class="horarios" width-25 *ngFor="let items of sabado"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-      <ion-row wrap *ngIf="segsab"><ion-col class="horarios" width-25 *ngFor="let items of segsab"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-      <ion-row wrap *ngIf="sabdom"><ion-col class="horarios" width-25 *ngFor="let items of sabdom"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
+    <!--   <div style="background: #4565a6;padding-left: 15px;padding-bottom: 10px;margin-top: -15px;padding-top: 10px;width: 100%">
+				<div style="color: white;font-weight: bold;font-size: 1.5em;"></div>
+				<ion-grid>
+					<ion-row>
+						<ion-col class="horarios" width-50 style="display: flex;justify-content: center;align-items: center;color: white;font-weight: 900;font-size: 1.3em;">Próximo: {{horarionow}}</ion-col>
+						<ion-col class="horarios" width-50 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 1.5em;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col>
+					</ion-row>
+				</ion-grid>
+			</div> -->
+
+    <!-- OBSERVACAO DA LINHA-->
+    <div *ngIf="obs && obsLinha" class="observacao">
+      {{obsLinha}}
     </div>
 
-    <div *ngIf="aparecedom">
-      <ion-row wrap *ngIf="diariamente"><ion-col class="horarios" width-25 *ngFor="let items of diariamente"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-      <ion-row wrap *ngIf="domingo"><ion-col class="horarios" width-25 *ngFor="let items of domingo"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-      <ion-row wrap *ngIf="sabdom"><ion-col class="horarios" width-25 *ngFor="let items of sabdom"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
+
+    <div *ngIf="ida" class="box-horarios">
+      <div *ngIf="aparecesegsex">
+        <ion-row wrap *ngIf="diariamente">
+          <ion-col class="horarios" width-25 *ngFor="let items of diariamente" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row wrap *ngIf="segsex">
+          <ion-col class="horarios" width-25 *ngFor="let items of segsex" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+
+
+      <div *ngIf="aparecesab">
+        <ion-row wrap *ngIf="diariamente">
+          <ion-col class="horarios" width-25 *ngFor="let items of diariamente" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="sabado">
+          <ion-col class="horarios" width-25 *ngFor="let items of sabado" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row wrap *ngIf="segsab">
+          <ion-col class="horarios" width-25 *ngFor="let items of segsab" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="sabdom">
+          <ion-col class="horarios" width-25 *ngFor="let items of sabdom" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div *ngIf="aparecedom">
+        <ion-row wrap *ngIf="diariamente">
+          <ion-col class="horarios" width-25 *ngFor="let items of diariamente" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="domingo">
+          <ion-col class="horarios" width-25 *ngFor="let items of domingo" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="sabdom">
+          <ion-col class="horarios" width-25 *ngFor="let items of sabdom" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
     </div>
-</div>
 
 
-<div *ngIf="volta">
+    <div *ngIf="volta" class="box-horarios">
+      <div *ngIf="segsex">
+        <ion-row wrap *ngIf="diariamenteVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of diariamenteVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="segsexVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of segsexVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="segsabVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of segsabVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
 
-  <div *ngIf="segsex">
-    <ion-row wrap *ngIf="diariamenteVolta"><ion-col class="horarios" width-25 *ngFor="let items of diariamenteVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-    <ion-row wrap *ngIf="segsexVolta"><ion-col class="horarios" width-25 *ngFor="let items of segsexVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-    <ion-row wrap *ngIf="segsabVolta"><ion-col class="horarios" width-25 *ngFor="let items of segsabVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div>    </div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-  </div>
+      <div *ngIf="sab">
+        <ion-row wrap *ngIf="diariamenteVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of diariamenteVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="sabadoVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of sabadoVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="segsabVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of segsabVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="sabdomVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of sabdomVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
 
-  <div *ngIf="sab">
-    <ion-row wrap *ngIf="diariamenteVolta"><ion-col class="horarios" width-25 *ngFor="let items of diariamenteVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-    <ion-row wrap *ngIf="sabadoVolta"><ion-col class="horarios" width-25 *ngFor="let items of sabadoVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-    <ion-row wrap *ngIf="segsabVolta"><ion-col class="horarios" width-25 *ngFor="let items of segsabVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div>    </div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-    <ion-row wrap *ngIf="sabdomVolta"><ion-col class="horarios" width-25 *ngFor="let items of sabdomVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-  </div>
+      <div *ngIf="dom">
+        <ion-row wrap *ngIf="diariamenteVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of diariamenteVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="domingoVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of domingoVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row wrap *ngIf="sabdomVolta">
+          <ion-col class="horarios" width-25 *ngFor="let items of sabdomVolta" (click)="openMenu(items)">
+            <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+              <div class="horario">{{items.txtHorario}}</div>
+            </div>
+            <ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
+                      name="information-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
 
-  <div *ngIf="dom">
-    <ion-row wrap *ngIf="diariamenteVolta"><ion-col class="horarios" width-25 *ngFor="let items of diariamenteVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-    <ion-row wrap *ngIf="domingoVolta"><ion-col class="horarios" width-25 *ngFor="let items of domingoVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-    <ion-row wrap *ngIf="sabdomVolta"><ion-col class="horarios" width-25 *ngFor="let items of sabdomVolta"><div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}"><div class="horario">{{items.txtHorario}}</div></div><ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm" name="alarm"></ion-icon></ion-col></ion-row>
-  </div>
-  
-</div>
+    </div>
 
 
-<div *ngIf="!horario">
-  <ion-list>
-    <div style="text-align: center;font-size: 20px;">Itinerário</div>
-    <ion-item class="ruas" *ngFor="let items of ruas">{{items.ruaItinerario}}</ion-item>
-  </ion-list>
-  <button class="aparecer" (click)="showHorarios()">Horários</button>
-</div>
+    <div *ngIf="!horario">
+      <ion-list>
+        <div style="text-align: center;font-size: 20px;">Itinerário</div>
+        <ion-item class="ruas" *ngFor="let items of ruas">{{items.ruaItinerario}}</ion-item>
+      </ion-list>
+      <button class="aparecer" (click)="showHorarios()">Horários</button>
+    </div>
 
 
     <ion-card padding *ngIf="obs">
-    <div style="text-align: center;">LEGENDA</div>
+      <div style="text-align: center;">LEGENDA</div>
       <div *ngFor="let items of obs" style="float: left;margin-right: 10px;">
-        <div style="    padding: 5px;" [ngStyle]="{'border-top': 'solid ' + items.corObservacao}" >
-          <div >{{items.txtObservacao}}</div>
+        <div style="    padding: 5px;" [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+          <div>{{items.txtObservacao}}</div>
         </div>
       </div>
     </ion-card>
@@ -103,7 +269,13 @@
 
 
   <div style="position: fixed;bottom: 0;width: 100%;color: white;padding: 5px;background: #4565a6;">
-    <div id="sentidoida" (click)="sentidoida()" style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;background: #4565a6;" [ngStyle]="{'background-color': backgroundida, 'color': colorida}">Sentido Ida</div>
-    <div id="sentidovolta" (click)="sentidovolta()" style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;color: #4565a6;background:white" [ngStyle]="{'background-color': backgroundvolta, 'color': colorvolta}">Sentido Volta</div>
+    <div id="sentidoida" (click)="sentidoida()"
+         style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;background: #4565a6;"
+         [ngStyle]="{'background-color': backgroundida, 'color': colorida}">Sentido Ida
+    </div>
+    <div id="sentidovolta" (click)="sentidovolta()"
+         style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;color: #4565a6;background:white"
+         [ngStyle]="{'background-color': backgroundvolta, 'color': colorvolta}">Sentido Volta
+    </div>
   </div>
 </ion-content>

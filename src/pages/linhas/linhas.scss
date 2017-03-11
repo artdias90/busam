@@ -24,18 +24,15 @@ page-linhas {
     padding: 5px;
     z-index: 100000;
     background: #4565a6;
-    height: 40px;
     margin-bottom: 15px;
     -moz-box-shadow: 10px 10px 5px #222;
     -webkit-box-shadow: 10px 10px 5px #222;
     box-shadow: 3px 3px 5px #222;
     .dia-semana {
       border-radius: 5px;
-      width: 33%;
-      float: left;
       text-align: -webkit-center;
       font-weight: bolder;
-      font-size: 1.5em;
+      font-size: 1.4em;
       color: #4565a6;
       background:white;
     }

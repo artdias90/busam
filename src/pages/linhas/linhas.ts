@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, NavController, AlertController, NavParams } from 'ionic-angular';
+import { Platform, NavController, AlertController, ActionSheetController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
@@ -77,6 +77,7 @@ export class LinhasPage {
               public navParams:NavParams,
               private alertCtrl:AlertController,
               private busamService:BusamService,
+              private actionsheetCtrl: ActionSheetController,
               private lembreteService:LembreteService) {}
 
   ionViewDidLoad() {
@@ -215,7 +216,48 @@ export class LinhasPage {
     this.horario = true;
   }
 
+  openMenu(items) {
+    let actionSheet = this.actionsheetCtrl.create({
+      title: 'Opcoes',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Alarme',
+          icon: 'alarm',
+          handler: () => {
+            this.saveHorario(items)
+          }
+        },
+        {
+          text: 'Reportar Erro',
+          icon: 'bug',
+          handler: () => {
+            this.saveHorario(items)
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          icon: 'close',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+  public alerta(titulo, mensagem){
+    let alert = this.alertCtrl.create({
+      title: titulo,
+      subTitle: mensagem,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
   saveHorario(horario) {
+    // this.alerta('', horario);
     horario.favorito = !horario.favorito;
     let time = horario.txtHorario.split(/h/g);
     let dat = new Date(new Date().getFullYear(), new Date().getMonth(), (new Date().getHours() > time[0]? new Date().getDate() + 1 : new Date().getDate()), time[0], time[1], 0, 0);
