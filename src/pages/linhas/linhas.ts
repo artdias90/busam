@@ -3,12 +3,14 @@ import { Platform, NavController, AlertController, ActionSheetController, NavPar
 import 'rxjs/add/operator/map';
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
+import { LoadingComponent } from "../../services/loading/loading";
+
 import { LembreteService } from '../../services/lembrete/lembrete.service';
 
 @Component({
   selector: 'page-linhas',
   templateUrl: 'linhas.html',
-  providers: [GlobalVars, BusamService, LembreteService]
+  providers: [GlobalVars, BusamService, LembreteService, LoadingComponent]
 })
 
 export class LinhasPage {
@@ -45,7 +47,6 @@ export class LinhasPage {
   d1;
   d2;
   diff;
-  showLoading = true;
   linha;
   linhaFavorita;
   diariamenteVolta;
@@ -61,6 +62,7 @@ export class LinhasPage {
   ida;
   volta;
   background;
+  finishedLoading;
   aparecesegsex;
   aparecesab;
   aparecedom;
@@ -78,6 +80,7 @@ export class LinhasPage {
               private alertCtrl:AlertController,
               private busamService:BusamService,
               private actionsheetCtrl: ActionSheetController,
+              private loadingComponent:LoadingComponent,
               private lembreteService:LembreteService) {}
 
   ionViewDidLoad() {
@@ -87,6 +90,7 @@ export class LinhasPage {
     this.number = this.navParams.get('item').numeroLinha;
     const d = new Date();
     this.curDay = d.getDay();
+    this.finishedLoading = false;
     this.backgroundida = "white";
     this.colorida = "#3f51b5";
     this.ida = true;
@@ -104,6 +108,7 @@ export class LinhasPage {
 
 
 
+    this.loadingComponent.show();
     for (this.i = 2; this.i < 8; this.i++) {
       this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 0).subscribe(
         response => {
@@ -155,7 +160,10 @@ export class LinhasPage {
                 this.resultInMinutes = this.getHorario(this.horarionow);
               }
             }
-
+            if (this.i == 7) {
+              this.loadingComponent.hide();
+              this.finishedLoading = true;
+            }
           }
         });
     }
@@ -186,9 +194,6 @@ export class LinhasPage {
             if (response[0].idFrequencia == 7) {
               this.sabdomVolta = response;
             }
-            if (this.i == 7) {
-              this.showLoading = false;
-            }
 
           }
         });
@@ -198,7 +203,8 @@ export class LinhasPage {
     this.itinerario = this.busamService.getItinerarios(this.navParams.get('item').idLinha).subscribe(
       response => {
         this.ruas = response;
-        this.showLoading = false;
+        this.loadingComponent.hide();
+        this.finishedLoading = true;
       },
       error => {console.log("erro", "Ocorreu um erro. Tente novamente.");});
 

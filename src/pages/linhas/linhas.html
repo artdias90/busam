@@ -9,9 +9,7 @@
 
 <ion-content overflow-scroll="false">
   <img src="assets/img/fundo.png" class="predios">
-
-  <div *ngIf="showLoading" class="show-loading"><img src="assets/img/loading.gif"></div>
-  <div *ngIf="!showLoading" class="show-content">
+  <div *ngIf="finishedLoading" class="show-content">
 
     <div class="box-divisao">
       <ion-row>

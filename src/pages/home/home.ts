@@ -8,6 +8,7 @@ import { BusamService } from "../../services/busam/busam";
 import { LinhasPage } from "../linhas/linhas";
 import { StartPage } from "../start/start";
 import { HorariosFavoritosPage } from '../horarios-favoritos/horarios-favoritos';
+import { LoadingComponent } from "../../services/loading/loading";
 
 declare var AdMob: any;
 
@@ -15,7 +16,7 @@ declare var AdMob: any;
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [AuthService, GlobalVars, BusamService]
+  providers: [AuthService, GlobalVars, BusamService, LoadingComponent]
 })
 
 export class HomePage {
@@ -29,7 +30,6 @@ export class HomePage {
   imagem_footer;
   link_footer;
   private admobId: any;
-  showLoading = true;
   cidade;
   searchBarItem;
   background;
@@ -40,6 +40,7 @@ export class HomePage {
               private http:Http,
               private authService:AuthService,
               private alertCtrl:AlertController,
+              private loadingComponent:LoadingComponent,
               private busamService:BusamService) {
     this.background = GlobalVars.platform + GlobalVars.background;
     this.cidade = this.busamService.verificaCidade();
@@ -55,6 +56,7 @@ export class HomePage {
         console.log("erro", "Ocorreu um erro. Tente novamente.");
       });
 
+    this.loadingComponent.show();
     this.imagem = this.busamService.getObs(9999).subscribe(
       response => {
         this.imagem = response[0].txtObservacao;
@@ -89,7 +91,7 @@ export class HomePage {
           })
           console.log(this.item);
         }
-        this.showLoading = false;
+        this.loadingComponent.hide();
       },
       error => {
         console.log("erro", "Ocorreu um erro. Tente novamente.");
@@ -129,6 +131,7 @@ export class HomePage {
 
   //BUSCA
   getLinhas(ev: any) {
+    this.loadingComponent.show();
     this.currResults = [];
     let val = ev.target.value;
     if(!val || val.length <= 2) {
@@ -144,7 +147,7 @@ export class HomePage {
               }
             })
           }
-          this.showLoading = false;
+          this.loadingComponent.hide();
         },
         error => {
           console.log("erro", "Ocorreu um erro. Tente novamente.");

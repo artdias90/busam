@@ -12,6 +12,7 @@ import { PasswordResetPage } from '../pages/password-reset/password-reset';
 import { RegisterPage } from '../pages/register/register';
 import { LinhasPage } from '../pages/linhas/linhas';
 import { StartPage } from '../pages/start/start';
+
 @NgModule({
   declarations: [
     MyApp,

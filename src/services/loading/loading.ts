@@ -1,23 +1,21 @@
-import { Component} from '@angular/core';
+import {Component, Injectable} from '@angular/core';
+import { LoadingController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
-@Component({
-  selector: 'loading',
-  templateUrl: 'loading.html'
-})
-
+@Injectable()
 export class LoadingComponent {
-  public visible: boolean;
-  constructor() {
-
+  public loader:any;
+  constructor(public loadingCtrl: LoadingController) {
+    this.loader = this.loadingCtrl.create({
+      content: "aguarde...",
+    });
   }
 
   public show() {
-    this.visible = true;
-
+    this.loader.present();
   }
 
   public hide() {
-    this.visible = false;
+    this.loader.dismiss();
   }
 }
