@@ -1,3 +1,48 @@
 page-start {
-
+	.background {
+  	height: 100%;
+  	width: 100%;
+  	position: absolute;
+  	opacity: 0.6;
+	}
+  .loading {
+    text-align: center;
+    margin-top: 60%;
+  }
+  .box-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    .box-background {
+      height: 50%;
+      background: white;
+      z-index: 10000;
+      width: 90%;
+      opacity: 0.6;
+      box-shadow: 0px 0px 150px #222;
+    }
+  }
+  .box-escolha {
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lista {
+    z-index: 10000000;
+    width: 70%;
+    text-align: -webkit-center;
+  }
+  .logo {
+    width: 70%;
+    margin-bottom: 10%;
+  }
+  .item {
+    box-shadow: 2px 2px 20px #222;
+  }
 }

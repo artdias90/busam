@@ -1,15 +1,15 @@
 <ion-content>
-  <div [ngStyle]="{'background-image': 'url(' + background + ')'}" style="height: 100%;width: 100%;position: absolute;opacity: 0.6;"></div>
-  <div *ngIf="showLoading" style="text-align: center;margin-top: 60%;"><img src="assets/img/loading.gif"></div>
-  
-<div style="display: flex;align-items: center;justify-content: center;height: 100%;position: absolute;width: 100%;">
-  <div style="height: 50%;background: white;z-index: 10000;width: 90%;opacity: 0.6;box-shadow: 0px 0px 150px #222;"></div>
-</div>
+  <div [ngStyle]="{'background-image': 'url(' + background + ')'}" class="background"></div>
+  <div *ngIf="showLoading" class="loading"><img src="assets/img/loading.gif"></div>
+    
+  <div class="box-content">
+    <div class="box-background"></div>
+  </div>
 
-	<div style="height: 100%;width: 100%;vertical-align: middle;display: flex;align-items: center;justify-content: center;" *ngIf="!showLoading">
-      <ion-list style="z-index: 10000000;width: 70%;text-align: -webkit-center;">
-        <img src="assets/img/icon.png" style="width: 70%;margin-bottom: 10%;">
-        <ion-item style="box-shadow: 2px 2px 20px #222;">
+	<div class="box-escolha" *ngIf="!showLoading">
+      <ion-list class="lista">
+        <img src="assets/img/icon.png" class="logo">
+        <ion-item class="item">
           <ion-label>Escolha sua cidade</ion-label>
           <ion-select [(ngModel)]="selectedItem" (ionChange)="selecionacidade($event, selectedItem)">
             <ion-option *ngFor="let items of item" (click)="viewItem(items.idCidade)" value="{{items.idCidade}}">{{items.nomeCidade}}</ion-option>
