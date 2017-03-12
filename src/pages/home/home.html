@@ -7,8 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="content ">
-
+<ion-content class="content">
   <div class="background"></div>
   <div *ngIf="item && item.length > 0">
     <ion-searchbar [(ngModel)]='searchBarItem' (ionInput)="getLinhas($event)" placeholder="pesquise linha..."></ion-searchbar>
