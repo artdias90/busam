@@ -1,72 +1,29 @@
 <ion-header >
   <ion-navbar hideBackButton >
-    <div style="position: absolute;color: white;font-size: 150%;margin-left: 2%;" (click)="backStart()">
+    <div class="troca-linha" (click)="backStart()">
       <ion-icon name="swap"></ion-icon>
     </div>
-    <ion-title style="text-align: center;width: 60%;margin-left: 20%;">BusAM</ion-title>
+    <ion-title class="busam">BusAM</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content style="padding: 0px;">
+<ion-content class="content ">
 
-  <div style="background: #4565a6;height: 100%;width: 100%;position: fixed;opacity: 0.6;z-index: -10;"></div>
+  <div class="background"></div>
   <div *ngIf="item && item.length > 0">
-  	<!--
-    <div padding *ngIf="aviso" style="background: rgba(255, 255, 255, 0.8);margin-top: 10px;margin-bottom: 10px;">
-  		{{aviso}}
-  	</div>
-    -->
-    <div style="text-align: center;" *ngIf="imagem">
-    	<a href="{{link}}" target="_target"><img src="{{imagem}}" ></a>
-    </div>
-
-
     <ion-searchbar [(ngModel)]='searchBarItem' (ionInput)="getLinhas($event)" placeholder="pesquise linha..."></ion-searchbar>
-<!--     <ion-list>
-      <ion-item *ngFor="let items of item">
-        <ion-row>
-          <ion-col width-90>
-            <button ion-item (click)="viewItem(items)" style="background: rgba(255, 255, 255, 0.8);    margin-bottom: 5px;" width-90>
-              {{items.numeroLinha}} - {{items.nomeLinha}}
-            </button>
-          </ion-col>
-          <ion-col width-10>
-            <ion-icon [color]="items.favorita? 'yellow' :'#000'" [name]="items.favorita? 'star' :'star-outline'" yellow class="favorite-star" ion-stop-event (click)="favoritar($event, items)" width-10></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-
-    </ion-list> -->
-
-
-   <ion-card *ngFor="let items of item" (click)="viewItem(items)">
+    <ion-card *ngFor="let items of item" (click)="viewItem(items)">
       <ion-row>
-        <ion-col width-90 style="padding:0px;">
-          <button ion-item style="background: rgba(255, 255, 255, 0.8);    margin-bottom: 5px;" width-90>
-            <div style="font-size: 1em;width: 100%;cursor: pointer;word-break: normal;white-space: normal;">{{items.numeroLinha}} - {{items.nomeLinha}}</div>
+        <ion-col width-90 class="col">
+          <button ion-item class="botao" width-90>
+            <div class="texto">{{items.numeroLinha}} - {{items.nomeLinha}}</div>
           </button>
         </ion-col>
-        <ion-col width-10 style="display: flex;justify-content: center;align-items: center;font-size: 1.5em;">
+        <ion-col width-10 class="estrela">
           <ion-icon [color]="items.favorita? 'yellow' :'#000'" [name]="items.favorita? 'star' :'star-outline'" yellow class="favorite-star" ion-stop-event (click)="favoritar($event, items)" width-10></ion-icon>
         </ion-col>
       </ion-row>
     </ion-card>
-
-
-
-
-    <div style="text-align: center;" *ngIf="imagem_footer">
-      <a href="{{link_footer}}" target="_target"><img src="{{imagem_footer}}" ></a>
-    </div>
-
-    <button ion-button (click)="viewFavoritos()">MEUS HORÁRIOS</button>
-
-  	<!--
-    <div style="text-align: center;background: #3f51b5;color: white;padding: 5px;font-weight: bolder;">
-  		<a href="http://www.codeam.com.br" target="_blank" style="color: white;text-decoration: none;font-family: roboto;font-size: 110%;">
-        Desenvolvido por CodeAM
-      </a>
-  	</div>
-    -->
+    <!-- <button ion-button (click)="viewFavoritos()">MEUS HORÁRIOS</button> -->
   </div>
 </ion-content>
