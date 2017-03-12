@@ -31,21 +31,20 @@
       </ion-row>
     </div>
 
-    <!--   <div style="background: #4565a6;padding-left: 15px;padding-bottom: 10px;margin-top: -15px;padding-top: 10px;width: 100%">
-				<div style="color: white;font-weight: bold;font-size: 1.5em;"></div>
-				<ion-grid>
-					<ion-row>
-						<ion-col class="horarios" width-50 style="display: flex;justify-content: center;align-items: center;color: white;font-weight: 900;font-size: 1.3em;">Próximo: {{horarionow}}</ion-col>
-						<ion-col class="horarios" width-50 style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 1.5em;padding: 10px;color: #292929;">Em {{resultInMinutes}} Minutos</button></ion-col>
-					</ion-row>
-				</ion-grid>
-			</div> -->
-
     <!-- OBSERVACAO DA LINHA-->
     <div *ngIf="obs && obsLinha" class="observacao">
       {{obsLinha}}
     </div>
 
+    <div style="background: #ffffff;width: 100%;">
+      <div style="font-weight: bold;font-size: 1.5em;"></div>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="horarios" style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 1.5em;padding: 10px;color: #292929;box-shadow: 3px 3px 5px #222;">Próximo {{horarionow}}</button></ion-col>
+          <ion-col class="horarios" style="text-align: right"><button style="background: #ace805;font-weight: bold;font-size: 1.5em;padding: 10px;color: #292929;box-shadow: 3px 3px 5px #222;">Em {{resultInMinutes}} Minutos</button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 
     <div *ngIf="ida" class="box-horarios">
       <div *ngIf="aparecesegsex">
