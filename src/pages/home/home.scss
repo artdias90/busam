@@ -1,12 +1,54 @@
 page-home {
 	.toolbar-background {
-	    background-color: #3F51B5;
+	    background-color: #4565a6;
 	}
 	.toolbar-title {
 		color: white;
 	}
-.favorite-star {
-  padding: 10px;
-  font-size: 1.3em;
-}
+	.favorite-star {
+	  padding: 10px;
+	  font-size: 1.3em;
+	}
+  .troca-linha {
+    position: absolute;
+    color: white;
+    font-size: 150%;
+    margin-left: 2%;
+  }
+  .busam {
+    text-align: center;
+    width: 60%;
+    margin-left: 20%;
+  }
+  .content {
+    padding: 0px;
+  }
+  .background {
+    background: #4565a6;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    opacity: 0.6;
+    z-index: -10;
+  }
+  .col {
+    display: flex !important;
+    padding:0px;
+    .botao {
+      background: rgba(255, 255, 255, 0.8);
+      .texto {
+        font-size: 1em;
+        width: 100%;
+        cursor: pointer;
+        word-break: normal;
+        white-space: normal;
+      }
+    }
+  }
+  .estrela {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+  }
 }

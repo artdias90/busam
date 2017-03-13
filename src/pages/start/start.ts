@@ -7,17 +7,12 @@ import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { HomePage } from "../home/home";
 
-/*
-  Generated class for the Start page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html',
   providers: [AuthService, GlobalVars, BusamService]
 })
+
 export class StartPage {
   linhas:any;
   item:any;
@@ -35,23 +30,12 @@ export class StartPage {
               private alertCtrl:AlertController,
               private busamService:BusamService) {
     
-    //this.background = "../www/assets/img/background.jpg";
     this.background = GlobalVars.platform + GlobalVars.background;
     this.icone = GlobalVars.platform + GlobalVars.icon;
-    //this.linha = this.busamService.verificaLinha();
-    //if(this.linha){
-    //  console.log(this.linha)
-    //  this.navCtrl.push(LinhasPage, {});
-    //}else{
-      this.cidade = this.busamService.verificaCidade();
-      if(this.cidade){
-         this.navCtrl.push(HomePage, {});    
-      }else{
-        this.showLoading = false;
-      }     
-    //}
-
-    
+    this.cidade = this.busamService.verificaCidade();
+    if(this.cidade){
+       this.navCtrl.push(HomePage, {});    
+    }
     this.linhas = this.busamService.getCidades().subscribe(
     response => {
       this.item = response;
@@ -62,19 +46,11 @@ export class StartPage {
     });
   }
 
-  ionViewDidLoad() {
-
-
-  }
+  ionViewDidLoad() {}
 
   selecionacidade(event, select){
     localStorage.setItem("idCidadeBusam", select);
     this.cidade = localStorage.getItem("idCidadeBusam");
     this.navCtrl.push(HomePage, {});
   }
-
-  selectedItem(){
-    
-  }
-
 }
