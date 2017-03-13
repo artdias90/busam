@@ -23,7 +23,7 @@ export class GlobalVars {
     this.key_usuario = "busam_user";
     this.key_senha = "busam_password";
     this.platform = "../www";
-    this.platform = "";
+    // this.platform = "";
     this.background = "/assets/img/background.jpg";
     this.icon = "/assets/img/icon.png";
   }

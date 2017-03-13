@@ -72,6 +72,8 @@ export class LinhasPage {
   colorsemana;
   colorsabado;
   colordomingo;
+  cidade;
+  temvolta;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -105,8 +107,12 @@ export class LinhasPage {
     this.colorsemana = "#3f51b5";
     this.colorsabado = "white";
     this.colordomingo = "white";
+    this.temvolta = true;
 
-
+    this.cidade = this.busamService.verificaCidade();
+    if(this.cidade == 1){
+      this.temvolta = false;
+    }
 
     this.loadingComponent.show();
     for (this.i = 2; this.i < 8; this.i++) {
