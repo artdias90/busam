@@ -60,6 +60,11 @@ export class BusamService {
     return this.cidade;
   }
 
+  reportaHorario(linha, horario, ida):any{
+    return this.http.get(`${this.host}reporta_horario.php?linha=${linha}&horario=${horario}&sentido=${ida == true? 'ida' : 'volta' }`)
+      .map(response => { return response.json() });
+  }
+
   verificaLinha():any{
     this.linha = localStorage.getItem("idLinhaBusam");
     return this.linha;

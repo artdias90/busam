@@ -238,7 +238,7 @@ export class LinhasPage {
           text: 'Reportar Erro',
           icon: 'bug',
           handler: () => {
-            this.saveHorario(items)
+            this.reportarHorario(items)
           }
         },
         {
@@ -260,6 +260,20 @@ export class LinhasPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  reportarHorario(horario) {
+    this.busamService.reportaHorario(this.number, horario.txtHorario, this.ida).subscribe(
+      response => {
+        let alert = this.alertCtrl.create({
+          title: 'Obrigado',
+          subTitle: `Verificaremos o problema com o horário o mais rápido possível!`,
+          buttons: ['OK']
+        });
+        alert.present();
+      },
+      error => {console.log("erro", "Ocorreu um erro. Tente novamente.");});
+
   }
 
   saveHorario(horario) {
