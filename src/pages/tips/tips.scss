@@ -1,0 +1,31 @@
+page-tips {
+
+  ion-slide.odd {
+    background-color: #fff;
+
+    ion-title {
+      div {
+        font-size: 1.8em;
+        color: #4565a6;
+      }
+    }
+
+    ion-label {
+      display: inline-block;
+      white-space: initial;
+      margin: 20px;
+    }
+
+    ion-icon {
+      font-size: 80px;
+      color: #4565a6;
+    }
+
+    button {
+      background: #4565a6;
+    }
+  }
+
+
+
+}

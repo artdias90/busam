@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
+import { TipsPage } from '../pages/tips/tips';
 import { HorariosFavoritosPage } from '../pages/horarios-favoritos/horarios-favoritos';
 import { PasswordResetPage } from '../pages/password-reset/password-reset';
 import { RegisterPage } from '../pages/register/register';
@@ -22,6 +23,7 @@ import { StartPage } from '../pages/start/start';
     ProfilePage,
     TabsPage,
     LoginPage,
+    TipsPage,
     HorariosFavoritosPage,
     PasswordResetPage,
     RegisterPage,
@@ -39,6 +41,7 @@ import { StartPage } from '../pages/start/start';
     HomePage,
     ProfilePage,
     TabsPage,
+    TipsPage,
     LoginPage,
     HorariosFavoritosPage,
     PasswordResetPage,

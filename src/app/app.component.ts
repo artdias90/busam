@@ -1,20 +1,25 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, MenuController } from 'ionic-angular';
 import { StatusBar, Deeplinks, Splashscreen, LocalNotifications } from 'ionic-native';
 import { StartPage } from '../pages/start/start';
-//import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
+import { HorariosFavoritosPage } from '../pages/horarios-favoritos/horarios-favoritos';
+import { ContactPage } from '../pages/contact/contact';
+import { TipsPage } from '../pages/tips/tips';
 import { LembreteService } from '../services/lembrete/lembrete.service';
 import { OneSignal } from 'ionic-native';
 
 @Component({
-  template: `<ion-nav [root]="rootPage"></ion-nav>`,
+  templateUrl: 'app.html',
   providers: [LembreteService]
 })
 export class MyApp {
   @ViewChild(Nav) nav:Nav;
-  rootPage = StartPage;
+  rootPage: any = HomePage;
+  menuTitle:string = "BusAM";
+  pages: Array<{title: string, component: any}>;
 
-  constructor(platform:Platform, lembreteService:LembreteService) {
+  constructor(platform:Platform, lembreteService:LembreteService, menu: MenuController) {
     platform.ready().then(() => {
 
 
@@ -32,16 +37,27 @@ export class MyApp {
           // do something when the notification is opened.
         });
         OneSignal.endInit();
-
-
-
       }
 
       lembreteService.updateLembretes();
 
-      Deeplinks.routeWithNavController(this.nav, {
-        '/start': StartPage
-      });
+      this.pages = [
+        { title: 'Home', component: HomePage },
+        { title: 'Cidades', component: StartPage },
+        { title: 'Lembretes', component: HorariosFavoritosPage},
+        { title: 'Contato', component: ContactPage}
+      ];
+
     });
   }
+
+
+  openPage(page) {
+    if(page.title === 'Home' &&  Math.random() > 0.05) {
+      this.nav.setRoot(TipsPage);
+    } else {
+      this.nav.setRoot(page.component);
+    }
+  }
+
 }
