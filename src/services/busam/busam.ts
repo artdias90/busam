@@ -14,6 +14,7 @@ export class BusamService {
   names: Array<string>;
   cidade;
   linha;
+  promocao;
 
   constructor (private http: Http, GlobalVars: GlobalVars) {
     this.http = http;
@@ -72,6 +73,11 @@ export class BusamService {
 
   resetaCidade():any{
     this.linha = localStorage.removeItem("idCidadeBusam");
+  }
+
+   verificaPromocao():any{
+    this.promocao = localStorage.getItem("promocaoBusam");
+    return this.promocao;
   }
 
 }

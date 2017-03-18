@@ -6,6 +6,8 @@ import { AuthService } from "../../services/auth/auth";
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { HomePage } from "../home/home";
+import { ContactPage } from "../contact/contact";
+
 
 @Component({
   selector: 'page-start',
@@ -21,6 +23,7 @@ export class StartPage {
   linha;
   background;
   icone;
+  promocao;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -33,9 +36,16 @@ export class StartPage {
     this.background = GlobalVars.platform + GlobalVars.background;
     this.icone = GlobalVars.platform + GlobalVars.icon;
     this.cidade = this.busamService.verificaCidade();
-    if(this.cidade){
-       this.navCtrl.push(HomePage, {});    
+    this.promocao = this.busamService.verificaPromocao();
+
+    if(!this.promocao){
+      this.navCtrl.push(ContactPage, {});    
+    } else {
+      if(this.cidade){
+         this.navCtrl.push(HomePage, {});    
+      }  
     }
+    
     this.linhas = this.busamService.getCidades().subscribe(
     response => {
       this.item = response;
