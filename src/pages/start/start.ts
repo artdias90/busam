@@ -33,6 +33,9 @@ export class StartPage {
     this.background = GlobalVars.platform + GlobalVars.background;
     this.icone = GlobalVars.platform + GlobalVars.icon;
     this.cidade = this.busamService.verificaCidade();
+    if(this.cidade){
+       this.navCtrl.push(HomePage, {});    
+    }
     this.linhas = this.busamService.getCidades().subscribe(
     response => {
       this.item = response;

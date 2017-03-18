@@ -15,7 +15,7 @@ import { OneSignal } from 'ionic-native';
 })
 export class MyApp {
   @ViewChild(Nav) nav:Nav;
-  rootPage: any = HomePage;
+  rootPage: any = StartPage;
   menuTitle:string = "BusAM";
   pages: Array<{title: string, component: any}>;
 
