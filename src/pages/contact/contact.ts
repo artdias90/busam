@@ -19,6 +19,7 @@ export class ContactPage {
     this.http.get('http://api.codeam.com.br/busam/promocao.php?nome=' + this.nome + '&email=' + this.email)
       .subscribe(data => {
         alert(this.nome + ", parabéns, você já está concorrendo!");
+        localStorage.setItem("promocaoBusam", "true");
         this.navCtrl.push(StartPage, {});
       });
   }
@@ -31,6 +32,7 @@ export class ContactPage {
         {
           text: 'Discordo',
           handler: () => {
+            localStorage.setItem("promocaoBusam", "true");
             this.navCtrl.push(StartPage, {});
           }
         },
