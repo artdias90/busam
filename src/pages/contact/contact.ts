@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, AlertController  } from 'ionic-angular';
-import { HomePage } from "../home/home";
+import { StartPage } from "../start/start";
 
 @Component({
   selector: 'page-contact',
@@ -19,7 +19,7 @@ export class ContactPage {
     this.http.get('http://api.codeam.com.br/busam/promocao.php?nome=' + this.nome + '&email=' + this.email)
       .subscribe(data => {
         alert(this.nome + ", parabéns, você já está concorrendo!");
-        this.navCtrl.push(HomePage, {});
+        this.navCtrl.push(StartPage, {});
       });
   }
 
@@ -31,7 +31,7 @@ export class ContactPage {
         {
           text: 'Discordo',
           handler: () => {
-            this.navCtrl.push(HomePage, {});
+            this.navCtrl.push(StartPage, {});
           }
         },
         {
