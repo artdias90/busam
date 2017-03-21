@@ -7,12 +7,12 @@ import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { HomePage } from "../home/home";
 import { ContactPage } from "../contact/contact";
-
+import { LoadingComponent } from "../../services/loading/loading";
 
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html',
-  providers: [AuthService, GlobalVars, BusamService]
+  providers: [AuthService, GlobalVars, BusamService, LoadingComponent]
 })
 
 export class StartPage {
@@ -31,13 +31,14 @@ export class StartPage {
               private http:Http,
               private authService:AuthService,
               private alertCtrl:AlertController,
+              private loadingComponent:LoadingComponent,
               private busamService:BusamService) {
 
     this.background = GlobalVars.platform + GlobalVars.background;
     this.icone = GlobalVars.platform + GlobalVars.icon;
     this.cidade = this.busamService.verificaCidade();
     this.promocao = this.busamService.verificaPromocao();
-
+    this.loadingComponent.show();
     if(!this.promocao){
       this.navCtrl.push(ContactPage, {});    
     } else {
@@ -50,6 +51,7 @@ export class StartPage {
     response => {
       this.item = response;
       this.showLoading = false;
+      this.loadingComponent.hide();
     },
     error => {
       console.log("erro", "Ocorreu um erro. Tente novamente.");

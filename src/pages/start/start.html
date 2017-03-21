@@ -1,8 +1,7 @@
 <ion-content>
   <div [ngStyle]="{'background-image': 'url(' + background + ')'}" class="background"></div>
-  <div *ngIf="showLoading" class="loading"><img src="assets/img/loading.gif"></div>
-
-  <div class="box-content">
+  
+  <div class="box-content" *ngIf="!showLoading">
     <div class="box-background"></div>
   </div>
 
