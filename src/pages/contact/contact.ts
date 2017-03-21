@@ -46,4 +46,9 @@ export class ContactPage {
     });
     confirm.present();
   }
+
+  naoquero() {
+    localStorage.setItem("promocaoBusam", "true");
+    this.navCtrl.push(StartPage, {});
+  }
 }
