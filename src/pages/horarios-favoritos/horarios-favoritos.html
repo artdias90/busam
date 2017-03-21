@@ -9,10 +9,10 @@
 
 <ion-content>
   <ion-list>
-    <ion-card *ngIf="horarios.length === 0">
+    <ion-card *ngIf="!horarios || horarios.length === 0">
       Você ainda não salvou nenhum horário.
     </ion-card>
-    <div *ngIf="horarios.length > 0">
+    <div *ngIf="horarios && horarios.length > 0">
       <ion-card *ngFor="let linha of horarios">
         <strong>Linha {{linha.numero}}</strong>
         <ion-card *ngFor="let linha_horario of linha.horarios">
