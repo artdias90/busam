@@ -40,10 +40,12 @@ export class StartPage {
     this.promocao = this.busamService.verificaPromocao();
     this.loadingComponent.show();
     if(!this.promocao){
+      this.loadingComponent.hide();
       this.navCtrl.push(ContactPage, {});    
     } else {
       if(this.cidade){
-         this.navCtrl.push(HomePage, {});    
+        this.loadingComponent.hide();
+        this.navCtrl.push(HomePage, {});    
       }  
     }
     

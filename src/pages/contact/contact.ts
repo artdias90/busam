@@ -18,10 +18,16 @@ export class ContactPage {
   cadastrar() {
     this.http.get('http://api.codeam.com.br/busam/promocao.php?nome=' + this.nome + '&email=' + this.email)
       .subscribe(data => {
-        alert(this.nome + ", parabéns, você já está concorrendo!");
+        let alert = this.alertCtrl.create({
+          title: this.nome,
+          subTitle: 'Parabéns, você já está concorrendo!',
+          buttons: ['OK']
+        });
+        alert.present();
         localStorage.setItem("promocaoBusam", "true");
         this.navCtrl.push(StartPage, {});
       });
+
   }
 
   regulamento() {
