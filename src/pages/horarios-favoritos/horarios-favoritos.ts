@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, NavController, AlertController, NavParams } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { GlobalVars } from "../../services/globals/globals";
 import { LembreteService } from '../../services/lembrete/lembrete.service';

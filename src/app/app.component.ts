@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, MenuController } from 'ionic-angular';
-import { StatusBar, Deeplinks, Splashscreen, LocalNotifications } from 'ionic-native';
+import { StatusBar, Splashscreen } from 'ionic-native';
 import { StartPage } from '../pages/start/start';
 import { HomePage } from '../pages/home/home';
 import { HorariosFavoritosPage } from '../pages/horarios-favoritos/horarios-favoritos';
