@@ -18,8 +18,9 @@
 
 <ion-list>
 
-  <ion-item *ngFor="let items of item" (click)="viewItem(items)">
-    {{items.numeroLinha}} - {{items.nomeLinha}}
+  <ion-item *ngFor="let items of item" (click)="viewItem(items)" text-wrap>
+    <ion-icon [color]="items.favorita? 'yellow' :'#000'" [name]="items.favorita? 'star' :'star-outline'" yellow class="favorite-star" ion-stop-event (click)="favoritar($event, items)" width-10></ion-icon> {{items.numeroLinha}} - {{items.nomeLinha}}
+    
   </ion-item>
 </ion-list>
 
