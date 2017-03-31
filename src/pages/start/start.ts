@@ -21,7 +21,6 @@ export class StartPage {
   showLoading = true;
   cidade;
   linha;
-  background;
   icone;
   promocao;
 
@@ -34,7 +33,6 @@ export class StartPage {
               private loadingComponent:LoadingComponent,
               private busamService:BusamService) {
 
-    this.background = GlobalVars.platform + GlobalVars.background;
     this.icone = GlobalVars.platform + GlobalVars.icon;
     this.cidade = this.busamService.verificaCidade();
     this.promocao = this.busamService.verificaPromocao();

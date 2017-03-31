@@ -10,7 +10,6 @@ export class GlobalVars {
   key_id: any;
   key_usuario: any;
   key_senha: any;
-  background: any;
   platform: any;
   icon: any;
 
@@ -24,7 +23,6 @@ export class GlobalVars {
     this.key_senha = "busam_password";
     this.platform = "../www";
     // this.platform = "";
-    this.background = "/assets/img/background.jpg";
     this.icon = "/assets/img/icon.png";
   }
 
