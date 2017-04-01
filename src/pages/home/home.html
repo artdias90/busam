@@ -7,34 +7,9 @@
   </ion-navbar>
 </ion-header>
 
-
-
-
 <ion-content class="content">
-
-
   <div class="background"></div>
-<!--     <ion-searchbar [(ngModel)]='searchBarItem' (ionInput)="getLinhas($event)" placeholder="pesquise linha..."></ion-searchbar> -->
-
-<ion-list>
-
-  <ion-item *ngFor="let items of item" (click)="viewItem(items)" text-wrap>
-    <ion-icon [color]="items.favorita? 'yellow' :'#000'" [name]="items.favorita? 'star' :'star-outline'" yellow class="favorite-star" ion-stop-event (click)="favoritar($event, items)" width-10></ion-icon> {{items.numeroLinha}} - {{items.nomeLinha}}
-    
-  </ion-item>
-</ion-list>
-
-<!--     <ion-card *ngFor="let items of item" (click)="viewItem(items)">
-      <ion-row>
-        <ion-col width-90 class="col">
-          <button ion-item class="botao" width-90>
-            <div class="texto">{{items.numeroLinha}} - {{items.nomeLinha}}</div>
-          </button>
-        </ion-col>
-        <ion-col width-10 class="estrela">
-          <ion-icon [color]="items.favorita? 'yellow' :'#000'" [name]="items.favorita? 'star' :'star-outline'" yellow class="favorite-star" ion-stop-event (click)="favoritar($event, items)" width-10></ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-card> -->
-    <!-- <button ion-button (click)="viewFavoritos()">MEUS HORÁRIOS</button> -->
+  <div *ngFor="let items of item" (click)="viewItem(items)" text-wrap class="linhas">
+    <ion-icon [color]="items.favorita? 'yellow' :'#000'" [name]="items.favorita? 'star' :'star-outline'" yellow class="favorite-star" ion-stop-event (click)="favoritar($event, items)" width-10></ion-icon> {{items.numeroLinha}} - {{items.nomeLinha}}  
+  </div>
 </ion-content>
