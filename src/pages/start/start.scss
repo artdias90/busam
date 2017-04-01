@@ -1,49 +1,65 @@
 page-start {
-	.background {
-  	height: 100%;
-  	width: 100%;
-  	position: absolute;
-  	opacity: 0.6;
+  .header {
     background: #3d99c2;
-	}
-  .loading {
-    text-align: center;
-    margin-top: 60%;
-  }
-  .box-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    .box-background {
-      height: 60%;
-      background: white;
-      z-index: 10000;
-      width: 90%;
-      opacity: 0.6;
-      box-shadow: 0px 0px 150px #222;
+    height: 30vh;
+    .busam {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30vh;
+      color: white;
+      position: absolute;
+      font-size: 10vh;
+      z-index: 100000;
+      margin-top: -1vh;width: 100vw;
+    }
+    .sub-titulo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      position: absolute;
+      font-size: 3.1vh;
+      z-index: 100000;
+      width: 100vw;
+      margin-top: 18vh;
+    }
+    .logo {
+      width: 24vh;
+      position: absolute;
+      margin-left: 15vh;
+      margin-top: 3vh;
+      opacity: 0.3;
+      z-index: 1;
     }
   }
-  .box-escolha {
-    height: 100%;
-    width: 100%;
-    vertical-align: middle;
-    display: flex;
-    align-items: center;
+  .conteudo {
     justify-content: center;
-  }
-  .lista {
-    z-index: 10000000;
-    width: 70%;
-    text-align: -webkit-center;
-  }
-  .logo {
-    width: 70%;
-    margin-bottom: 10%;
-  }
-  .item {
-    box-shadow: 2px 2px 20px #222;
+    align-items: center;
+    height: 70vh;
+    .escolha {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10vh;
+      font-size: 4vh;
+      color: #3d99c2;
+    }
+    .botoes {
+      margin-top: 5vh;
+    }
+    .cidades {
+      background: white;
+      width: 70vw;
+      display: flex;
+      justify-content: center;
+      margin-left: 15vw;
+      padding: 2vh;
+      border: 0.5vh solid #3d99c2;
+      border-radius: 10px;
+      color: #3d99c2;
+      font-size: 3vh;
+      margin-bottom: 2vh;
+    }
   }
 }

@@ -60,7 +60,7 @@ export class StartPage {
 
   ionViewDidLoad() {}
 
-  selecionacidade(event, select){
+  selecionacidade(select){
     localStorage.setItem("idCidadeBusam", select);
     this.cidade = localStorage.getItem("idCidadeBusam");
     this.navCtrl.push(HomePage, {});

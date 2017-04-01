@@ -32,7 +32,6 @@ export class HomePage {
   private admobId: any;
   cidade;
   searchBarItem;
-  background;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -42,7 +41,6 @@ export class HomePage {
               private alertCtrl:AlertController,
               private loadingComponent:LoadingComponent,
               private busamService:BusamService) {
-    this.background = GlobalVars.platform + GlobalVars.background;
     this.cidade = this.busamService.verificaCidade();
     this.searchBarItem = '';
     this.aviso = this.busamService.getObs(0).subscribe(
