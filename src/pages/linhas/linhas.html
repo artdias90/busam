@@ -36,6 +36,8 @@
       {{obsLinha}}
     </div>
 
+
+
 <!--     <div style="background: #ffffff;width: 100%;">
       <div style="font-weight: bold;font-size: 1.5em;"></div>
       <ion-grid>
@@ -49,17 +51,21 @@
     <div *ngIf="ida" class="box-horarios">
       <div *ngIf="aparecesegsex">
         <ion-row wrap *ngIf="diariamente">
+          <div class="proximo-horario">Próximo Horário - {{horarioDiariamente}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of diariamente" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioDiariamente" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioDiariamente" class="proximo">{{items.txtHorario}}</div>
             </div>
           </ion-col>
         </ion-row>
 
         <ion-row wrap *ngIf="segsex">
+          <div class="proximo-horario">Próximo Horário - {{horarioSegsex}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of segsex" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSegsex" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSegsex" class="proximo">{{items.txtHorario}}</div>
             </div>
           </ion-col>
         </ion-row>
@@ -68,18 +74,22 @@
 
       <div *ngIf="aparecesab">
         <ion-row wrap *ngIf="diariamente">
+          <div class="proximo-horario">Próximo Horário - {{horarioDiariamente}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of diariamente" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioDiariamente" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioDiariamente" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="sabado">
+          <div class="proximo-horario">Próximo Horário - {{horarioSab}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of sabado" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSab" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSab" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
@@ -87,18 +97,22 @@
         </ion-row>
 
         <ion-row wrap *ngIf="segsab">
+          <div class="proximo-horario">Próximo Horário - {{horarioSegsab}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of segsab" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSegsab" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSegsab" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="sabdom">
+          <div class="proximo-horario">Próximo Horário - {{horarioSabdom}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of sabdom" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSabdom" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSabdom" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
@@ -108,27 +122,33 @@
 
       <div *ngIf="aparecedom">
         <ion-row wrap *ngIf="diariamente">
+          <div class="proximo-horario">Próximo Horário - {{horarioDiariamente}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of diariamente" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioDiariamente" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioDiariamente" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="domingo">
+          <div class="proximo-horario">Próximo Horário - {{horarioDom}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of domingo" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioDom" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioDom" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="sabdom">
+          <div class="proximo-horario">Próximo Horário - {{horarioSabdom}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of sabdom" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSabdom" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSabdom" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
@@ -137,31 +157,36 @@
       </div>
     </div>
 
-
     <div *ngIf="volta" class="box-horarios">
-      <div *ngIf="segsex">
+      <div *ngIf="aparecesegsexvolta">
         <ion-row wrap *ngIf="diariamenteVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioDiariamenteVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of diariamenteVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioDiariamenteVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioDiariamenteVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="segsexVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioSegsexVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of segsexVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSegsexVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSegsexVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="segsabVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioSegsabVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of segsabVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSegsabVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSegsabVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
@@ -169,38 +194,46 @@
         </ion-row>
       </div>
 
-      <div *ngIf="sab">
+      <div *ngIf="aparecesabvolta">
         <ion-row wrap *ngIf="diariamenteVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioDiariamenteVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of diariamenteVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioDiariamenteVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioDiariamenteVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="sabadoVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioSabVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of sabadoVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSabVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSabVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="segsabVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioSegsabVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of segsabVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSegsabVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSegsabVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="sabdomVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioSabdomVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of sabdomVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSabdomVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSabdomVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
@@ -208,29 +241,35 @@
         </ion-row>
       </div>
 
-      <div *ngIf="dom">
+      <div *ngIf="aparecedomvolta">
         <ion-row wrap *ngIf="diariamenteVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioDiariamenteVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of diariamenteVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=diariamenteVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==diariamenteVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="domingoVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioDomVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of domingoVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioDomVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioDomVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
           </ion-col>
         </ion-row>
         <ion-row wrap *ngIf="sabdomVolta">
+          <div class="proximo-horario">Próximo Horário - {{horarioSabdomVolta}}</div>
           <ion-col class="horarios" width-25 *ngFor="let items of sabdomVolta" >
             <div [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-              <div class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')!=horarioSabdomVolta" class="horario">{{items.txtHorario}}</div>
+              <div *ngIf="items.txtHorario.replace(':','h')==horarioSabdomVolta" class="proximo">{{items.txtHorario}}</div>
             </div>
             <!--ion-icon [color]="items.favorito? 'secondary' :'danger'" class="horario-alarm"
                       name="information-circle"></ion-icon-->
@@ -254,7 +293,7 @@
       <div style="text-align: center;">LEGENDA</div>
       <div *ngFor="let items of obs" style="float: left;margin-right: 10px;">
         <div style="    padding: 5px;" [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-          <div>{{items.txtObservacao}}</div>
+          <div class="proximo-horario">Próximo Horário - {{items.txtObservacao}}</div>
         </div>
       </div>
     </ion-card>

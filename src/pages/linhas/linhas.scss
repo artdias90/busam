@@ -49,11 +49,28 @@ page-linhas {
   }
 
   .box-horarios {
+    .proximo-horario {
+      width: 100%;
+      text-align: -webkit-center;
+      color: #3d99c2;
+      font-size: 1.5em;
+      font-weight: 700;
+      border: solid 1px #3d99c2;
+    }
     .horarios {
       text-align: center;
     }
     .horario {
       background: #3d99c2;
+      box-shadow: 1px 1px 5px #000;
+      border: solid 1px #1a4152;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2em;
+      text-shadow: 0 0 5px #13303e;
+    }
+    .proximo {
+      background: #3dc24d;
       box-shadow: 1px 1px 5px #000;
       border: solid 1px #1a4152;
       color: white;

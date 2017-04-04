@@ -73,6 +73,23 @@ export class LinhasPage {
   colordomingo;
   cidade;
   temvolta;
+  horarioDiariamente;
+  horarioSegsex;
+  horarioSab;
+  horarioDom;
+  horarioSegsab;
+  horarioSabdom;
+  horarioDiariamenteVolta;
+  horarioSegsexVolta;
+  horarioSabVolta;
+  horarioDomVolta;
+  horarioSegsabVolta;
+  horarioSabdomVolta;
+  sab;
+  dom;
+  aparecesegsexvolta;
+  aparecesabvolta;
+  aparecedomvolta;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -118,52 +135,59 @@ export class LinhasPage {
       this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 0).subscribe(
         response => {
           this.retornou = this.getHorario(response);
+          console.log(response[0].idFrequencia);
           if (response) {
             if (response[0].idFrequencia == 2) {
               this.diariamente = response;
               this.checkNotifications(this.diariamente);
-              this.horarionow = this.verificaHorario(response);
+              this.horarioDiariamente = this.verificaHorario(response);
+              console.log("diariamante" + this.horarioDiariamente);
               this.resultInMinutes = this.getHorario(this.horarionow);
             }
             if (response[0].idFrequencia == 3) {
               this.segsex = response;
               this.checkNotifications(this.segsex);
-              if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5) {
-                this.horarionow = this.verificaHorario(response);
+              // if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5) {
+                this.horarioSegsex = this.verificaHorario(response);
+                console.log("seg sex" + this.horarioSegsex);
                 this.resultInMinutes = this.getHorario(this.horarionow);
-              }
+              // }
             }
             if (response[0].idFrequencia == 4) {
               this.sabado = response;
               this.checkNotifications(this.sabado);
-              if (this.curDay == 6) {
-                this.horarionow = this.verificaHorario(response);
+              // if (this.curDay == 6) {
+                this.horarioSab = this.verificaHorario(response);
+                console.log("sab" + this.horarioSab);
                 this.resultInMinutes = this.getHorario(this.horarionow);
-              }
+              // }
             }
             if (response[0].idFrequencia == 5) {
               this.domingo = response;
               this.checkNotifications(this.domingo);
-              if (this.curDay == 0) {
-                this.horarionow = this.verificaHorario(response);
+              // if (this.curDay == 0) {
+                this.horarioDom = this.verificaHorario(response);
+                console.log("dom" + this.horarioDom);
                 this.resultInMinutes = this.getHorario(this.horarionow);
-              }
+              // }
             }
             if (response[0].idFrequencia == 6) {
               this.segsab = response;
               this.checkNotifications(this.segsab);
-              if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5 || this.curDay == 6) {
-                this.horarionow = this.verificaHorario(response);
+              // if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5 || this.curDay == 6) {
+                this.horarioSegsab = this.verificaHorario(response);
+                console.log("horarioSegsab" + this.horarioSegsab);
                 this.resultInMinutes = this.getHorario(this.horarionow);
-              }
+              // }
             }
             if (response[0].idFrequencia == 7) {
               this.sabdom = response;
               this.checkNotifications(this.sabdom);
-              if (this.curDay == 0 || this.curDay == 6) {
-                this.horarionow = this.verificaHorario(response);
+              // if (this.curDay == 0 || this.curDay == 6) {
+                this.horarioSabdom = this.verificaHorario(response);
+                console.log("horarioSabdom" + this.horarioSabdom);
                 this.resultInMinutes = this.getHorario(this.horarionow);
-              }
+              // }
             }
             if (this.i == 7) {
               this.loadingComponent.hide();
@@ -180,26 +204,32 @@ export class LinhasPage {
       this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 1).subscribe(
         response => {
           this.retornou = this.getHorario(response);
+          console.log(response[0].idFrequencia);
           if (response) {
             if (response[0].idFrequencia == 2) {
               this.diariamenteVolta = response;
+              this.horarioDiariamenteVolta = this.verificaHorario(response);
             }
             if (response[0].idFrequencia == 3) {
               this.segsexVolta = response;
+              this.horarioSegsexVolta = this.verificaHorario(response);
             }
             if (response[0].idFrequencia == 4) {
               this.sabadoVolta = response;
+              this.horarioSabVolta = this.verificaHorario(response);
             }
             if (response[0].idFrequencia == 5) {
               this.domingoVolta = response;
+              this.horarioDomVolta = this.verificaHorario(response);
             }
             if (response[0].idFrequencia == 6) {
               this.segsabVolta = response;
+              this.horarioSegsabVolta = this.verificaHorario(response);
             }
             if (response[0].idFrequencia == 7) {
               this.sabdomVolta = response;
+              this.horarioSabdomVolta = this.verificaHorario(response);
             }
-
           }
         });
     }
@@ -434,6 +464,9 @@ export class LinhasPage {
     this.aparecesegsex = true;
     this.aparecesab = false;
     this.aparecedom = false;
+    this.aparecesegsexvolta = true;
+    this.aparecesabvolta = false;
+    this.aparecedomvolta = false;
   }
 
   mostrasabado() {
@@ -446,6 +479,9 @@ export class LinhasPage {
     this.aparecesegsex = false;
     this.aparecesab = true;
     this.aparecedom = false;
+    this.aparecesegsexvolta = false;
+    this.aparecesabvolta = true;
+    this.aparecedomvolta = false;
   }
 
   mostradomingo() {
@@ -458,5 +494,8 @@ export class LinhasPage {
     this.aparecesegsex = false;
     this.aparecesab = false;
     this.aparecedom = true;
+    this.aparecesegsexvolta = false;
+    this.aparecesabvolta = false;
+    this.aparecedomvolta = true;
   }
 }
