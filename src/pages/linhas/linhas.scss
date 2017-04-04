@@ -16,19 +16,17 @@ page-linhas {
 
   .predios {
     width: 100%;
-    background: #4565a6;
+    background: #3d99c2;
   }
 
   .box-divisao {
     color: white;
-    padding: 5px;
     z-index: 100000;
-    background: #4565a6;
+    background: #3d99c2;
     margin-bottom: 15px;
-    -moz-box-shadow: 10px 10px 5px #222;
-    -webkit-box-shadow: 10px 10px 5px #222;
     box-shadow: 3px 3px 5px #222;
     .dia-semana {
+      padding: 5px;
       border-radius: 5px;
       text-align: -webkit-center;
       font-weight: bolder;
@@ -55,8 +53,13 @@ page-linhas {
       text-align: center;
     }
     .horario {
-      padding: 3px;
-      box-shadow: 1px 1px 5px #222;
+      background: #3d99c2;
+      box-shadow: 1px 1px 5px #000;
+      border: solid 1px #1a4152;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2em;
+      text-shadow: 0 0 5px #13303e;
     }
   }
 
@@ -70,7 +73,7 @@ page-linhas {
   }
 
   .toolbar-background {
-      background-color: #4565a6;
+      background-color: #3d99c2;
   }
   .toolbar-title, .back-button{
     color: white;

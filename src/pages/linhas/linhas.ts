@@ -4,7 +4,6 @@ import 'rxjs/add/operator/map';
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { LoadingComponent } from "../../services/loading/loading";
-
 import { LembreteService } from '../../services/lembrete/lembrete.service';
 
 @Component({
@@ -94,7 +93,7 @@ export class LinhasPage {
     this.curDay = d.getDay();
     this.finishedLoading = false;
     this.backgroundida = "white";
-    this.colorida = "#3f51b5";
+    this.colorida = "#3d99c2";
     this.ida = true;
     this.volta = false;
     this.background = "/assets/img/background.jpg";
@@ -102,9 +101,9 @@ export class LinhasPage {
     this.aparecesab = false;
     this.aparecedom = false;
     this.backgroundsemana = "white";
-    this.backgroundsabado = "#3f51b5";
-    this.backgrounddomingo = "#3f51b5";
-    this.colorsemana = "#3f51b5";
+    this.backgroundsabado = "#13303e";
+    this.backgrounddomingo = "#13303e";
+    this.colorsemana = "#13303e";
     this.colorsabado = "white";
     this.colordomingo = "white";
     this.temvolta = true;
@@ -408,8 +407,8 @@ export class LinhasPage {
   sentidoida(){
     console.log("ida");
     this.backgroundida = "white";
-    this.colorida = "#3f51b5";
-    this.backgroundvolta = "#3f51b5";
+    this.colorida = "#3d99c2";
+    this.backgroundvolta = "#3d99c2";
     this.colorvolta = "white";
     this.ida = true;
     this.volta = false;
@@ -418,8 +417,8 @@ export class LinhasPage {
   sentidovolta(){
     console.log("volta");
     this.backgroundvolta = "white";
-    this.colorvolta = "#3f51b5";
-    this.backgroundida = "#3f51b5";
+    this.colorvolta = "#3d99c2";
+    this.backgroundida = "#3d99c2";
     this.colorida = "white";
     this.ida = false;
     this.volta = true;
@@ -427,9 +426,9 @@ export class LinhasPage {
 
   mostrasemana() {
     this.backgroundsemana = "white";
-    this.backgroundsabado = "#3f51b5";
-    this.backgrounddomingo = "#3f51b5";
-    this.colorsemana = "#3f51b5";
+    this.backgroundsabado = "#13303e";
+    this.backgrounddomingo = "#13303e";
+    this.colorsemana = "#13303e";
     this.colorsabado = "white";
     this.colordomingo = "white";
     this.aparecesegsex = true;
@@ -438,11 +437,11 @@ export class LinhasPage {
   }
 
   mostrasabado() {
-    this.backgroundsemana = "#3f51b5";
+    this.backgroundsemana = "#13303e";
     this.backgroundsabado = "white";
-    this.backgrounddomingo = "#3f51b5";
+    this.backgrounddomingo = "#13303e";
     this.colorsemana = "white";
-    this.colorsabado = "#3f51b5";
+    this.colorsabado = "#13303e";
     this.colordomingo = "white";
     this.aparecesegsex = false;
     this.aparecesab = true;
@@ -450,12 +449,12 @@ export class LinhasPage {
   }
 
   mostradomingo() {
-    this.backgroundsemana = "#3f51b5";
-    this.backgroundsabado = "#3f51b5";
+    this.backgroundsemana = "#13303e";
+    this.backgroundsabado = "#13303e";
     this.backgrounddomingo = "white";
     this.colorsemana = "white";
     this.colorsabado = "white";
-    this.colordomingo = "#3f51b5";
+    this.colordomingo = "#13303e";
     this.aparecesegsex = false;
     this.aparecesab = false;
     this.aparecedom = true;

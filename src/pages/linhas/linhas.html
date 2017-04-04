@@ -14,19 +14,19 @@
     <div class="box-divisao">
       <ion-row>
         <ion-col width-33>
-          <button ion-button id="sabado" (click)="mostrasabado()" class="dia-semana"
+          <div id="sabado" (click)="mostrasabado()" class="dia-semana"
                [ngStyle]="{'background-color': backgroundsabado, 'color': colorsabado}">Sábado
-          </button>
+          </div>
         </ion-col>
         <ion-col width-33>
-          <button ion-button id="semana" (click)="mostrasemana()" class="dia-semana"
+          <div id="semana" (click)="mostrasemana()" class="dia-semana"
                [ngStyle]="{'background-color': backgroundsemana, 'color': colorsemana}">Seg-Sex
-          </button>
+          </div>
         </ion-col>
         <ion-col width-33>
-          <button ion-button id="domingo" (click)="mostradomingo()" class="dia-semana"
+          <div id="domingo" (click)="mostradomingo()" class="dia-semana"
                [ngStyle]="{'background-color': backgrounddomingo, 'color': colordomingo}">Domingo
-          </button>
+          </div>
         </ion-col>
       </ion-row>
     </div>
@@ -261,13 +261,13 @@
   </div>
 
 
-  <div *ngIf="temvolta" style="position: fixed;bottom: 0;width: 100%;color: white;padding: 5px;background: #4565a6;">
+  <div *ngIf="temvolta" style="position: fixed;bottom: 0;width: 100%;color: white;padding: 5px;background: #3d99c2">
     <div id="sentidoida" (click)="sentidoida()"
          style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;background: #4565a6;"
          [ngStyle]="{'background-color': backgroundida, 'color': colorida}">Sentido Ida
     </div>
     <div id="sentidovolta" (click)="sentidovolta()"
-         style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;color: #4565a6;background:white"
+         style="width: 50%;float: left;text-align: -webkit-center;font-weight: bolder;font-size: 1.5em;color: #3d99c2;background:white"
          [ngStyle]="{'background-color': backgroundvolta, 'color': colorvolta}">Sentido Volta
     </div>
   </div>
