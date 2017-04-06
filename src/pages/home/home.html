@@ -9,10 +9,13 @@
 
 <ion-content class="content">
   <div class="background"></div>
-  <br>
+  <div *ngIf="banner_campinas" style="width: 50%;margin-left: 25%;">
+    <img src="http://api.codeam.com.br/img/campinas.png">
+  </div>
   <div *ngFor="let items of item" (click)="viewItem(items)" text-wrap class="linhas">
     <div style="margin-left: -4vw;padding: 2px;width: 17vw;text-align: -webkit-center;float: left;font-size: 7vw;">{{items.numeroLinha}}</div>
     <div style="width: 69vw;float: left;">{{items.nomeLinha}}</div>
     <ion-icon [color]="items.favorita? 'yellow' :'#000'" [name]="items.favorita? 'star' :'star-outline'" yellow class="favorite-star" ion-stop-event (click)="favoritar($event, items)" width-10></ion-icon>  
   </div>
+
 </ion-content>

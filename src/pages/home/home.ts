@@ -32,6 +32,7 @@ export class HomePage {
   private admobId: any;
   cidade;
   searchBarItem;
+  banner_campinas;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -42,6 +43,11 @@ export class HomePage {
               private loadingComponent:LoadingComponent,
               private busamService:BusamService) {
     this.cidade = this.busamService.verificaCidade();
+    if(this.cidade == 2) {
+      this.banner_campinas = true;
+    } else {
+      this.banner_campinas = false;
+    }
     this.searchBarItem = '';
     this.aviso = this.busamService.getObs(0).subscribe(
       response => {
