@@ -1,5 +1,21 @@
 page-linhas {
-
+  .botao-mostrar {
+    background: #3d99c2;
+    color: white;
+    font-weight: 600;
+    text-align: -webkit-center;
+    font-size: 1.3em;
+    padding: 5px;
+    margin-top: 10px;
+  }
+  .itinerario {
+    background: white;
+    width: 94vw;
+    padding: 2vh 0vh 2vh 2vh;
+    border-top: 0.1vh solid #000000;
+    display: flex;
+    align-items: center;
+  }
   .titulo-header {
     font-size: 1em;
     line-height: 1em;

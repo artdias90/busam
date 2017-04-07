@@ -90,6 +90,7 @@ export class LinhasPage {
   aparecesegsexvolta;
   aparecesabvolta;
   aparecedomvolta;
+  itinerarioTem;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -124,11 +125,21 @@ export class LinhasPage {
     this.colorsabado = "white";
     this.colordomingo = "white";
     this.temvolta = true;
+    this.itinerarioTem = false;
 
     this.cidade = this.busamService.verificaCidade();
     if(this.cidade == 1){
       this.temvolta = false;
     }
+
+    this.itinerario = this.busamService.getItinerarios(this.navParams.get('item').idLinha).subscribe(
+        response => {
+          this.ruas = response;
+          if(response){
+            this.itinerarioTem = true;
+          }
+        });
+    
 
     this.loadingComponent.show();
     for (this.i = 2; this.i < 8; this.i++) {
