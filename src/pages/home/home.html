@@ -10,7 +10,7 @@
 <ion-content class="content">
   <div class="background"></div>
   <div *ngIf="banner_campinas" style="width: 50%;margin-left: 25%;">
-    <img src="http://api.codeam.com.br/img/campinas.png">
+    <a href="http://www.onibusdecampinas.com.br/"><img src="http://api.codeam.com.br/img/campinas.png"></a>
   </div>
   <div *ngFor="let items of item" (click)="viewItem(items)" text-wrap class="linhas">
     <div style="margin-left: -4vw;padding: 2px;width: 17vw;text-align: -webkit-center;float: left;font-size: 7vw;">{{items.numeroLinha}}</div>
