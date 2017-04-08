@@ -29,14 +29,15 @@
     "typescript": "2.0.6"
   },
   "cordovaPlugins": [
-    "ionic-plugin-keyboard",
-    "cordova-plugin-whitelist",
-    "cordova-plugin-console",
-    "cordova-plugin-statusbar",
-    "cordova-plugin-splashscreen",
+    "onesignal-cordova-plugin",
     "cordova-plugin-admobpro",
-    "cordova-plugin-extension",
-    "onesignal-cordova-plugin"
+    "cordova-plugin-device",
+    "cordova-plugin-console",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-statusbar",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-extension"
   ],
   "cordovaPlatforms": [
     {
