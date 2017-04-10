@@ -146,13 +146,13 @@ export class LinhasPage {
       this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 0).subscribe(
         response => {
           this.retornou = this.getHorario(response);
-          console.log(response[0].idFrequencia);
+          // console.log(response[0].idFrequencia);
           if (response) {
             if (response[0].idFrequencia == 2) {
               this.diariamente = response;
               this.checkNotifications(this.diariamente);
               this.horarioDiariamente = this.verificaHorario(response);
-              console.log("diariamante" + this.horarioDiariamente);
+              // console.log("diariamante" + this.horarioDiariamente);
               this.resultInMinutes = this.getHorario(this.horarionow);
             }
             if (response[0].idFrequencia == 3) {
@@ -160,7 +160,7 @@ export class LinhasPage {
               this.checkNotifications(this.segsex);
               // if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5) {
                 this.horarioSegsex = this.verificaHorario(response);
-                console.log("seg sex" + this.horarioSegsex);
+                // console.log("seg sex" + this.horarioSegsex);
                 this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
@@ -169,7 +169,7 @@ export class LinhasPage {
               this.checkNotifications(this.sabado);
               // if (this.curDay == 6) {
                 this.horarioSab = this.verificaHorario(response);
-                console.log("sab" + this.horarioSab);
+                // console.log("sab" + this.horarioSab);
                 this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
@@ -178,7 +178,7 @@ export class LinhasPage {
               this.checkNotifications(this.domingo);
               // if (this.curDay == 0) {
                 this.horarioDom = this.verificaHorario(response);
-                console.log("dom" + this.horarioDom);
+                // console.log("dom" + this.horarioDom);
                 this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
@@ -187,7 +187,7 @@ export class LinhasPage {
               this.checkNotifications(this.segsab);
               // if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5 || this.curDay == 6) {
                 this.horarioSegsab = this.verificaHorario(response);
-                console.log("horarioSegsab" + this.horarioSegsab);
+                // console.log("horarioSegsab" + this.horarioSegsab);
                 this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
@@ -196,7 +196,7 @@ export class LinhasPage {
               this.checkNotifications(this.sabdom);
               // if (this.curDay == 0 || this.curDay == 6) {
                 this.horarioSabdom = this.verificaHorario(response);
-                console.log("horarioSabdom" + this.horarioSabdom);
+                // console.log("horarioSabdom" + this.horarioSabdom);
                 this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
@@ -215,7 +215,7 @@ export class LinhasPage {
       this.horarios = this.busamService.getHorarios(this.navParams.get('item').idLinha, this.i, 1).subscribe(
         response => {
           this.retornou = this.getHorario(response);
-          console.log(response[0].idFrequencia);
+          // console.log(response[0].idFrequencia);
           if (response) {
             if (response[0].idFrequencia == 2) {
               this.diariamenteVolta = response;
@@ -292,7 +292,7 @@ export class LinhasPage {
           role: 'cancel',
           icon: 'close',
           handler: () => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         }
       ]
@@ -323,53 +323,8 @@ export class LinhasPage {
   }
 
   saveHorario(horario) {
-    // this.alerta('', horario);
     horario.favorito = !horario.favorito;
-    let time = horario.txtHorario.split(/h/g);
-    let dat = new Date(new Date().getFullYear(), new Date().getMonth(), (new Date().getHours() > time[0]? new Date().getDate() + 1 : new Date().getDate()), time[0], time[1], 0, 0);
-    // console.log(dat, dat.getUTCMilliseconds());
-
-    let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
-    let added = false;
-    if (favoritos) {
-      let found = false;
-      favoritos.map((linha, index) => {
-        if (linha.numero === this.number) {
-          found = true;
-          if (linha.horarios.indexOf(dat.getTime()) === -1) {
-            added = true;
-            linha.horarios.push(dat.getTime());
-          } else {
-            linha.horarios.splice(linha.horarios.indexOf(dat.getTime()), 1);
-            if(linha.horarios.length === 0) {
-              favoritos.splice(index, 1);
-            }
-          }
-        }
-      })
-      if (!found) {
-        favoritos.push({
-          numero: this.number,
-          horarios: [dat.getTime()]
-        });
-      }
-    } else {
-      favoritos = [];
-      added = true;
-      favoritos.push({
-        numero: this.number,
-        horarios: [dat.getTime()]
-      });
-    }
-
-    let alert = this.alertCtrl.create({
-      title: 'Sucesso',
-      subTitle: `Lembrete de horário ${added? 'salvo': 'apagado'} com sucesso!`,
-      buttons: ['OK']
-    });
-    alert.present();
-    window.localStorage.setItem('horarios_favoritos', JSON.stringify(favoritos));
-    this.lembreteService.updateLembretes();
+    this.lembreteService.addLembrete(horario, this.number);
     // dat.getTime();
   }
 
@@ -421,7 +376,7 @@ export class LinhasPage {
       Date(0, 0, 0, this.hora, this.minuto);
       if (this.d1 > this.d2) {
         this.horarionow = this.hora + 'h' + this.minuto;
-        console.log(this.horarionow);
+        // console.log(this.horarionow);
         return this.horarionow;
       }
     }
@@ -446,7 +401,7 @@ export class LinhasPage {
 
 
   sentidoida(){
-    console.log("ida");
+    // console.log("ida");
     this.backgroundida = "white";
     this.colorida = "#3d99c2";
     this.backgroundvolta = "#3d99c2";
@@ -456,7 +411,7 @@ export class LinhasPage {
   }
 
   sentidovolta(){
-    console.log("volta");
+    // console.log("volta");
     this.backgroundvolta = "white";
     this.colorvolta = "#3d99c2";
     this.backgroundida = "#3d99c2";
