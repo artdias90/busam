@@ -198,7 +198,7 @@ export class HomePage {
     });
   }
 
-  viewFavoritos(item) {
+  viewFavoritos() {
     this.navCtrl.push(HorariosFavoritosPage, {});
   }
 

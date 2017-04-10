@@ -1,9 +1,8 @@
 <ion-header>
-  <ion-navbar hideBackButton>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Meus Lembretes</ion-title>
+  <ion-navbar>
+    <ion-title>
+      <div class="titulo-header">Alarmes</div>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -14,11 +13,11 @@
     </ion-card>
     <div *ngIf="horarios && horarios.length > 0">
       <ion-card *ngFor="let linha of horarios">
-        <strong>Linha {{linha.numero}}</strong>
-        <ion-card *ngFor="let linha_horario of linha.horarios">
+        <strong>Linha {{linha.numero}} - </strong>
+        <span *ngFor="let linha_horario of linha.horarios">
           {{printHorario(linha_horario)}}
           <ion-icon (click)="deleteHorario(linha.numero, linha_horario)" name="trash" color="danger"></ion-icon>
-        </ion-card>
+        </span>
       </ion-card>
     </div>
 

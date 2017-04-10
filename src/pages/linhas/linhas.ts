@@ -98,7 +98,7 @@ export class LinhasPage {
               public navParams:NavParams,
               private alertCtrl:AlertController,
               private busamService:BusamService,
-              private actionsheetCtrl: ActionSheetController,
+              private actionsheetCtrl:ActionSheetController,
               private loadingComponent:LoadingComponent,
               private lembreteService:LembreteService) {}
 
@@ -128,18 +128,18 @@ export class LinhasPage {
     this.itinerarioTem = false;
 
     this.cidade = this.busamService.verificaCidade();
-    if(this.cidade == 1){
+    if (this.cidade == 1) {
       this.temvolta = false;
     }
 
     this.itinerario = this.busamService.getItinerarios(this.navParams.get('item').idLinha).subscribe(
-        response => {
-          this.ruas = response;
-          if(response){
-            this.itinerarioTem = true;
-          }
-        });
-    
+      response => {
+        this.ruas = response;
+        if (response) {
+          this.itinerarioTem = true;
+        }
+      });
+
 
     this.loadingComponent.show();
     for (this.i = 2; this.i < 8; this.i++) {
@@ -159,45 +159,45 @@ export class LinhasPage {
               this.segsex = response;
               this.checkNotifications(this.segsex);
               // if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5) {
-                this.horarioSegsex = this.verificaHorario(response);
-                // console.log("seg sex" + this.horarioSegsex);
-                this.resultInMinutes = this.getHorario(this.horarionow);
+              this.horarioSegsex = this.verificaHorario(response);
+              // console.log("seg sex" + this.horarioSegsex);
+              this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
             if (response[0].idFrequencia == 4) {
               this.sabado = response;
               this.checkNotifications(this.sabado);
               // if (this.curDay == 6) {
-                this.horarioSab = this.verificaHorario(response);
-                // console.log("sab" + this.horarioSab);
-                this.resultInMinutes = this.getHorario(this.horarionow);
+              this.horarioSab = this.verificaHorario(response);
+              // console.log("sab" + this.horarioSab);
+              this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
             if (response[0].idFrequencia == 5) {
               this.domingo = response;
               this.checkNotifications(this.domingo);
               // if (this.curDay == 0) {
-                this.horarioDom = this.verificaHorario(response);
-                // console.log("dom" + this.horarioDom);
-                this.resultInMinutes = this.getHorario(this.horarionow);
+              this.horarioDom = this.verificaHorario(response);
+              // console.log("dom" + this.horarioDom);
+              this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
             if (response[0].idFrequencia == 6) {
               this.segsab = response;
               this.checkNotifications(this.segsab);
               // if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5 || this.curDay == 6) {
-                this.horarioSegsab = this.verificaHorario(response);
-                // console.log("horarioSegsab" + this.horarioSegsab);
-                this.resultInMinutes = this.getHorario(this.horarionow);
+              this.horarioSegsab = this.verificaHorario(response);
+              // console.log("horarioSegsab" + this.horarioSegsab);
+              this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
             if (response[0].idFrequencia == 7) {
               this.sabdom = response;
               this.checkNotifications(this.sabdom);
               // if (this.curDay == 0 || this.curDay == 6) {
-                this.horarioSabdom = this.verificaHorario(response);
-                // console.log("horarioSabdom" + this.horarioSabdom);
-                this.resultInMinutes = this.getHorario(this.horarionow);
+              this.horarioSabdom = this.verificaHorario(response);
+              // console.log("horarioSabdom" + this.horarioSabdom);
+              this.resultInMinutes = this.getHorario(this.horarionow);
               // }
             }
             if (this.i == 7) {
@@ -299,7 +299,8 @@ export class LinhasPage {
     });
     actionSheet.present();
   }
-  public alerta(titulo, mensagem){
+
+  public alerta(titulo, mensagem) {
     let alert = this.alertCtrl.create({
       title: titulo,
       subTitle: mensagem,
@@ -329,11 +330,12 @@ export class LinhasPage {
   }
 
   private checkNotifications(horarios:any) {
-    horarios.map((horario, index) => {
-      let time = horario.txtHorario.split(/h/g);
-      let dat = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), time[0], time[1]);
-      let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
-      if (favoritos) {
+    let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
+    console.debug(favoritos);
+    if (favoritos) {
+      horarios.map((horario, index) => {
+        let time = horario.txtHorario.split(/:|h/g);
+        let dat = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), time[0], time[1]);
         let found = false;
         favoritos.map((linha, index) => {
           if (linha.numero === this.number) {
@@ -351,15 +353,8 @@ export class LinhasPage {
             horarios: [dat.getTime()]
           });
         }
-      } else {
-        favoritos = [];
-        favoritos.push({
-          numero: this.number,
-          horarios: [dat.getTime()]
-        });
-      }
-    })
-
+      })
+    }
   }
 
   verificaHorario(response) {
@@ -400,7 +395,7 @@ export class LinhasPage {
   }
 
 
-  sentidoida(){
+  sentidoida() {
     // console.log("ida");
     this.backgroundida = "white";
     this.colorida = "#3d99c2";
@@ -410,7 +405,7 @@ export class LinhasPage {
     this.volta = false;
   }
 
-  sentidovolta(){
+  sentidovolta() {
     // console.log("volta");
     this.backgroundvolta = "white";
     this.colorvolta = "#3d99c2";

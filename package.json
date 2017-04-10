@@ -33,10 +33,13 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-console",
     "cordova-plugin-statusbar",
+    "cordova-plugin-device",
     "cordova-plugin-splashscreen",
     "cordova-plugin-admobpro",
     "cordova-plugin-extension",
-    "onesignal-cordova-plugin"
+    "onesignal-cordova-plugin",
+    "cordova-plugin-app-event",
+    "de.appplant.cordova.plugin.local-notification"
   ],
   "cordovaPlatforms": [
     {
