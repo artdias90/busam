@@ -12,13 +12,13 @@
       Você ainda não salvou nenhum horário.
     </ion-card>
     <div *ngIf="horarios && horarios.length > 0">
-      <ion-card *ngFor="let linha of horarios">
-        <strong>Linha {{linha.numero}}</strong>
+      <span *ngFor="let linha of horarios">
+        <strong>Linha {{linha.numero}} -</strong>
         <ion-card *ngFor="let linha_horario of linha.horarios">
           {{printHorario(linha_horario)}}
           <ion-icon (click)="deleteHorario(linha.numero, linha_horario)" name="trash" color="danger"></ion-icon>
         </ion-card>
-      </ion-card>
+      </span>
     </div>
 
   </ion-list>
