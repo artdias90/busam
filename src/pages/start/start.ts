@@ -8,6 +8,8 @@ import { BusamService } from "../../services/busam/busam";
 import { HomePage } from "../home/home";
 import { LoadingComponent } from "../../services/loading/loading";
 
+declare var AdMob: any;
+
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html',
@@ -22,6 +24,7 @@ export class StartPage {
   linha;
   icone;
   promocao;
+  private admobId: any;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -30,7 +33,22 @@ export class StartPage {
               private authService:AuthService,
               private alertCtrl:AlertController,
               private loadingComponent:LoadingComponent,
-              private busamService:BusamService) {
+              private busamService:BusamService
+              ) {
+   
+    
+    this.platform = platform;
+    if (/(android)/i.test(navigator.userAgent)) {
+      this.admobId = {
+        banner: 'ca-app-pub-5898281503537290/4820015210',
+        interstitial: 'ca-app-pub-5898281503537290/4820015210'
+      };
+    } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+      this.admobId = {
+        banner: 'ca-app-pub-5898281503537290~1866548811',
+        interstitial: 'ca-app-pub-5898281503537290~1866548811'
+      };
+    }
 
     this.icone = GlobalVars.platform + GlobalVars.icon;
     this.cidade = this.busamService.verificaCidade();
@@ -40,20 +58,40 @@ export class StartPage {
       this.loadingComponent.hide();
       this.navCtrl.push(HomePage, {});    
     }  
- 
-    
-    this.linhas = this.busamService.getCidades().subscribe(
-    response => {
-      this.item = response;
-      this.showLoading = false;
-      this.loadingComponent.hide();
-    },
-    error => {
-      console.log("erro", "Ocorreu um erro. Tente novamente.");
+  }
+
+  ionViewDidLoad() {
+    if (/(android)/i.test(navigator.userAgent)) {
+      this.createBanner();
+      this.showBanner("top");
+    }
+  }
+
+  createBanner() {
+    this.platform.ready().then(() => {
+      if (AdMob) {
+        console.log("criando banner");
+        console.log(this.admobId.banner);
+        AdMob.createBanner({
+          adId: this.admobId.banner,
+          autoShow: true
+        });
+      }
     });
   }
 
-  ionViewDidLoad() {}
+  showBanner(position) {
+    this.platform.ready().then(() => {
+      if (AdMob) {
+        var positionMap = {
+          "bottom": AdMob.AD_POSITION.BOTTOM_CENTER,
+          "top": AdMob.AD_POSITION.TOP_CENTER
+        };
+        AdMob.showBanner(positionMap[position.toLowerCase()]);
+        console.log("banner criado com sucesso");
+      }
+    });
+  }
 
   selecionacidade(select){
     localStorage.setItem("idCidadeBusam", select);

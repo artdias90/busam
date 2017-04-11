@@ -10,7 +10,7 @@ import { StartPage } from "../start/start";
 import { HorariosFavoritosPage } from '../horarios-favoritos/horarios-favoritos';
 import { LoadingComponent } from "../../services/loading/loading";
 
-declare var AdMob: any;
+
 
 
 @Component({
@@ -29,7 +29,7 @@ export class HomePage {
   link;
   imagem_footer;
   link_footer;
-  private admobId: any;
+  
   cidade;
   searchBarItem;
   banner_campinas;
@@ -104,19 +104,6 @@ export class HomePage {
 
 
 
-    // admob setup
-    this.platform = platform;
-    if (/(android)/i.test(navigator.userAgent)) {
-      this.admobId = {
-        banner: 'ca-app-pub-5898281503537290/4820015210',
-        interstitial: 'ca-app-pub-5898281503537290/4820015210'
-      };
-    } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
-      this.admobId = {
-        banner: 'ca-app-pub-5898281503537290~1866548811',
-        interstitial: 'ca-app-pub-5898281503537290~1866548811'
-      };
-    }
 
   }
 
@@ -165,38 +152,9 @@ export class HomePage {
     }
   }
 
-  ionViewDidLoad() {
-    if (/(android)/i.test(navigator.userAgent)) {
-      this.createBanner();
-      this.showBanner("top");
-    }
-  }
+  ionViewDidLoad() {}
 
-  createBanner() {
-    this.platform.ready().then(() => {
-      if (AdMob) {
-        console.log("criando banner");
-        console.log(this.admobId.banner);
-        AdMob.createBanner({
-          adId: this.admobId.banner,
-          autoShow: true
-        });
-      }
-    });
-  }
 
-  showBanner(position) {
-    this.platform.ready().then(() => {
-      if (AdMob) {
-        var positionMap = {
-          "bottom": AdMob.AD_POSITION.BOTTOM_CENTER,
-          "top": AdMob.AD_POSITION.TOP_CENTER
-        };
-        AdMob.showBanner(positionMap[position.toLowerCase()]);
-        console.log("banner criado com sucesso");
-      }
-    });
-  }
 
   viewFavoritos() {
     this.navCtrl.push(HorariosFavoritosPage, {});
