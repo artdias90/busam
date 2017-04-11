@@ -370,7 +370,6 @@ export class LinhasPage {
     alert.present();
     window.localStorage.setItem('horarios_favoritos', JSON.stringify(favoritos));
     this.lembreteService.updateLembretes();
-    // dat.getTime();
   }
 
   private checkNotifications(horarios:any) {
