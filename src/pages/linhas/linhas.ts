@@ -139,7 +139,7 @@ export class LinhasPage {
             this.itinerarioTem = true;
           }
         });
-    
+
 
     this.loadingComponent.show();
     for (this.i = 2; this.i < 8; this.i++) {
@@ -325,8 +325,8 @@ export class LinhasPage {
   saveHorario(horario) {
     // this.alerta('', horario);
     horario.favorito = !horario.favorito;
-    let time = horario.txtHorario.split(/h/g);
-    let dat = new Date(new Date().getFullYear(), new Date().getMonth(), (new Date().getHours() > time[0]? new Date().getDate() + 1 : new Date().getDate()), time[0], time[1], 0, 0);
+    let time = horario.txtHorario.split(/h|:/g);
+    let dat = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), time[0], time[1], 0, 0);
     // console.log(dat, dat.getUTCMilliseconds());
 
     let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
@@ -364,7 +364,7 @@ export class LinhasPage {
 
     let alert = this.alertCtrl.create({
       title: 'Sucesso',
-      subTitle: `Lembrete de horário ${added? 'salvo': 'apagado'} com sucesso!`,
+      subTitle: `Lembrete de horário atualizado com sucesso!`,
       buttons: ['OK']
     });
     alert.present();
@@ -374,7 +374,7 @@ export class LinhasPage {
 
   private checkNotifications(horarios:any) {
     horarios.map((horario, index) => {
-      let time = horario.txtHorario.split(/h/g);
+      let time = horario.txtHorario.split(/h|:/g);
       let dat = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), time[0], time[1]);
       let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
       if (favoritos) {

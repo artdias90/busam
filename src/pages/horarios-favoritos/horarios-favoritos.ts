@@ -40,7 +40,7 @@ export class HorariosFavoritosPage {
 
     alert.present();
     window.localStorage.setItem('horarios_favoritos', JSON.stringify(this.horarios));
-    this.lembreteService.updateLembretes();
+    this.lembreteService.deleteLembrete(paramNumero, horario);
   }
 
   printHorario(timestamp){
