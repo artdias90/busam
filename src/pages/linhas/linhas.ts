@@ -288,7 +288,7 @@ export class LinhasPage {
           }
         },
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           icon: 'close',
           handler: () => {

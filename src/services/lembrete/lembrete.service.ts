@@ -67,9 +67,9 @@ export class LembreteService {
         linha.horarios.map((horario, index) => {
           horariosArray.push({
             id: `${linha.numero}_${new Date(horario).getHours()}:${new Date(horario).getMinutes()}`,
-            text: `alerta: linha ${linha.numero} - ${new Date(horario).getHours()}:${new Date(horario).getMinutes()} - ônibus a caminho`,
-            at: new Date(new Date(horario).getTime() - 60000),
-            every: 'day',
+            text: `alerta: linha ${linha.numero} - ${new Date(horario).getHours()}:${new Date(horario).getMinutes()} - sai em 15 minutos`,
+            firstAt: new Date(new Date(horario).getTime() - 900000),
+            every: 'minute',
             icon: 'res:/ic_stat_onesignal_default.png',
             sound: null
           });
