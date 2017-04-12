@@ -7,7 +7,7 @@ import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { HomePage } from "../home/home";
 import { LoadingComponent } from "../../services/loading/loading";
-
+import { SQLite } from 'ionic-native';
 declare var AdMob: any;
 
 @Component({
@@ -24,7 +24,12 @@ export class StartPage {
   linha;
   icone;
   promocao;
+  storage;
+      public database: SQLite;
+
   private admobId: any;
+  private db: SQLite;
+      public people: Array<Object>;
 
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -36,7 +41,44 @@ export class StartPage {
               private busamService:BusamService
               ) {
    
+    this.platform.ready().then(() => {
+  
+
+this.database = new SQLite();
+this.database.openDatabase({name: "data.db", location: "default", createFromLocation: 1}).then(() => {
     
+
+ this.database.executeSql("INSERT INTO people (firstname, lastname) VALUES ('Nic', 'Raboy')", []).then((data) => {
+            console.log("INSERTED: " + JSON.stringify(data));
+        }, (error) => {
+            console.log("ERROR: " + JSON.stringify(error.err));
+        });
+
+
+
+this.database.executeSql("SELECT * FROM people", []).then((data) => {
+            this.people = [];
+            if(data.rows.length > 0) {
+                for(var i = 0; i < data.rows.length; i++) {
+                    this.people.push({firstname: data.rows.item(i).firstname, lastname: data.rows.item(i).lastname});
+                }
+            }
+        }, (error) => {
+            console.log("ERROR: " + JSON.stringify(error));
+        });
+
+
+}, (error) => {
+    console.log("ERROR: ", error);
+});
+
+
+
+
+
+
+
+    });
     this.platform = platform;
     if (/(android)/i.test(navigator.userAgent)) {
       this.admobId = {
@@ -57,8 +99,12 @@ export class StartPage {
     if(this.cidade){
       this.loadingComponent.hide();
       this.navCtrl.push(HomePage, {});    
-    }  
+    } else {
+      this.loadingComponent.hide();
+    }
   }
+
+
 
   ionViewDidLoad() {
     if (/(android)/i.test(navigator.userAgent)) {
