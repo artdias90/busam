@@ -110,7 +110,7 @@ export class HomePage {
   // favorita uma linha para que ela fique sempre no topo
   favoritar(event:any, item:any) {
     item.favorita = !item.favorita;
-    console.log(item);
+    // console.log(item);
     event.stopPropagation();
     event.preventDefault();
 

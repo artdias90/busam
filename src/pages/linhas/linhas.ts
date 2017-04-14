@@ -331,7 +331,7 @@ export class LinhasPage {
 
   private checkNotifications(horarios:any) {
     let favoritos:any = JSON.parse(window.localStorage.getItem('horarios_favoritos'));
-    console.debug(favoritos);
+    // console.debug(favoritos);
     if (favoritos) {
       horarios.map((horario, index) => {
         let time = horario.txtHorario.split(/:|h/g);
