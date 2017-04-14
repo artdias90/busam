@@ -13,7 +13,8 @@ import { PasswordResetPage } from '../pages/password-reset/password-reset';
 import { RegisterPage } from '../pages/register/register';
 import { LinhasPage } from '../pages/linhas/linhas';
 import { StartPage } from '../pages/start/start';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
@@ -31,6 +32,8 @@ import { StartPage } from '../pages/start/start';
     StartPage
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

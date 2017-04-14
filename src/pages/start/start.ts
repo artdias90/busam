@@ -28,7 +28,6 @@ export class StartPage {
       public database: SQLite;
 
   private admobId: any;
-  private db: SQLite;
       public people: Array<Object>;
 
   constructor(GlobalVars:GlobalVars,
