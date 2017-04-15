@@ -7,7 +7,6 @@ import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { LinhasPage } from "../linhas/linhas";
 import { StartPage } from "../start/start";
-import { HorariosFavoritosPage } from '../horarios-favoritos/horarios-favoritos';
 import { LoadingComponent } from "../../services/loading/loading";
 
 
@@ -157,7 +156,6 @@ export class HomePage {
 
 
   viewFavoritos() {
-    this.navCtrl.push(HorariosFavoritosPage, {});
   }
 
 

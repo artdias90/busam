@@ -4,12 +4,11 @@ import 'rxjs/add/operator/map';
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { LoadingComponent } from "../../services/loading/loading";
-import { LembreteService } from '../../services/lembrete/lembrete.service';
 
 @Component({
   selector: 'page-linhas',
   templateUrl: 'linhas.html',
-  providers: [GlobalVars, BusamService, LembreteService, LoadingComponent]
+  providers: [GlobalVars, BusamService, LoadingComponent]
 })
 
 export class LinhasPage {
@@ -99,8 +98,7 @@ export class LinhasPage {
               private alertCtrl:AlertController,
               private busamService:BusamService,
               private actionsheetCtrl:ActionSheetController,
-              private loadingComponent:LoadingComponent,
-              private lembreteService:LembreteService) {}
+              private loadingComponent:LoadingComponent) {}
 
   ionViewDidLoad() {
     this.obsLinha = this.navParams.get('item').obsLinha;
@@ -325,7 +323,7 @@ export class LinhasPage {
 
   saveHorario(horario) {
     horario.favorito = !horario.favorito;
-    this.lembreteService.addLembrete(horario, this.number);
+    // this.lembreteService.addLembrete(horario, this.number);
     // dat.getTime();
   }
 

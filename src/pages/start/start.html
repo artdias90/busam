@@ -1,7 +1,17 @@
-<ion-content padding>
-    <ion-list>
-         <ion-item *ngFor="let person of people">
-             {{person.firstname}} {{person.lastname}}
-         </ion-item>
-     </ion-list>
+<ion-content>
+	<div class="header">
+	  <div class="busam">BusAM</div>
+	  <div class="sub-titulo">Horários de Ônibus</div>
+	  <img src="assets/img/icon.png" class="logo">
+	</div>
+	<div class="conteudo">
+	  <div class="escolha">
+	    Escolha sua Cidade
+	  </div>
+	  <div class="botoes">
+	    <button (click)="selecionacidade(2)" class="cidades">Campinas</button>
+	    <button (click)="selecionacidade(1)" class="cidades">Valinhos</button>
+	    <button (click)="selecionacidade(3)" class="cidades">Vinhedo</button>
+	  </div>
+	</div>
 </ion-content>
