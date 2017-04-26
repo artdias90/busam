@@ -8,8 +8,8 @@ import { BusamService } from "../../services/busam/busam";
 import { LinhasPage } from "../linhas/linhas";
 import { StartPage } from "../start/start";
 import { LoadingComponent } from "../../services/loading/loading";
-
-
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { HorariosFavoritosPage } from '../horarios-favoritos/horarios-favoritos';
 
 
 @Component({
@@ -28,11 +28,12 @@ export class HomePage {
   link;
   imagem_footer;
   link_footer;
-  
+  people;
   cidade;
   searchBarItem;
   banner_campinas;
-
+  private options = { name: "data16.db", location: 'default', createFromLocation: 1 };
+  public names: String[] = [];
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
               private navCtrl:NavController,
@@ -40,68 +41,28 @@ export class HomePage {
               private authService:AuthService,
               private alertCtrl:AlertController,
               private loadingComponent:LoadingComponent,
-              private busamService:BusamService) {
+              private busamService:BusamService,
+              private sqlite: SQLite) {
     this.cidade = this.busamService.verificaCidade();
     if(this.cidade == 2) {
       this.banner_campinas = true;
     } else {
       this.banner_campinas = false;
     }
-    this.searchBarItem = '';
-    this.aviso = this.busamService.getObs(0).subscribe(
-      response => {
-        this.aviso = response[0].txtObservacao;
-        if(this.aviso == ""){
-           this.aviso = false;
-        }
-      },
-      error => {
-        console.log("erro", "Ocorreu um erro. Tente novamente.");
-      });
 
     this.loadingComponent.show();
-    this.imagem = this.busamService.getObs(9999).subscribe(
-      response => {
-        this.imagem = response[0].txtObservacao;
-        this.link =  response[0].corObservacao;
-      },
-      error => {
-        console.log("erro", "Ocorreu um erro. Tente novamente.");
-      });
-
-    this.imagem_footer = this.busamService.getObs(9999).subscribe(
-      response => {
-        this.imagem_footer = response[0].txtObservacao;
-        this.link_footer = response[0].corObservacao;
-      },
-      error => {
-        console.log("erro", "Ocorreu um erro. Tente novamente.");
-      });
-
-    this.linhas = this.busamService.getLinhas(this.cidade).subscribe(
-      response => {
-        this.item = response;
-        let favoritas:any = JSON.parse(window.localStorage.getItem('linha_favoritas'));
-        if(favoritas) {
-          this.item.map((linha, index) => {
-            linha.favorita = false;
-            if(favoritas.indexOf(linha.idLinha) !== -1) {
-              linha.favorita = true;
-            }
-          })
-          this.item.sort((linhaa, linhab) => {
-            return (linhaa.favorita === linhab.favorita)? 0 : linhaa.favorita? -1 : 1;
-          })
-          console.log(this.item);
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM linhas WHERE cidadeLinha = " + this.cidade + " ORDER BY idLinha", {}).then((data) => {
+        this.people = [];
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            this.people.push({idLinha: data.rows.item(i).idLinha, nomeLinha: data.rows.item(i).nomeLinha, numeroLinha: data.rows.item(i).numeroLinha});
+          }
         }
         this.loadingComponent.hide();
-      },
-      error => {
-        console.log("erro", "Ocorreu um erro. Tente novamente.");
-      });
-
-
-
+        this.item = JSON.stringify(this.people);
+      })
+    });
 
 
   }
@@ -156,6 +117,7 @@ export class HomePage {
 
 
   viewFavoritos() {
+    this.navCtrl.push(HorariosFavoritosPage, {});
   }
 
 

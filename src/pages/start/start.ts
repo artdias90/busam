@@ -6,13 +6,13 @@ import { AuthService } from "../../services/auth/auth";
 import { GlobalVars } from "../../services/globals/globals";
 import { BusamService } from "../../services/busam/busam";
 import { HomePage } from "../home/home";
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { LoadingComponent } from "../../services/loading/loading";
 declare var AdMob: any;
 
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html',
-  providers: [AuthService, GlobalVars, BusamService]
+  providers: [AuthService, GlobalVars, BusamService, LoadingComponent]
 })
 
 export class StartPage {
@@ -24,9 +24,7 @@ export class StartPage {
   icone;
   promocao;
   storage;
-  private options = { name: "data16.db", location: 'default', createFromLocation: 1 };
-  private queryNames = "SELECT * FROM cidade";
-  public names: String[] = [];
+  
 
   private admobId: any;
       public people: Array<Object>;
@@ -37,28 +35,11 @@ export class StartPage {
               private http:Http,
               private authService:AuthService,
               private alertCtrl:AlertController,
-              private busamService:BusamService,
-              private sqlite: SQLite
+              private loadingComponent:LoadingComponent,
+              private busamService:BusamService
               ) {
    
-    this.platform.ready().then(() => {
-  
-
-    this.sqlite.create(this.options).then((db: SQLiteObject) => {
-      db.executeSql(this.queryNames, {}).then((data) => {
-        let rows = data.rows;
-        for (let i = 0; i < rows.length; i++)
-          this.names.push(rows.item(i).nomeCidade);
-        console.log("Number of names on database = " + this.names.length);
-      })
-    });
-
-
-
-
-
-
-    });
+    this.platform.ready().then(() => {});
     this.platform = platform;
     if (/(android)/i.test(navigator.userAgent)) {
       this.admobId = {
@@ -75,18 +56,17 @@ export class StartPage {
     this.icone = GlobalVars.platform + GlobalVars.icon;
     this.cidade = this.busamService.verificaCidade();
     if(this.cidade){
-    } else {
-      this.navCtrl.push(HomePage, {});
-    }
+      this.navCtrl.push(HomePage, {}); 
+    } else {}
   }
 
 
 
   ionViewDidLoad() {
-    // if (/(android)/i.test(navigator.userAgent)) {
-    //   this.createBanner();
-    //   this.showBanner("top");
-    // }
+    if (/(android)/i.test(navigator.userAgent)) {
+      this.createBanner();
+      this.showBanner("top");
+    }
   }
 
   createBanner() {

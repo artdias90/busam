@@ -1,4 +1,4 @@
-import { LocalNotifications } from 'ionic-native';
+// import { LocalNotifications } from 'ionic-native';
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 
@@ -75,12 +75,12 @@ export class LembreteService {
           });
         })
       })
-      LocalNotifications.schedule(horariosArray);
+      // LocalNotifications.schedule(horariosArray);
     }
   }
 
   deleteLembrete(linha, horario) {
-    LocalNotifications.cancel(`${linha}_${new Date(horario).getHours()}:${new Date(horario).getMinutes()}`)
+    // LocalNotifications.cancel(`${linha}_${new Date(horario).getHours()}:${new Date(horario).getMinutes()}`)
   }
 
 }
