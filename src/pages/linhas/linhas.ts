@@ -146,7 +146,7 @@ export class LinhasPage {
       })
     });
 
-
+    // DIARIAMENTE IDA
     this.sqlite.create(this.options).then((db: SQLiteObject) => {
       db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 2 AND sentido = 0 ORDER BY txtHorario ASC", {}).then((data) => {
         this.diariamente = [];
@@ -161,107 +161,168 @@ export class LinhasPage {
         }
       });
     });
+    // SEG-SEX IDA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 3 AND sentido = 0 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.segsex = [];
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            this.segsex.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioSegsex = this.verificaHorario(this.segsex);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
+    // SABADO IDA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 4 AND sentido = 0 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.sabado = [];
+        console.log("data: " + data.rows.length);
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            console.log(data.rows.item(i));
+            this.sabado.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioSab = this.verificaHorario(this.sabado);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
+    // DOMINGO IDA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 5 AND sentido = 0 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.domingo = [];
+        console.log("data: " + data.rows.length);
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            console.log(data.rows.item(i));
+            this.domingo.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioDom = this.verificaHorario(this.domingo);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
+    // SEG-SAB IDA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 6 AND sentido = 0 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.segsab = [];
+        console.log("data: " + data.rows.length);
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            console.log(data.rows.item(i));
+            this.segsab.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioSegsab = this.verificaHorario(this.segsab);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
+    // SAB-DOM IDA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 7 AND sentido = 0 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.sabdom = [];
+        console.log("data: " + data.rows.length);
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            console.log(data.rows.item(i));
+            this.sabdom.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioSabdom = this.verificaHorario(this.sabdom);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
 
-    // // this.loadingComponent.show();
-    // for (this.i = 2; this.i < 8; this.i++) {
-    //   this.sqlite.create(this.options).then((db: SQLiteObject) => {
-    //   db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = " + this.i + " AND sentido = 0 ORDER BY txtHorario ASC", {}).then((data) => {
-    //     this.response = [];
-    //     console.log("data: " + data.rows.length);
-    //       if(data.rows.length > 0) {
-    //         for(var i = 0; i < data.rows.length; i++) {
-    //           console.log(data.rows.item(i));
-    //           this.response.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
-    //         }
-    //       }
-    //       console.log("response" + this.i);
-    //       this.response =  JSON.stringify(this.response);
-    //       this.retornou = this.getHorario(this.response);
-    //       if (this.response) {
-    //         if (this.response[0].idFrequencia == 2) {
-    //           this.diariamente = this.response;
-    //           this.checkNotifications(this.diariamente);
-    //           this.horarioDiariamente = this.verificaHorario(this.response);
-    //           // console.log("diariamante" + this.horarioDiariamente);
-    //           this.resultInMinutes = this.getHorario(this.horarionow);}
-    //         if (this.response[0].idFrequencia == 3) {
-    //           this.segsex = this.response;
-    //           this.checkNotifications(this.segsex);
-    //           // if (this.curDay == 1 || this.curDay == 2 || this.curDay == 3 || this.curDay == 4 || this.curDay == 5) {
-    //           this.horarioSegsex = this.verificaHorario(this.response);
-    //           // console.log("seg sex" + this.horarioSegsex);
-    //           this.resultInMinutes = this.getHorario(this.horarionow);}
-    //         if (this.response[0].idFrequencia == 4) {
-    //           this.sabado = this.response;
-    //           this.checkNotifications(this.sabado);
-    //           this.horarioSab = this.verificaHorario(this.response);
-    //           this.resultInMinutes = this.getHorario(this.horarionow);}
-    //         if (this.response[0].idFrequencia == 5) {
-    //           this.domingo = this.response;
-    //           this.checkNotifications(this.domingo);
-    //           this.horarioDom = this.verificaHorario(this.response);
-    //           this.resultInMinutes = this.getHorario(this.horarionow);}
-    //         if (this.response[0].idFrequencia == 6) {
-    //           this.segsab = this.response;
-    //           this.checkNotifications(this.segsab);
-    //           this.horarioSegsab = this.verificaHorario(this.response);
-    //           this.resultInMinutes = this.getHorario(this.horarionow);}
-    //         if (this.response[0].idFrequencia == 7) {
-    //           this.sabdom = this.response;
-    //           this.checkNotifications(this.sabdom);
-    //           this.horarioSabdom = this.verificaHorario(this.response);
-    //           this.resultInMinutes = this.getHorario(this.horarionow);}
-    //         if (this.i == 7) {
-
-    //         }
-    //       }
-    //     });
-    //   });
-    // }
-
-    // for (this.i = 2; this.i < 8; this.i++) {
-    //   console.log("consolelog: " + this.i);
-    //   this.sqlite.create(this.options).then((db: SQLiteObject) => {
-    //   db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = " + this.i + " AND sentido = 1 ORDER BY txtHorario ASC", {}).then((data) => {
-    //     this.response = [];
-    //       console.log(data);
-    //       if(data.rows.length > 0) {
-    //         for(var i = 0; i < data.rows.length; i++) {
-    //           this.response.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
-    //         }
-    //       }
-    //       this.retornou = this.getHorario(this.response);
-    //       // console.log(this.response[0].idFrequencia);
-    //       if (this.response) {
-    //         if (this.response[0].idFrequencia == 2) {
-    //           this.diariamenteVolta = this.response;
-    //           this.horarioDiariamenteVolta = this.verificaHorario(this.response);
-    //         }
-    //         if (this.response[0].idFrequencia == 3) {
-    //           this.segsexVolta = this.response;
-    //           this.horarioSegsexVolta = this.verificaHorario(this.response);
-    //         }
-    //         if (this.response[0].idFrequencia == 4) {
-    //           this.sabadoVolta = this.response;
-    //           this.horarioSabVolta = this.verificaHorario(this.response);
-    //         }
-    //         if (this.response[0].idFrequencia == 5) {
-    //           this.domingoVolta = this.response;
-    //           this.horarioDomVolta = this.verificaHorario(this.response);
-    //         }
-    //         if (this.response[0].idFrequencia == 6) {
-    //           this.segsabVolta = this.response;
-    //           this.horarioSegsabVolta = this.verificaHorario(this.response);
-    //         }
-    //         if (this.response[0].idFrequencia == 7) {
-    //           this.sabdomVolta = this.response;
-    //           this.horarioSabdomVolta = this.verificaHorario(this.response);
-    //         }
-    //       }
-    //     });
-    //   });
-    // }
-
+    // DIARIAMENTE VOLTA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 2 AND sentido = 1 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.diariamenteVolta = [];
+        console.log("data: " + data.rows.length);
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            console.log(data.rows.item(i));
+            this.diariamenteVolta.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioDiariamenteVolta = this.verificaHorario(this.diariamenteVolta);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
+    // SEG-SEX VOLTA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 3 AND sentido = 1 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.segsexVolta = [];
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            this.segsexVolta.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioSegsexVolta = this.verificaHorario(this.segsexVolta);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
+    // SABADO VOLTA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 4 AND sentido = 1 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.sabadoVolta = [];
+        console.log("data: " + data.rows.length);
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            console.log(data.rows.item(i));
+            this.sabadoVolta.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioSabVolta = this.verificaHorario(this.sabadoVolta);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
+    // DOMINGO VOLTA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 5 AND sentido = 1 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.domingoVolta = [];
+        console.log("data: " + data.rows.length);
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            console.log(data.rows.item(i));
+            this.domingoVolta.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioDomVolta = this.verificaHorario(this.domingoVolta);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
+    // SEG-SAB VOLTA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 6 AND sentido = 1 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.segsabVolta = [];
+        console.log("data: " + data.rows.length);
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            console.log(data.rows.item(i));
+            this.segsabVolta.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioSegsabVolta = this.verificaHorario(this.segsabVolta);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
+    // SAB-DOM VOLTA
+    this.sqlite.create(this.options).then((db: SQLiteObject) => {
+      db.executeSql("SELECT * FROM horarios INNER JOIN observacao on idObservacao = obsHorario INNER JOIN frequencia on idFrequencia = frequenciaId WHERE horarios.linhaId = " + this.navParams.get('item').idLinha + " AND idFrequencia = 7 AND sentido = 1 ORDER BY txtHorario ASC", {}).then((data) => {
+        this.sabdomVolta = [];
+        console.log("data: " + data.rows.length);
+        if(data.rows.length > 0) {
+          for(var i = 0; i < data.rows.length; i++) {
+            console.log(data.rows.item(i));
+            this.sabdomVolta.push({idHorario: data.rows.item(i).idHorario, txtHorario: data.rows.item(i).txtHorario, obsHorario: data.rows.item(i).obsHorario, linhaId: data.rows.item(i).linhaId, frequenciaId: data.rows.item(i).frequenciaId, sentido: data.rows.item(i).sentido, idObservacao: data.rows.item(i).idObservacao, txtObservacao: data.rows.item(i).txtObservacao, corObservacao: data.rows.item(i).corObservacao, idFrequencia: data.rows.item(i).idFrequencia, txtFrequencia: data.rows.item(i).txtFrequencia, corFrequencia: data.rows.item(i).corFrequencia});
+          }
+          this.horarioSabdomVolta = this.verificaHorario(this.sabdomVolta);
+          this.resultInMinutes = this.getHorario(this.horarionow);
+        }
+      });
+    });
 
 
 
