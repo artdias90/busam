@@ -32,7 +32,7 @@ export class HomePage {
   cidade;
   searchBarItem;
   banner_campinas;
-  private options = { name: "data16.db", location: 'default', createFromLocation: 1 };
+  private options = { name: "data17.db", location: 'default', createFromLocation: 1 };
   public names: String[] = [];
   constructor(GlobalVars:GlobalVars,
               private platform:Platform,
@@ -50,21 +50,25 @@ export class HomePage {
       this.banner_campinas = false;
     }
 
-    this.loadingComponent.show();
-    this.sqlite.create(this.options).then((db: SQLiteObject) => {
-      db.executeSql("SELECT * FROM linhas WHERE cidadeLinha = " + this.cidade + " ORDER BY idLinha", {}).then((data) => {
-        this.people = [];
-        if(data.rows.length > 0) {
-          for(var i = 0; i < data.rows.length; i++) {
-            this.people.push({idLinha: data.rows.item(i).idLinha, nomeLinha: data.rows.item(i).nomeLinha, numeroLinha: data.rows.item(i).numeroLinha});
+    this.platform.ready().then(() => {
+      this.loadingComponent.show();
+      this.sqlite.create(this.options).then((db: SQLiteObject) => {
+        console.log("veio aqui");
+        db.executeSql("SELECT * FROM linhas WHERE cidadeLinha = " + this.cidade + " ORDER BY idLinha", {}).then((data) => {
+          this.people = [];
+          console.log("deu certo");
+          if(data.rows.length > 0) {
+            for(var i = 0; i < data.rows.length; i++) {
+              this.people.push({idLinha: data.rows.item(i).idLinha, nomeLinha: data.rows.item(i).nomeLinha, numeroLinha: data.rows.item(i).numeroLinha});
+            }
+          } else {
+            console.log("zerado");
           }
-        }
-        this.loadingComponent.hide();
-        this.item = JSON.stringify(this.people);
-      })
+          this.loadingComponent.hide();
+          this.item = JSON.stringify(this.people);
+        }).catch(e => console.log(e));
+      });
     });
-
-
   }
 
   // favorita uma linha para que ela fique sempre no topo

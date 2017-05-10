@@ -275,8 +275,8 @@
       <ion-card padding *ngIf="obs">
         <div style="text-align: center;">LEGENDA</div>
         <div *ngFor="let items of obs" style="float: left;margin-right: 10px;">
-          <div style="    padding: 5px;" [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
-            <div class="proximo-horario">Próximo Horário - {{items.txtObservacao}}</div>
+          <div style="padding: 5px;" [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
+            <div class="proximo-horario">{{items.txtObservacao}}</div>
           </div>
         </div>
       </ion-card>

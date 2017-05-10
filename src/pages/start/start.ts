@@ -63,10 +63,10 @@ export class StartPage {
 
 
   ionViewDidLoad() {
-    if (/(android)/i.test(navigator.userAgent)) {
-      this.createBanner();
-      this.showBanner("top");
-    }
+    // if (/(android)/i.test(navigator.userAgent)) {
+    //   this.createBanner();
+    //   this.showBanner("top");
+    // }
   }
 
   createBanner() {
