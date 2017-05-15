@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="157" id="br.com.busam" version="4.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="158" id="br.com.busam" version="4.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BusAM - Horários de Ônibus</name>
     <description>Horários de Ônibus na palma da sua mão.</description>
     <author email="contato@codeam.com.br" href="http://www.codeam.com.br/">CodeAM</author>
