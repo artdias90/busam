@@ -37,7 +37,8 @@
                  [ngStyle]="{'background-color': backgrounddomingo, 'color': colordomingo}">Domingo
             </div>
           </ion-col>
-        </ion-row></div>
+        </ion-row>
+      </div>
       <!-- OBSERVACAO DA LINHA-->
       <div *ngIf="obs && obsLinha" class="observacao">{{obsLinha}}</div>
 
@@ -234,14 +235,14 @@
           </ion-row>
         </div></div>
 
-      <ion-card padding *ngIf="obs">
+      <!-- <ion-card padding *ngIf="obs">
         <div style="text-align: center;">LEGENDA</div>
         <div *ngFor="let items of obs" style="float: left;margin-right: 10px;">
           <div style="padding: 5px;" [ngStyle]="{'border-top': 'solid ' + items.corObservacao}">
             <div class="proximo-horario">{{items.txtObservacao}}</div>
           </div>
         </div>
-      </ion-card>
+      </ion-card> -->
       <div (click)="showItinerario()" *ngIf="itinerarioTem" class="botao-mostrar">Mostrar Itinerários</div>
     </div>
   </div>
